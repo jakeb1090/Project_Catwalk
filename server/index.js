@@ -9,4 +9,4 @@ app.use(express.json());
 const STATIC_DIR = path.join(__dirname, '../client/dist');
 app.use(express.static(STATIC_DIR));
 
-app.listen(PORT, () => {console.log(`listening on http://localhost:${PORT}`)});
+app.listen(PORT, () => { console.log(`listening on http://localhost:${PORT}`); });
