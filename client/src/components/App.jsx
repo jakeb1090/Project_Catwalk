@@ -10,7 +10,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div data-testid="app">
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
       </div>

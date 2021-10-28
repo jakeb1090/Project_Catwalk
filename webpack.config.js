@@ -1,14 +1,17 @@
 const path = require('path');
 
-const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/client/dist');
+const SRC_DIR = path.join(__dirname, 'client', 'src');
+const DIST_DIR = path.join(__dirname, 'client', 'dist', 'compiled');
 
 module.exports = {
   mode: 'development',
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
-    path: `${DIST_DIR}/compiled`,
+    path: `${DIST_DIR}`,
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   devtool: 'source-map',
   module: {
@@ -18,19 +21,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          // options: {
-          //   presets: [
-          //     "@babel/preset-env",
-          //     "@babel/preset-react"
-          //   ],
-          //   plugins: [
-          //     ["@babel/plugin-transform-runtime",
-          //       {
-          //         "regenerator": true
-          //       }
-          //     ]
-          //   ]
-          // }
         },
       },
     ],

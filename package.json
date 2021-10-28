@@ -4,10 +4,10 @@
   "description": "MVP retail app  project_catwalk",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack --config ./webpack.config.js  -w",
+    "react-dev": "webpack --config ./webpack.config.js  --watch",
     "server-dev": "nodemon server/index.js",
     "start": "npm run react-dev & npm run server-dev",
-    "test": "jest --watchAll"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

@@ -10,3 +10,6 @@ compiled/
 ## API keys ##
 client/config.js
 client/dist/compiled/config.js
+
+## Jest Coverage Report ##
+coverage/
