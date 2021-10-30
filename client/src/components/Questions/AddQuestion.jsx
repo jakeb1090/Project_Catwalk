@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+/* eslint-disable no-console */
+import React from 'react';
 import axios from 'axios';
-const qs = require('qs');
+
 // const API_KEY = require('./api.config');
 
-const AddQuestion = (props) => {
-
+const AddQuestion = () => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 
-  const handleClick = (e) => {
-    const params = {
-      body: 'how do I put thid belt on?',
-      name: 'dirkdiggler137',
-      email: 'dirkdiggler137@hotmail.com',
-      product_id: 5,
+  const handleClick = () => {
+    const data = {
+      body: 'are the sleeves organic free-trade?',
+      name: 'jack',
+      email: 'jack8482@hotmail.com',
+      product_id: 61601,
     };
 
     const headers = {
@@ -20,17 +20,17 @@ const AddQuestion = (props) => {
       Authorization: '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',
     };
 
-    const config = { params: qs.stringify(params), headers };
+    const config = { headers };
 
-    axios.post(url, {}, config)
+    axios.post(url, data, config)
       .then((res) => {
         console.log(res);
       });
   };
 
   return (
-    <div className="button">
-      <input type="button" value="Add Question" onClick={handleClick} />
+    <div className="add-question button">
+      <input type="button" value="Add A Question +" onClick={handleClick} />
     </div>
   );
 };

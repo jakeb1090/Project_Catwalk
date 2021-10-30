@@ -6,7 +6,7 @@ const GetProducts = () => {
 
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products';
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     const params = {
       product_id: 1,
       page: 2,
@@ -25,10 +25,10 @@ const GetProducts = () => {
   };
 
   return (
-    <div className="get-question">
+    <div className="get-question button">
       <input onClick={handleClick} type="button" value="Get Products" />
     </div>
-  )
-}
+  );
+};
 
 export default GetProducts;

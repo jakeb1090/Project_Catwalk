@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 
-const GetQuestions = () => {
-  // https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/?product_id=1
-
-  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
-
+const LoadMoreAnswers = () => {
   const handleClick = () => {
+    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
+
+    console.log('...loading more answers');
     const params = {
-      product_id: 61577,
-      // page: 2,
-      // count: 22,
+      product_id: 61601,
+      page: 2,
+      count: 22,
     };
 
     const headers = {
@@ -27,10 +26,10 @@ const GetQuestions = () => {
   };
 
   return (
-    <div className="get-question">
-      <input onClick={handleClick} type="button" value="Get Questions " />
+    <div className="load-more">
+      <input type="button" value="load more answers" onClick={handleClick} />
     </div>
   );
 };
 
-export default GetQuestions;
+export default LoadMoreAnswers;

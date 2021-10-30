@@ -6,9 +6,9 @@ const GetAnswers = () => {
   // GET /qa/questions/:question_id/answers
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     const params = {
-      product_id: 1,
+      product_id: 61601,
       page: 2,
       count: 22,
     };
@@ -27,10 +27,10 @@ const GetAnswers = () => {
   };
 
   return (
-    <div className="get-question">
-      <input onClick={handleClick} type="button" value="Get Answers" />
+    <div className="get-answers button">
+      <input onClick={handleClick} type="button" value="more answers" />
     </div>
-  )
-}
+  );
+};
 
 export default GetAnswers;
