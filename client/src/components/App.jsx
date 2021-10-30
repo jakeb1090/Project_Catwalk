@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Related from './Related/Related';
 
 class App extends Component {
   constructor() {
@@ -13,6 +14,7 @@ class App extends Component {
       <div data-testid="app">
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
+        <Related />
       </div>
     );
   }
