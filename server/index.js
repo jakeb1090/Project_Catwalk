@@ -4,13 +4,9 @@ const axios = require('axios');
 
 const app = express();
 
-const PORT = 3000;
-
 app.use(express.json());
 const STATIC_DIR = path.join(__dirname, '../client/dist');
 app.use(express.static(STATIC_DIR));
-
-app.listen(PORT, () => { console.log(`listening on http://localhost:${PORT}`); });
 
 // paths
 app.get('/products/:id', (req, res) => {
@@ -72,3 +68,5 @@ app.get('/reviews/meta', (req, res) => {
       res.status(err.response.status).send(err.response.data);
     });
 });
+
+module.exports = app;
