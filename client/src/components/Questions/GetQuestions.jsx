@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+const { API_KEY } = require('../../../../config');
 
 const GetQuestions = () => {
   // https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/?product_id=1
@@ -15,7 +16,7 @@ const GetQuestions = () => {
 
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: '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',
+      Authorization: API_KEY,
     };
 
     const config = { params, headers };

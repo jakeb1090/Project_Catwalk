@@ -6,6 +6,8 @@ import QuestionElement from './QuestionElement';
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
 
+const { API_KEY } = require('../../../../config');
+
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,7 @@ class QuestionsList extends React.Component {
 
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: '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',
+      Authorization: API_KEY,
     };
 
     const config = { params, headers };

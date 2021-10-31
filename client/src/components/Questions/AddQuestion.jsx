@@ -2,7 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 
-// const API_KEY = require('./api.config');
+const { API_KEY } = require('../../../../config');
 
 const AddQuestion = () => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
@@ -17,7 +17,7 @@ const AddQuestion = () => {
 
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: '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',
+      Authorization: API_KEY,
     };
 
     const config = { headers };

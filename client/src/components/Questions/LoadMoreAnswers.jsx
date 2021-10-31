@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+const { API_KEY } = require('../../../../config');
 
 const LoadMoreAnswers = () => {
   const handleClick = () => {
@@ -14,7 +15,7 @@ const LoadMoreAnswers = () => {
 
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: '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',
+      Authorization: API_KEY,
     };
 
     const config = { params, headers };

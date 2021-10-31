@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+const { API_KEY } = require('../../../../config');
 
 const qs = require('qs');
 // const API_KEY = require('./api.config');
@@ -20,7 +21,7 @@ const AddAnswer = () => {
 
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: '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',
+      Authorization: API_KEY,
     };
 
     const config = { params: qs.stringify(bodyParams), headers };
