@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 // eslint-disable-next-line import/no-named-as-default
-import QuestionElement from './QuestionElement';
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
 
@@ -46,25 +45,25 @@ class QuestionsList extends React.Component {
       });
   }
 
+  // key={question.question_id}
+  // body={question.question_body}
+  // asker={question.asker_name}
+  // helpfulness={question.question_helpfulness}
+  // id={question.question_id}
+  // reported={question.reported}
+  // answers={question.answers}
+
   render() {
     const { questionList } = this.state;
     return (
       <div className="question-list">
+        QA LIST
         {
         questionList.length === 0
           ? (<div />) : questionList.map((question) => (
-            <QAContainer
-              key={question.question_id}
-              body={question.question_body}
-              asker={question.asker_name}
-              helpfulness={question.question_helpfulness}
-              id={question.question_id}
-              reported={question.reported}
-              answers={question.answers}
-            />
+            <QAContainer key={question.question_id} question={question} />
           ))
         }
-        <QAContainer />
         <LoadMoreAnswers />
       </div>
     );

@@ -13,39 +13,46 @@ import PropTypes from 'prop-types';
 
 const QuestionElement = (props) => {
   const {
-    body, asker, helpfulness, id, reported,
-  } = props;
+    asker_name: askerName,
+    question_body: questionBody,
+    question_date: questionDate,
+    question_helpfulness: questionHelpfulness,
+    question_id: questionId,
+    reported,
+  } = props.data;
 
   return (
-    <li className="question-element" key={id}>
+    <li className="question-element" key={questionId}>
       <div>
-        <b>Q... </b>
-        { body }
-        { asker }
-        { helpfulness }
-        { reported }
-        {
-
-        }
+        Q:
+        { questionBody }
+        {/* { askerName }
+        { questionDate }
+        { questionHelpfulness }
+        { questionId }
+        { reported } */}
       </div>
     </li>
   );
 };
 
 QuestionElement.defaultProps = {
-  body: 'cool shirt ',
-  asker: 'rick',
-  helpfulness: 4,
-  id: 43333,
+  asker_name: 'default_person ',
+  question_body: 'default_question ',
+  question_date: 'default_date ',
+  question_helpfulness: 0,
+  question_id: 9999,
   reported: false,
 };
 
-QuestionElement.propTypes = {
-  body: PropTypes.string,
-  asker: PropTypes.string,
-  helpfulness: PropTypes.number,
-  id: PropTypes.number,
-  reported: PropTypes.bool,
-};
+// QuestionElement.propTypes = {
+//   asker_name: PropTypes.string,
+//   question_body: PropTypes.string,
+//   question_date: PropTypes.string,
+//   question_helpfulness: PropTypes.number,
+//   question_id: PropTypes.number,
+//   reported: PropTypes.bool,
+
+// };
 
 export default QuestionElement;

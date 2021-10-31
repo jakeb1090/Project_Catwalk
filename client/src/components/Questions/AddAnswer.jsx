@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+
 const { API_KEY } = require('../../../../config');
 
-const qs = require('qs');
 // const API_KEY = require('./api.config');
 
 const AddAnswer = () => {
@@ -11,9 +11,9 @@ const AddAnswer = () => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 
   const handleClick = () => {
-    const params = { question_id: 1 };
+    // const params = { question_id: 1 };
 
-    const bodyParams = {
+    const params = {
       body: 'Yes, these belts are 100% free-trade',
       name: 'dirkdiggler137',
       email: 'dirkdiggler137@hotmail.com',
@@ -24,7 +24,7 @@ const AddAnswer = () => {
       Authorization: API_KEY,
     };
 
-    const config = { params: qs.stringify(bodyParams), headers };
+    const config = { headers };
 
     axios.post(url, params, config)
       .then((res) => {
