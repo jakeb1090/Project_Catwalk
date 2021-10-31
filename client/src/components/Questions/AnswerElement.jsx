@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 import PropTypes from 'prop-types';
 
 // key={question.question_id}
@@ -47,13 +46,5 @@ AnswerElement.propTypes = {
   id: PropTypes.number,
 
 };
-=======
-
-const AnswerElement = () => (
-  <div className="answer-element">
-    A: Voluptatibus rem et eum ullam. Officiis sed tempore vero rerum rerum in.
-  </div>
-);
->>>>>>> aabc142 (Added test buttons for API requests)
 
 export default AnswerElement;

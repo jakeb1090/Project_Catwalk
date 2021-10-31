@@ -6,21 +6,9 @@ const GetAnswers = () => {
   // GET /qa/questions/:question_id/answers
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const handleClick = (e) => {
-    const params = {
-      product_id: 1,
-=======
   const handleClick = () => {
     const params = {
       product_id: 61601,
->>>>>>> e32449df701931fecd09323aa201dff108b30c95
-=======
-  const handleClick = () => {
-    const params = {
-      product_id: 61601,
->>>>>>> aabc142 (Added test buttons for API requests)
       page: 2,
       count: 22,
     };
@@ -39,26 +27,10 @@ const GetAnswers = () => {
   };
 
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <div className="get-question">
-      <input onClick={handleClick} type="button" value="Get Answers" />
-    </div>
-  )
-}
-=======
     <div className="get-answers button">
       <input onClick={handleClick} type="button" value="more answers" />
     </div>
   );
 };
->>>>>>> e32449df701931fecd09323aa201dff108b30c95
-=======
-    <div className="get-answers button">
-      <input onClick={handleClick} type="button" value="more answers" />
-    </div>
-  );
-};
->>>>>>> aabc142 (Added test buttons for API requests)
 
 export default GetAnswers;
