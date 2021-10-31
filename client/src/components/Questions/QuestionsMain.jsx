@@ -7,6 +7,7 @@ import AddQuestion from './AddQuestion';
 import AddAnswer from './AddAnswer';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
+import QAContainer from './QAContainer';
 
 class QuestionsContainer extends React.Component {
   constructor(props) {
@@ -33,8 +34,9 @@ class QuestionsContainer extends React.Component {
           <SearchQuestions updateSearch={(input) => this.setState({ searchText: input })} />
           <QuestionsList />
           <div className="button-container">
-            <GetAnswers />
-            <AddQuestion />
+            {/* <GetAnswers />
+            <AddQuestion /> */}
+            <QAContainer />
           </div>
         </div>
       </div>

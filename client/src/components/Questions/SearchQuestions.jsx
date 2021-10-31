@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//updateserach
+// updateserach
 class SearchQuestions extends React.Component {
   constructor(props) {
     super(props);

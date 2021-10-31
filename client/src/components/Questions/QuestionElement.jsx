@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // key={question.question_id}
@@ -9,35 +9,43 @@ import PropTypes from 'prop-types';
 // reported={question.reported}
 // answers={question.answers}
 
-const QuestionElement = ({
-  body, asker, helpfulness, id, reported, answers
-}) => (
-  <li className="question-element" key={id}>
-    <span>
-      <b>Q... </b>
-      {body}
-      {asker}
-      {helpfulness}
-      {reported}
-    </span>
-  </li>
-);
+// { answerer_name, body, date, helpfulness, id, photos }
+
+const QuestionElement = (props) => {
+  const {
+    body, asker, helpfulness, id, reported,
+  } = props;
+
+  return (
+    <li className="question-element" key={id}>
+      <div>
+        <b>Q... </b>
+        { body }
+        { asker }
+        { helpfulness }
+        { reported }
+        {
+
+        }
+      </div>
+    </li>
+  );
+};
 
 QuestionElement.defaultProps = {
-  body: 'cool shirt',
+  body: 'cool shirt ',
   asker: 'rick',
   helpfulness: 4,
   id: 43333,
   reported: false,
-  answers: { product1: 'answer1', product2: 'answer2' },
 };
+
 QuestionElement.propTypes = {
   body: PropTypes.string,
   asker: PropTypes.string,
   helpfulness: PropTypes.number,
   id: PropTypes.number,
   reported: PropTypes.bool,
-  answers: PropTypes.object,
 };
 
 export default QuestionElement;

@@ -51,7 +51,7 @@ class QuestionsList extends React.Component {
         {
         questionList.length === 0
           ? (<div />) : questionList.map((question) => (
-            <QuestionElement
+            <QAContainer
               key={question.question_id}
               body={question.question_body}
               asker={question.asker_name}
