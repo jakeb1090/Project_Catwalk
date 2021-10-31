@@ -2,7 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+<<<<<<< HEAD
 // updateserach
+=======
+//updateserach
+>>>>>>> aabc142 (Added test buttons for API requests)
 class SearchQuestions extends React.Component {
   constructor(props) {
     super(props);

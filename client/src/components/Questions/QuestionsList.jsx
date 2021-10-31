@@ -51,7 +51,11 @@ class QuestionsList extends React.Component {
         {
         questionList.length === 0
           ? (<div />) : questionList.map((question) => (
+<<<<<<< HEAD
             <QAContainer
+=======
+            <QuestionElement
+>>>>>>> aabc142 (Added test buttons for API requests)
               key={question.question_id}
               body={question.question_body}
               asker={question.asker_name}

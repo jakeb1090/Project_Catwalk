@@ -24,8 +24,12 @@
     "express": "^4.17.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "prop-types": "^15.7.2",
 =======
+=======
+    "prop-types": "^15.7.2",
+>>>>>>> aabc142 (Added test buttons for API requests)
     "qs": "^6.10.1",
 >>>>>>> 5a43fcf (Set up test components for API requests)
 =======

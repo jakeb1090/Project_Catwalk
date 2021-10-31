@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Related from './Related/Related';
 =======
 import Questions from './Questions/QuestionsMain';
@@ -8,6 +9,9 @@ import Questions from './Questions/QuestionsMain';
 =======
 import Questions from './Questions/Questions';
 >>>>>>> e32449df701931fecd09323aa201dff108b30c95
+=======
+import Questions from './Questions/Questions';
+>>>>>>> aabc142 (Added test buttons for API requests)
 
 class App extends Component {
   constructor() {
