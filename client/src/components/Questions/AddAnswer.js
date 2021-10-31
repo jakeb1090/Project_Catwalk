@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 const qs = require('qs');
+import API_KEY from '../../../client/config';
 // const API_KEY = require('./api.config');
 
 const AddAnswer = (props) => {
-
+  console.log(API_KEY);
   // /qa/questions/:question_id/answers
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 
