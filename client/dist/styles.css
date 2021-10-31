@@ -1,0 +1,39 @@
+
+.questions-widget {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  border: 1px solid gray;
+  width: 70%;
+  margin: 30px;
+  padding: 20px;
+}
+
+.question-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  border: 1px solid gray;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+
+}
+
+.question-element {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+.load-more {
+  margin-top: 10px;
+}
