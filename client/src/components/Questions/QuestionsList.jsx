@@ -14,8 +14,10 @@ class QuestionsList extends React.Component {
       currentProductId: 61577,
       questionList: [],
       searchText: '',
+      nList: 2,
     };
     this.fetchQuestions = this.fetchQuestions.bind(this);
+    this.expandList = this.expandList.bind(this);
   }
 
   componentDidMount() {
@@ -45,17 +47,23 @@ class QuestionsList extends React.Component {
       });
   }
 
+  expandList() {
+    this.setState();
+  }
+
   render() {
     const { questionList } = this.state;
+    const { nList } = this.state;
     return (
       <div className="question-list">
         {
         questionList.length === 0
-          ? (<div>No Questions for this Product</div>) : questionList.map((question) => (
+          ? (<div>No Questions for this Product</div>)
+          : questionList.slice(0, nList).map((question) => (
             <QAContainer key={question.question_id} question={question} />
           ))
         }
-        <LoadMoreAnswers />
+        <LoadMoreAnswers click={() => this.setState({ nList: nList + 2 })} />
       </div>
     );
   }

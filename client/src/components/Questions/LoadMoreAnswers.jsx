@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const { API_KEY } = require('../../../../config');
 
-const LoadMoreAnswers = () => {
+const LoadMoreAnswers = (props) => {
   const handleClick = () => {
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 
@@ -29,7 +29,7 @@ const LoadMoreAnswers = () => {
 
   return (
     <div className="load-more">
-      <input type="button" value="load more answers" onClick={handleClick} />
+      <input type="button" value="load more answers" onClick={() => props.click()} />
     </div>
   );
 };
