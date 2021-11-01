@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Carousel from './Carousel';
-// import { getProduct, getProductStyles, getProductRelated, getReviewsMeta } from '../../utils';
+// import {
+//   getPaginatedProducts,
+//   getProduct,
+//   getProductStyles,
+//   getProductRelated,
+//   getReviewsMeta
+// } from '../../utils';
 
 class Related extends Component {
   constructor(props) {
@@ -9,6 +15,14 @@ class Related extends Component {
   }
 
   componentDidMount() {
+    // getPaginatedProducts(1, 10, (err, response) => {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     console.log('Get Paginated Product Response', response);
+    //   }
+    // });
+
     // getProduct(61576, (err, response) => {
     //   if (err) {
     //     console.log(err);

@@ -3,6 +3,12 @@ import API_KEY from '../config';
 
 const headers = { headers: { Authorization: API_KEY } };
 
+const getPaginatedProducts = (page, count, cb) => {
+  axios.get(`/products/?page=${page}&count=${count}`, headers)
+    .then((response) => { cb(null, response.data); })
+    .catch((err) => { cb(err); });
+};
+
 const getProduct = (id, cb) => {
   axios.get(`/products/${id}`, headers)
     .then((response) => { cb(null, response.data); })
@@ -28,6 +34,7 @@ const getReviewsMeta = (id, cb) => {
 };
 
 export {
+  getPaginatedProducts,
   getProduct,
   getProductStyles,
   getProductRelated,
