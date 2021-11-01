@@ -8,15 +8,19 @@ const AnswerElement = (props) => {
     helpfulness,
     id,
     photos,
-  }
+  } = props;
 
   return (
-    <div className="answerElement">
+    <div className="answerElement" key={id}>
+      answer##
       { body }
       { answererName }
     </div>
   );
 };
 
-export default AnswerElement;
+// AnswerElement.propTypes = {
+//   body: propTypes
+// };
 
+export default AnswerElement;

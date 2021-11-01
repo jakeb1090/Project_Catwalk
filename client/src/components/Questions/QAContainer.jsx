@@ -11,7 +11,7 @@ const QAContainer = (props) => {
     <div className="qa-container">
       QA container
       <QuestionElement data={question} />
-      <AnswerInnerList data={answers} />
+      <AnswerInnerList answers={answers} />
     </div>
   );
 };

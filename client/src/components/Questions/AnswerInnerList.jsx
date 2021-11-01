@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import AnswerElement from './AnswerInnerList';
+import AnswerElement from './AnswerElement';
 
-//     "answers": {
+//     "answers": [
 //       "4996635": {
 //         "id": 4996635,
 //         "body": "Mine was delivered from Oklahoma",
@@ -19,22 +19,18 @@ import AnswerElement from './AnswerInnerList';
 //         "helpfulness": 19,
 //         "photos": "[]"
 //       }
-//     }
+//     ]
 
 const AnswerInnerList = (props) => {
-  const { data } = props;
-
-  const [answers, setAnswers] = useState([data]);
+  const { answers } = props;
+  const keys = Object.keys(answers);
 
   return (
-    <ul className="answer-inner-list" key={4}>
-      <div>
-        <b>A... </b>
-        {
-          answers.map((answer) => <AnswerElement data={answer} key={4} />)
-        }
-      </div>
-    </ul>
+    <div className="answer-inner-list">
+      {
+        keys.map((key) => <AnswerElement key={key} data={answers[key]} />)
+      }
+    </div>
   );
 };
 
@@ -44,7 +40,7 @@ AnswerInnerList.defaultProps = {
 };
 
 AnswerInnerList.propTypes = {
-  data: PropTypes.object,
+  answers: PropTypes.object,
 };
 
 export default AnswerInnerList;
