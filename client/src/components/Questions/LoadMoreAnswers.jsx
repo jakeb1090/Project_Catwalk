@@ -30,7 +30,7 @@ const LoadMoreAnswers = ({ click }) => {
   // };
 
   return (
-    <div className="load-more">
+    <div data-testid="load-more" className="load-more">
       <input type="button" value="load more answers" onClick={() => click()} />
       { placeHolder }
     </div>

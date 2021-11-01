@@ -20,7 +20,7 @@ class SearchQuestions extends React.Component {
   render() {
     const { updateSearch } = this.props;
     return (
-      <div className="search">
+      <div data-testid="search" className="search">
         <input
           type="text"
           placeholder="have a question? search for answers..."
@@ -30,6 +30,10 @@ class SearchQuestions extends React.Component {
     );
   }
 }
+
+SearchQuestions.defaultProps = {
+  updateSearch: () => {},
+};
 
 SearchQuestions.propTypes = {
   updateSearch: PropTypes.func,

@@ -4,9 +4,10 @@
   flex-direction: column;
   justify-content: left;
   border: 1px solid gray;
-  width: 80%;
+  /* width: 80%; */
   margin: 30px;
   padding: 20px;
+  margin-bottom: 300px;
 }
 
 .question-list {
@@ -41,11 +42,11 @@
 .questions {
   margin-top: 30px;
   border: 1px solid lightgray;
-  width: 70%;
+  width: 80%;
 }
 
 .qa-container {
-  border: 1px solid magenta;
+  border: 1px solid rgb(235, 55, 190);
   padding: 12px;
   margin-bottom: 12px;
 }
@@ -54,9 +55,14 @@
   border: 1px solid lightsalmon;
   padding: 10px;
   margin-left: 30px;
+  margin-bottom: 7px;
 }
 
 .img {
   max-width: 200px;
   height: auto;
+}
+
+.answer-inner-list {
+  margin-left: 7px;
 }

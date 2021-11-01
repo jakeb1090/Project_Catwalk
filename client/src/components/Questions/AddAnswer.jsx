@@ -33,7 +33,7 @@ const AddAnswer = () => {
   };
 
   return (
-    <div className="add-answer button">
+    <div data-testid="add-answer" className="add-answer button">
       <input type="button" value="Add Answer" onClick={handleClick} />
     </div>
   );

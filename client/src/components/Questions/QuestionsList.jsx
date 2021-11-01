@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
-// eslint-disable-next-line import/no-named-as-default
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
 
@@ -11,8 +9,9 @@ class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 61577,
+      currentProductId: 61579,
       questionList: [],
+      nList: 2,
       // searchText: '',
     };
     this.fetchQuestions = this.fetchQuestions.bind(this);
@@ -46,19 +45,38 @@ class QuestionsList extends React.Component {
   }
 
   render() {
-    const { questionList } = this.state;
+    const { questionList, nList } = this.state;
     return (
-      <div className="question-list">
+      <div data-testid="questions-list" className="question-list">
+        &lt;Questions List Container&gt;
         {
         questionList.length === 0
-          ? (<div>No Questions for this Product</div>) : questionList.map((question) => (
+          ? (<div>No Questions for this Product</div>)
+          : questionList.slice(0, nList).map((question) => (
             <QAContainer key={question.question_id} question={question} />
           ))
         }
-        <LoadMoreAnswers />
+        <LoadMoreAnswers click={() => this.setState({ nList: nList + 2 })} />
       </div>
     );
   }
 }
 
 export default QuestionsList;
+
+//   "question": {
+//     "question_id": 533233,
+//     "question_body": "Where does this product ship from?",
+//     "question_date": "2017-11-04T00:00:00.000Z",
+//     "asker_name": "toofast",
+//     "question_helpfulness": 17,
+//     "reported": false,
+//     "answers": {
+//       "4996635": {
+//         "id": 4996635,
+//         "body": "Mine was delivered from Oklahoma",
+//         "date": "2017-11-04T00:00:00.000Z",
+//         "answerer_name": "toofast",
+//         "helpfulness": 14,
+//         "photos": "[]"
+//       },

@@ -26,7 +26,7 @@ const AnswerInnerList = (props) => {
   const keys = Object.keys(answers);
 
   return (
-    <div className="answer-inner-list">
+    <div data-testid="answer-inner-list" className="answer-inner-list">
       A:
       {
         keys.map((key) => <AnswerElement key={key} data={answers[key]} />)

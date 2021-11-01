@@ -8,9 +8,9 @@ const QAContainer = (props) => {
   const { answers } = question;
 
   return (
-    <div className="qa-container">
-      QA container
-      <QuestionElement data={question} />
+    <div data-testid="qa-container" className="qa-container">
+      &lt;QA container&gt;
+      <QuestionElement key={`00${question.question_id}`} question={question} />
       <AnswerInnerList answers={answers} />
     </div>
   );

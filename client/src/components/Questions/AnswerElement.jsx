@@ -12,7 +12,7 @@ const AnswerElement = ({ data }) => {
   } = data;
 
   return (
-    <div className="answerElement" key={id}>
+    <div data-testid="answer-element" className="answerElement" key={id}>
       <div>{ body }</div>
       <div>
         <span>
@@ -43,7 +43,7 @@ const AnswerElement = ({ data }) => {
         </span>
         <div>
           {
-            photos.map((img) => <img key={id} className="img" src={img} alt="cool" />)
+            photos.map((img) => <img key={img} className="img" src={img} alt="cool" />)
           }
         </div>
       </div>
