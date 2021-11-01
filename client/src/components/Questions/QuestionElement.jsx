@@ -12,12 +12,12 @@ import PropTypes from 'prop-types';
 // { answerer_name, body, date, helpfulness, id, photos }
 const QuestionElement = (props) => {
   const {
-    asker_name: askerName,
+    // asker_name: askerName,
     question_body: questionBody,
-    question_date: questionDate,
-    question_helpfulness: questionHelpfulness,
+    // question_date: questionDate,
+    // question_helpfulness: questionHelpfulness,
     question_id: questionId,
-    reported,
+    // reported,
   } = props.data;
 
   return (

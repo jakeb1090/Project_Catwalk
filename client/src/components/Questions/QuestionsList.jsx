@@ -45,21 +45,13 @@ class QuestionsList extends React.Component {
       });
   }
 
-  // key={question.question_id}
-  // body={question.question_body}
-  // asker={question.asker_name}
-  // helpfulness={question.question_helpfulness}
-  // id={question.question_id}
-  // reported={question.reported}
-  // answers={question.answers}
-
   render() {
     const { questionList } = this.state;
     return (
       <div className="question-list">
         {
         questionList.length === 0
-          ? (<div />) : questionList.map((question) => (
+          ? (<div>No Questions for this Product</div>) : questionList.map((question) => (
             <QAContainer key={question.question_id} question={question} />
           ))
         }

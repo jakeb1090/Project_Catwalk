@@ -40,6 +40,11 @@ const AnswerElement = (props) => {
           {' '}
           Report
         </span>
+        <div>
+          {
+            photos.map((img) => <img key={id} className="img" src={img} alt="cool" />)
+          }
+        </div>
       </div>
     </div>
   );
