@@ -17,29 +17,16 @@ const AnswerElement = ({ data }) => {
       <div>
         <span>
           by
-          {' '}
-          {' '}
-          { answererName }
-          ,
-          {' '}
-          {' '}
-          { date.slice(0, 10) }
-          {' '}
-          {' '}
-          |
-          {' '}
-          {' '}
-          Helpful?
-          Yes
+          {answererName}
+          ,&nbsp;
+          {{ date }.slice(0, 10)}
+          &nbsp;
+          |&nbsp;&nbsp;Helpful?&nbsp;
+          <a href="#" onClick={() => console.log('yess') }>&nbsp;Yes&nbsp;</a>
           (
           {helpfulness}
           )
-          {' '}
-          {' '}
-          |
-          {' '}
-          {' '}
-          Report
+          &nbsp;|&nbsp;&nbsp;Report&nbsp;
         </span>
         <div>
           {

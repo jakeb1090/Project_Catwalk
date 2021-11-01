@@ -29,7 +29,7 @@ const GetQuestions = () => {
   };
 
   return (
-    <div data-testid="get-question button" className="get-question button">
+    <div data-testid="get-question" className="get-question button">
       <input onClick={handleClick} type="button" value="Get Questions " />
     </div>
   );

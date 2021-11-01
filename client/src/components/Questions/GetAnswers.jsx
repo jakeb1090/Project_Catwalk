@@ -29,7 +29,7 @@ const GetAnswers = () => {
   };
 
   return (
-    <div data-testid="get-answers button" className="get-answers button">
+    <div data-testid="get-answers" className="get-answers button">
       <input onClick={handleClick} type="button" value="more answers" />
     </div>
   );

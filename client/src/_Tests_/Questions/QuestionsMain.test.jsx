@@ -7,7 +7,7 @@ import QuestionsMain from '../../components/Questions/QuestionsMain';
 describe('QuestionsMain container', () => {
   test('should render QuestionList component', () => {
     render(<QuestionsMain />);
-    const component = screen.getByTestId('questions-main');
+    const component = screen.getByTestId('questions-widget');
     expect(component).toBeInTheDocument();
   });
 });

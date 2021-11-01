@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+// eslint-disable-next-line import/no-named-as-default
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
 

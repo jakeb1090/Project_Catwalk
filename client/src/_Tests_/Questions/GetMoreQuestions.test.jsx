@@ -7,7 +7,7 @@ import GetMoreQuestions from '../../components/Questions/GetMoreQuestions';
 describe('Get More Questions button', () => {
   test('should render button to DOM', () => {
     render(<GetMoreQuestions />);
-    const buttonElement = screen.getByTestId('more-questions');
+    const buttonElement = screen.queryByTestId('more-questions');
     expect(buttonElement).toBeInTheDocument();
   });
 });

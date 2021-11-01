@@ -8,6 +8,6 @@ describe('Add Question button', () => {
   test('should not be rendered to DOM', () => {
     render(<AddQuestion />);
     const buttonElement = screen.getByTestId('add-question');
-    expect(buttonElement).not.toBeInTheDocument();
+    expect(buttonElement).not.BeInTheDocument();
   });
 });

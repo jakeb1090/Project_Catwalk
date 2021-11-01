@@ -29,7 +29,7 @@ class QuestionsContainer extends React.Component {
 
           <SearchQuestions />
         </div> */}
-        <div data-testid="questions-widget questions-main" className="questions-widget">
+        <div data-testid="questions-widget" className="questions-widget">
           <SearchQuestions updateSearch={(input) => this.setState({ searchText: input })} />
           <QuestionsList />
           <div className="button-container">
