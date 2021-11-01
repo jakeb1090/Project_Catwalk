@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AnswerElement from './AnswerElement';
 
@@ -36,12 +36,11 @@ const AnswerInnerList = (props) => {
 };
 
 AnswerInnerList.defaultProps = {
-  // answererName: 'person',
-
+  answers: {},
 };
 
 AnswerInnerList.propTypes = {
-  answers: PropTypes.object,
+  answers: PropTypes.objectOf(PropTypes.object),
 };
 
 export default AnswerInnerList;

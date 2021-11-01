@@ -9,20 +9,21 @@ const QAContainer = (props) => {
 
   return (
     <div className="qa-container">
+      QA container
       <QuestionElement data={question} />
       <AnswerInnerList answers={answers} />
     </div>
   );
 };
 
-// QAContainer.defaultProps = {
-//   question: {},
-//   answer: {},
-// };
+QAContainer.defaultProps = {
+  question: {},
+  answers: {},
+};
 
 QAContainer.propTypes = {
-  question: PropTypes.object,
-  answer: PropTypes.object,
+  question: PropTypes.objectOf(PropTypes.object),
+  answers: PropTypes.objectOf(PropTypes.object),
 };
 
 export default QAContainer;

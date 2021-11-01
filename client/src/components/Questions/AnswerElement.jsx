@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const AnswerElement = (props) => {
+const AnswerElement = ({ data }) => {
   const {
     answerer_name: answererName,
     body,
@@ -8,7 +9,7 @@ const AnswerElement = (props) => {
     helpfulness,
     id,
     photos,
-  } = props.data;
+  } = data;
 
   return (
     <div className="answerElement" key={id}>
@@ -50,8 +51,24 @@ const AnswerElement = (props) => {
   );
 };
 
-// AnswerElement.propTypes = {
-//   body: propTypes
-// };
+AnswerElement.defaultProps = {
+  data: {},
+  answerer_name: 'default_person',
+  body: 'default_answer',
+  date: 'default_data',
+  helpfulness: 99,
+  id: 9999,
+  photos: ['array', 'of things'],
+};
+
+AnswerElement.propTypes = {
+  data: PropTypes.objectOf(PropTypes.any),
+  answerer_name: PropTypes.string,
+  body: PropTypes.string,
+  date: PropTypes.string,
+  helpfulness: PropTypes.number,
+  id: PropTypes.number,
+  photos: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default AnswerElement;

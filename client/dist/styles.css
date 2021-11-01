@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: left;
   border: 1px solid gray;
-  width: 90%;
+  width: 80%;
   margin: 30px;
   padding: 20px;
 }
@@ -41,7 +41,7 @@
 .questions {
   margin-top: 30px;
   border: 1px solid lightgray;
-  width: 80%;
+  width: 70%;
 }
 
 .qa-container {
@@ -54,14 +54,9 @@
   border: 1px solid lightsalmon;
   padding: 10px;
   margin-left: 30px;
-  margin-bottom: 5px;
 }
 
 .img {
   max-width: 200px;
   height: auto;
-}
-
-.answer-inner-list {
-  margin-left: 5px;
 }

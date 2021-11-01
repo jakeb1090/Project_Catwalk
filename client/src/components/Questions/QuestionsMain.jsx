@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import GetProducts from './GetProducts';
-import GetQuestions from './GetQuestions';
+// import GetProducts from './GetProducts';
+// import GetQuestions from './GetQuestions';
 import GetAnswers from './GetAnswers';
 import AddQuestion from './AddQuestion';
-import AddAnswer from './AddAnswer';
+// import AddAnswer from './AddAnswer';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
 

@@ -10,15 +10,15 @@ import PropTypes from 'prop-types';
 // answers={question.answers}
 
 // { answerer_name, body, date, helpfulness, id, photos }
-const QuestionElement = (props) => {
+const QuestionElement = ({ data }) => {
   const {
-    // asker_name: askerName,
     question_body: questionBody,
+    question_id: questionId,
+    // asker_name: askerName,
     // question_date: questionDate,
     // question_helpfulness: questionHelpfulness,
-    question_id: questionId,
     // reported,
-  } = props.data;
+  } = data;
 
   return (
     <li className="question-element" key={questionId}>
@@ -37,23 +37,25 @@ const QuestionElement = (props) => {
 };
 
 QuestionElement.defaultProps = {
-  data: '{}',
-  asker_name: 'default_person ',
+  data: {},
+  question_id: {},
   question_body: 'default_question ',
-  question_date: 'default_date ',
-  question_helpfulness: 0,
-  question_id: 9999,
-  reported: false,
+  // data: '{}',
+  // asker_name: 'default_person ',
+  // question_date: 'default_date ',
+  // question_helpfulness: 0,
+  // reported: false,
 };
 
 QuestionElement.propTypes = {
-  data: PropTypes.object,
-  asker_name: PropTypes.string,
+  data: PropTypes.objectOf(PropTypes.object),
   question_body: PropTypes.string,
-  question_date: PropTypes.string,
-  question_helpfulness: PropTypes.number,
-  question_id: PropTypes.number,
-  reported: PropTypes.bool,
+  question_id: PropTypes.objectOf(PropTypes.object),
+  // data: PropTypes.object,
+  // asker_name: PropTypes.string,
+  // question_date: PropTypes.string,
+  // question_helpfulness: PropTypes.number,
+  // reported: PropTypes.bool,
 
 };
 
