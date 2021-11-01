@@ -11,3 +11,30 @@ import sizes from './sizes.jsx';
 
 
 //parent branch for all module files in overview
+
+class Overview extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+
+  render() {
+    return (
+      <div>
+        <div>Product Overview</div>
+        <addToCart />
+        <addToOutfit />
+        <amount />
+        <clothingStyles />
+        <mainPicture />
+        <pictureScroll />
+        <productDescription />
+        <reviews />
+        <sizes />
+      </div>
+    )
+  }
+}
+
+export default Overview;
