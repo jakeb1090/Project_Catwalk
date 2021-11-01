@@ -20,7 +20,7 @@ class QuestionsContainer extends React.Component {
   render() {
     return (
       <div>
-        <div className="test-components">
+        {/* <div className="test-components">
           <GetProducts />
           <GetQuestions />
           <GetAnswers />
@@ -28,7 +28,7 @@ class QuestionsContainer extends React.Component {
           <AddAnswer />
 
           <SearchQuestions />
-        </div>
+        </div> */}
         <div className="questions-widget">
           <SearchQuestions updateSearch={(input) => this.setState({ searchText: input })} />
           <QuestionsList />

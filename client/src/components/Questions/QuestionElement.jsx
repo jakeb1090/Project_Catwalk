@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 // answers={question.answers}
 
 // { answerer_name, body, date, helpfulness, id, photos }
-
 const QuestionElement = (props) => {
   const {
     asker_name: askerName,
@@ -25,6 +24,7 @@ const QuestionElement = (props) => {
     <li className="question-element" key={questionId}>
       <div>
         Q:
+        {' '}
         { questionBody }
         {/* { askerName }
         { questionDate }
@@ -37,6 +37,7 @@ const QuestionElement = (props) => {
 };
 
 QuestionElement.defaultProps = {
+  data: '{}',
   asker_name: 'default_person ',
   question_body: 'default_question ',
   question_date: 'default_date ',
@@ -45,14 +46,15 @@ QuestionElement.defaultProps = {
   reported: false,
 };
 
-// QuestionElement.propTypes = {
-//   asker_name: PropTypes.string,
-//   question_body: PropTypes.string,
-//   question_date: PropTypes.string,
-//   question_helpfulness: PropTypes.number,
-//   question_id: PropTypes.number,
-//   reported: PropTypes.bool,
+QuestionElement.propTypes = {
+  data: PropTypes.object,
+  asker_name: PropTypes.string,
+  question_body: PropTypes.string,
+  question_date: PropTypes.string,
+  question_helpfulness: PropTypes.number,
+  question_id: PropTypes.number,
+  reported: PropTypes.bool,
 
-// };
+};
 
 export default QuestionElement;

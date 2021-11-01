@@ -57,7 +57,6 @@ class QuestionsList extends React.Component {
     const { questionList } = this.state;
     return (
       <div className="question-list">
-        QA LIST
         {
         questionList.length === 0
           ? (<div />) : questionList.map((question) => (

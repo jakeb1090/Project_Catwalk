@@ -9,7 +9,6 @@ const QAContainer = (props) => {
 
   return (
     <div className="qa-container">
-      QA container
       <QuestionElement data={question} />
       <AnswerInnerList answers={answers} />
     </div>

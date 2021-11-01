@@ -8,13 +8,39 @@ const AnswerElement = (props) => {
     helpfulness,
     id,
     photos,
-  } = props;
+  } = props.data;
 
   return (
     <div className="answerElement" key={id}>
-      answer##
-      { body }
-      { answererName }
+      <div>{ body }</div>
+      <div>
+        <span>
+          by
+          {' '}
+          {' '}
+          { answererName }
+          ,
+          {' '}
+          {' '}
+          { date.slice(0, 10) }
+          {' '}
+          {' '}
+          |
+          {' '}
+          {' '}
+          Helpful?
+          Yes
+          (
+          {helpfulness}
+          )
+          {' '}
+          {' '}
+          |
+          {' '}
+          {' '}
+          Report
+        </span>
+      </div>
     </div>
   );
 };
