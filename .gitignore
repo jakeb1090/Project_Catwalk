@@ -8,6 +8,8 @@ node_modules
 compiled/
 
 ## API keys ##
+server/config.js
+server/dist/compiled/config.js
 client/config.js
 client/dist/compiled/config.js
 

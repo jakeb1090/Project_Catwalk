@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 const { test, expect, describe } = require('@jest/globals');
 const app = require('../index');
-const API_KEY = require('./config');
+const API_KEY = require('../config');
 
 const request = supertest(app);
 

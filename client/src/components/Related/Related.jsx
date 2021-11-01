@@ -5,7 +5,7 @@ import Carousel from './Carousel';
 //   getProduct,
 //   getProductStyles,
 //   getProductRelated,
-//   getReviewsMeta
+//   getReviewsMeta,
 // } from '../../utils';
 
 class Related extends Component {
@@ -14,47 +14,47 @@ class Related extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    // getPaginatedProducts(1, 10, (err, response) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log('Get Paginated Product Response', response);
-    //   }
-    // });
+  // componentDidMount() {
+  //   getPaginatedProducts(1, 10, (err, response) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       console.log('Get Paginated Product Response', response);
+  //     }
+  //   });
 
-    // getProduct(61576, (err, response) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log('Get Product Response', response);
-    //   }
-    // });
+  //   getProduct(61576, (err, response) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       console.log('Get Product Response', response);
+  //     }
+  //   });
 
-    // getProductStyles(61576, (err, response) => {
-    //   if (err) {
-    //     console.log('Error', err);
-    //   } else {
-    //     console.log('Get Product Styles Response', response);
-    //   }
-    // });
+  //   getProductStyles(61576, (err, response) => {
+  //     if (err) {
+  //       console.log('Error', err);
+  //     } else {
+  //       console.log('Get Product Styles Response', response);
+  //     }
+  //   });
 
-    // getProductRelated(61576, (err, response) => {
-    //   if (err) {
-    //     console.log('Error', err);
-    //   } else {
-    //     console.log('Get Product Related Response', response);
-    //   }
-    // });
+  //   getProductRelated(61576, (err, response) => {
+  //     if (err) {
+  //       console.log('Error', err);
+  //     } else {
+  //       console.log('Get Product Related Response', response);
+  //     }
+  //   });
 
-    // getReviewsMeta(61576, (err, response) => {
-    //   if (err) {
-    //     console.log('Error', err);
-    //   } else {
-    //     console.log('Get Reviews Meta Response', response);
-    //   }
-    // });
-  }
+  //   getReviewsMeta(61576, (err, response) => {
+  //     if (err) {
+  //       console.log('Error', err);
+  //     } else {
+  //       console.log('Get Reviews Meta Response', response);
+  //     }
+  //   });
+  // }
 
   render() {
     return (
