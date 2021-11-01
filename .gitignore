@@ -8,8 +8,8 @@ node_modules
 compiled/
 
 ## API keys ##
+server/config.js
 client/config.js
-client/dist/compiled/config.js
 
 ## Jest Coverage Report ##
 coverage/
