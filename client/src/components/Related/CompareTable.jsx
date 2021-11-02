@@ -1,7 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Table = styled.table`
+  border: solid red;
+`;
 
 const CompareTable = (props) => (
-  <table>
+  <Table>
     <thead>
       <tr>
         <th>Current Product</th>
@@ -12,7 +17,7 @@ const CompareTable = (props) => (
     <tbody>
       {/* some type of loop through data to creat rows/columns/cells */}
     </tbody>
-  </table>
+  </Table>
 );
 
 CompareTable.propTypes = {

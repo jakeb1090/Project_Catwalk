@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CardImg = (props) => {
+  // console.log(props);
   const { src, alt } = props;
   return (
     <div>
-      <img src={src} alt={`product ${alt}`} />
+      <img src={src} alt={`product ${alt}`} width="75" height="100" />
     </div>
   );
 };

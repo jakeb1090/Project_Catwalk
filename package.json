@@ -7,8 +7,8 @@
     "react-dev": "webpack --config ./webpack.config.js  --watch",
     "server-dev": "nodemon server/server.js",
     "start": "npm run react-dev & npm run server-dev",
-    "server-debug": "node --inspect-brk node_modules/.bin/jest endpoints.test",
-    "test": "jest --watch"
+    "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
