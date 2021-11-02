@@ -74,7 +74,7 @@ app.get('/products/:id/related', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   const { authorization } = req.headers;
   const url = `${baseURL}/reviews/meta/?product_id=${id}`;
   const headers = { headers: { authorization } };
@@ -82,6 +82,37 @@ app.get('/reviews/meta', (req, res) => {
   axios.get(url, headers)
     .then((response) => {
       res.status(response.status).send(response.data);
+    })
+    .catch((err) => {
+      res.status(err.response.status).send(err.response.data);
+    });
+});
+
+app.get('/products/questions', (req, res) => {
+  const { id } = req.params;
+  const { authorization } = req.headers;
+  const url = `${baseURL}/qa/questions/?product_id=${61601}`;
+  const headers = { headers: { authorization } };
+
+  axios.get(url, headers)
+    .then((response) => {
+      res.status(response.status).send(response.data);
+    })
+    .catch((err) => {
+      res.status(err.response.status).send(err.response.data);
+    });
+});
+
+app.get('/products/questions/answers', (req, res) => {
+  const { id } = req.params;
+  const { authorization } = req.headers;
+  // const url = `${baseURL}/qa/questions/?product_id=${id}`;
+  const url = `${baseURL}/qa/questions/${61601}/answers`;
+  const headers = { headers: { authorization } };
+
+  axios.get(url, headers)
+    .then((response) => {
+      res.status(response.status).send(req.query);
     })
     .catch((err) => {
       res.status(err.response.status).send(err.response.data);

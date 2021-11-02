@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import QuestionElement from './QuestionElement';
 import AnswerInnerList from './AnswerInnerList';
 
@@ -10,49 +11,22 @@ const QAContainer = (props) => {
   return (
     <div data-testid="qa-container" className="qa-container">
       &lt;QA container&gt;
-      <QuestionElement key={`00${question.question_id}`} question={question} />
+      <QuestionElement key={question.question_id} questionData={question} />
       <AnswerInnerList answers={answers} />
     </div>
   );
 };
 
-QAContainer.defaultProps = {
-  question: {},
-  answers: {},
-};
+// QAContainer.defaultProps = {
+//   question: {},
+//   answers: {},
+//   // question_id:
+// };
 
-QAContainer.propTypes = {
-  question: PropTypes.objectOf(PropTypes.object),
-  answers: PropTypes.objectOf(PropTypes.object),
-};
+// QAContainer.propTypes = {
+//   question: PropTypes.objectOf(PropTypes.object),
+//   answers: PropTypes.objectOf(PropTypes.object),
+//   question_id: PropTypes.number.isRequired,
+// };
 
 export default QAContainer;
-
-// {
-//   "question": {
-//     "question_id": 533233,
-//     "question_body": "Where does this product ship from?",
-//     "question_date": "2017-11-04T00:00:00.000Z",
-//     "asker_name": "toofast",
-//     "question_helpfulness": 17,
-//     "reported": false,
-//     "answers": {
-//       "4996635": {
-//         "id": 4996635,
-//         "body": "Mine was delivered from Oklahoma",
-//         "date": "2017-11-04T00:00:00.000Z",
-//         "answerer_name": "toofast",
-//         "helpfulness": 14,
-//         "photos": "[]"
-//       },
-//       "4996646": {
-//         "id": 4996646,
-//         "body": "It ships from the facility in Tulsa",
-//         "date": "2017-11-04T00:00:00.000Z",
-//         "answerer_name": "toofast",
-//         "helpfulness": 19,
-//         "photos": "[]"
-//       }
-//     }
-//   }
-// }

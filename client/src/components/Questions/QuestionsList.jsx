@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 // eslint-disable-next-line import/no-named-as-default
+// import PropTypes from 'prop-types';
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
 
@@ -15,7 +16,6 @@ class QuestionsList extends React.Component {
       nList: 2,
       // searchText: '',
     };
-    this.fetchQuestions = this.fetchQuestions.bind(this);
   }
 
   componentDidMount() {
@@ -41,20 +41,22 @@ class QuestionsList extends React.Component {
 
     axios.get(url, config)
       .then((res) => {
+        // eslint-disable-next-line react/no-unused-state
         this.setState({ questionList: res.data.results });
       });
   }
 
   render() {
-    const { questionList, nList } = this.state;
+    const { nList, questionList } = this.state;
+
     return (
       <div data-testid="questions-list" className="question-list">
         &lt;Questions List Container&gt;
         {
         questionList.length === 0
           ? (<div>No Questions for this Product</div>)
-          : questionList.slice(0, nList).map((question) => (
-            <QAContainer key={question.question_id} question={question} />
+          : questionList.slice(0, nList).map((nQuestion) => (
+            <QAContainer key={nQuestion.question_id} question={nQuestion} />
           ))
         }
         <LoadMoreAnswers click={() => this.setState({ nList: nList + 2 })} />
@@ -63,21 +65,8 @@ class QuestionsList extends React.Component {
   }
 }
 
-export default QuestionsList;
+// QuestionsList.propTypes = {
+//   currentSearch: PropTypes.string.isRequired,
+// };
 
-//   "question": {
-//     "question_id": 533233,
-//     "question_body": "Where does this product ship from?",
-//     "question_date": "2017-11-04T00:00:00.000Z",
-//     "asker_name": "toofast",
-//     "question_helpfulness": 17,
-//     "reported": false,
-//     "answers": {
-//       "4996635": {
-//         "id": 4996635,
-//         "body": "Mine was delivered from Oklahoma",
-//         "date": "2017-11-04T00:00:00.000Z",
-//         "answerer_name": "toofast",
-//         "helpfulness": 14,
-//         "photos": "[]"
-//       },
+export default QuestionsList;

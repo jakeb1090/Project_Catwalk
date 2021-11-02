@@ -11,6 +11,8 @@ const AnswerElement = ({ data }) => {
     photos,
   } = data;
 
+  const formattedDate = date.slice(0, 10);
+
   return (
     <div data-testid="answer-element" className="answerElement" key={id}>
       <div>{ body }</div>
@@ -19,10 +21,10 @@ const AnswerElement = ({ data }) => {
           by
           {answererName}
           ,&nbsp;
-          {{ date }.slice(0, 10)}
+          {formattedDate}
           &nbsp;
           |&nbsp;&nbsp;Helpful?&nbsp;
-          <a href="#" onClick={() => console.log('yess') }>&nbsp;Yes&nbsp;</a>
+          &nbsp;Yes&nbsp;
           (
           {helpfulness}
           )

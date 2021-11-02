@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// updateserach
+// updatesearch
 class SearchQuestions extends React.Component {
   constructor(props) {
     super(props);
@@ -13,18 +13,17 @@ class SearchQuestions extends React.Component {
   }
 
   handleChange(e) {
-    // this.setState({ SearchText: e.target.value });
-    this.updateSearch(e.target.value);
+    const { updateSearch } = this.props;
+    updateSearch(e.target.value);
   }
 
   render() {
-    const { updateSearch } = this.props;
     return (
       <div data-testid="search" className="search">
         <input
           type="text"
           placeholder="have a question? search for answers..."
-          onChange={(e) => updateSearch(e.target.value)}
+          onChange={this.handleChange}
         />
       </div>
     );

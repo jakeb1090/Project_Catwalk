@@ -5,9 +5,14 @@ import '@testing-library/jest-dom';
 import SearchQuestions from '../../components/Questions/SearchQuestions';
 
 describe('search bar component', () => {
-  test('should render search bar component', () => {
+  test('should render search bar to DOM', () => {
     render(<SearchQuestions />);
-    const placeHolderText = screen.getByPlaceHolderText(/have a question/i);
-    expect(placeHolderText).toBeInDocument();
+    const element = screen.getByTestId('search');
+    expect(element).toBeInTheDocument();
   });
+  // test('should trigger handler search bar', () => {
+  //   const handleSearch = jest.fn();
+  //   render(<SearchQuestions onSearch={handleSearch} />);
+  //   expect(handleSearch).toHaveBeenCalledWith('test');
+  // });
 });
