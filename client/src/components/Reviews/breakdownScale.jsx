@@ -1,15 +1,14 @@
 import React from 'react';
 
-class ScaleBreakdown extends React.Component {
-  render() {
-    return (
-      <div>Scale Breakdown
-        <div>Width Scale </div>
-        <div>Comfort Scale</div>
-        <div> etc etc</div>
-      </div>
-    )
-  }
+const ScaleBreakdown = (props) => {
+
+  return (
+    <div>
+      {Object.keys(props.scale).map((characteristic) =>
+        <div>{characteristic} Scale: {props.scale[characteristic].value}</div>
+      )}
+    </div>
+  );
 }
 
 export default ScaleBreakdown;
