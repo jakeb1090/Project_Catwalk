@@ -5,19 +5,24 @@ import Carousel from '../../components/Related/Carousel';
 import '@testing-library/jest-dom';
 
 test('should render Carousel to the DOM', () => {
-  const relation = {
-    id: 2,
-    img: '',
-    title: '',
-    price:'',
-    salesPrice: null,
-    avgRating: null,
-    features: [],
-  };
-  const data = [relation, relation, relation];
+  let related = [];
+  for (let i = 0; i < 3; i++) {
+    let current = {
+      id: i,
+      img: '',
+      title: '',
+      price:'',
+      salesPrice: null,
+      avgRating: null,
+      features: [],
+    }
+    debugger;
+    related.push(current);
+  }
+  debugger;
   render(
     <Carousel
-      data={data}
+      data={related}
       btn='delete'
     />
   );

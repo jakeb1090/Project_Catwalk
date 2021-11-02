@@ -7,8 +7,8 @@
     "react-dev": "webpack --config ./webpack.config.js  --watch",
     "server-dev": "nodemon server/server.js",
     "start": "npm run react-dev & npm run server-dev",
-    "server-debug": "node --inspect-brk node_modules/.bin/jest endpoints.test",
-    "test": "jest --watch"
+    "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

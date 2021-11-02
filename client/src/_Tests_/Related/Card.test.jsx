@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 
 test('should render Card to the DOM', () => {
   const relation = {
-    id: 2,
+    id: 65126,
     img: '',
     title: '',
     price:'',
