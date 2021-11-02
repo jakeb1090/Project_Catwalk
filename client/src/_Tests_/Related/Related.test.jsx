@@ -8,7 +8,7 @@ render(<Related />);
 
 test('renders Related to DOM', () => {
   const relatedContainer = screen.getByTestId('related');
-  const relatedHeader = screen.getByRole('heading', { name: /Related Products/i });
+  const relatedHeader = screen.getByRole('heading', { name: /loading.../i });
 
   expect(relatedContainer).toBeInTheDocument();
   expect(relatedHeader).toBeInTheDocument();

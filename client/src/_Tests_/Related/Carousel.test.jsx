@@ -5,7 +5,22 @@ import Carousel from '../../components/Related/Carousel';
 import '@testing-library/jest-dom';
 
 test('should render Carousel to the DOM', () => {
-  render(<Carousel />);
+  const relation = {
+    id: 2,
+    img: '',
+    title: '',
+    price:'',
+    salesPrice: null,
+    avgRating: null,
+    features: [],
+  };
+  const data = [relation, relation, relation];
+  render(
+    <Carousel
+      data={data}
+      btn='delete'
+    />
+  );
   const carousel = screen.getByTestId('carousel');
   expect(carousel).toBeInTheDocument();
 });
