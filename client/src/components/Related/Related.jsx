@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Carousel from './Carousel';
 import Modal from './Modal';
+import AddOutfitBtn from './AddOutfitBtn';
 import {
   getPaginatedProducts,
   getProduct,
@@ -18,71 +19,100 @@ class Related extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfit: [61580, 61593, 61602, 61614, 61687, 61689, 61731],
-      current: 61602,
+      outfitIds: [/*61580, 61593, 61602, 61614, 61687, 61689, 61731*/],
+      currentId: 61602,
+      relatedIds: [],
+      related: [],
+      outfit: [],
+      loading: true,
     };
   }
 
   componentDidMount() {
-    // getPaginatedProducts(1, 10, (err, response) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log('Get Paginated Product Response', response);
-    //   }
-    // });
-
-    // getProduct(61602, (err, response) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log('Get Product Response', response);
-    //   }
-    // });
-
-    // getProductStyles(61602, (err, response) => {
-    //   if (err) {
-    //     console.log('Error', err);
-    //   } else {
-    //     console.log('Get Product Styles Response', response);
-    //   }
-    // });
-
-    getProductRelated(this.state.current, (err, response) => {
-      if (err) {
-        console.log('Error', err);
-      } else {
-        console.log('Get Product Related Response', response);
-        this.objectBuilder(response);
-      }
-    });
-
-    // getReviewsMeta(61602, (err, response) => {
-    //   if (err) {
-    //     console.log('Error', err);
-    //   } else {
-    //     console.log('Get Reviews Meta Response', response);
-    //   }
-    // });
+    getProductRelated(this.state.currentId)
+      .then((response) => {
+        const { data } = response;
+        this.objectBuilder(data)
+        .then((related) => {
+          this.setState({related})
+        })
+      })
+      .then(() => {
+        this.objectBuilder(this.state.outfitIds)
+        .then((outfit) => {
+          this.setState({outfit})
+        });
+      })
+      .then(() => {
+        this.setState({
+          loading: false
+        })
+      });
   }
 
   objectBuilder = (products) => {
-    console.log('build: ', products)
+    let related = Promise.all(products.map(async (product) => {
+      let relation = {
+        id: product,
+        img: '',
+        title: '',
+        price:'',
+        salesPrice: null,
+        avgRating: null,
+        features: [],
+      };
+      await Promise.all([getProduct(product), getProductStyles(product), getReviewsMeta(product)])
+        .then(([productResponse, styleResponse, reviewsMetaResponse]) => {
+          let { data } = productResponse;
+          relation.title = data.name;
+          relation.features = data.features
+
+          const result = styleResponse.data.results[0];
+          relation.img = result.photos[0].url;
+          relation.price = result.original_price;
+          relation.salesPrice = result.sale_price;
+
+          data = reviewsMetaResponse.data;
+          let avg = Object.values(data.ratings).reduce((prev, curr) => {
+            return Number(prev) + Number(curr)
+          }, 0) / (Object.values(data.ratings).length || 1);
+          relation.avgRating = Math.floor(avg / 0.25) * 0.25;
+        })
+        return relation;
+    }));
+    return related;
   }
 
   render() {
-    const { related } = this.state;
-    return (
+    const { related, outfit, loading } = this.state;
+    return(
       <div data-testid="related">
-        <Modal />
-        <Title>Related Products</Title>
-        <Carousel
-          related={related}
-        />
-        <Title>Your Outfit</Title>
-        <Carousel />
+        {loading
+        ?
+          <h1>loading...</h1>
+        :
+          <>
+            <Modal />
+            <Title>Related Products</Title>
+            <Carousel
+              data={related}
+              btn={'compare'}
+            />
+            <Title>Your Outfit</Title>
+            {outfit.length
+            ?
+              <Carousel
+                data={outfit}
+                btn={'delete'}
+              />
+            :
+              <AddOutfitBtn />
+            }
+          </>
+        }
       </div>
-    );
+    )
+
   }
 }
 
