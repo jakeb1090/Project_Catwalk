@@ -15,7 +15,9 @@ import sizes from './sizes.jsx';
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      currentPicture = ''
+    }
   }
 
 

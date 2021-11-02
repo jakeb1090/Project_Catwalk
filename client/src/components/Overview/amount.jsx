@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Dropdown menu for the amount of clothing selected
-//will need to be connected to add to cart so that the amount selected is saved when it's submitted to the cart
+//will need to be connected to add to cart so that the amount selected is saved when it's Clickted to the cart
 //good resource: https://react-bootstrap.github.io/components/dropdowns/
 
 class amount extends React.Component {
@@ -10,25 +10,25 @@ class amount extends React.Component {
     this.state = {
       amount = 0;
     }
-    this.onSubmit = this.onSubmit.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  onSubmit(event) {
+  onClick(event) {
     event.preventDefault();
     const amount = this.state.amount;
-    this.props.handleSubmit(amount);
+    this.props.handleClick(amount);
   }
 
-  handleSubmit(event) {
+  handleClick(event) {
     const amount = amount.target;
     this.setState({amount: amount})
   }
 
 
-  //dropdown for amount
+  //dropdown for amount (15 maximum, should be less if lower amount available)
   render() {
-    <SplitButton id="dropdown-amount" title="Dropdown amount button">
+    <SplitButton id="dropdown-amount" title="Dropdown amount button" onclick={this.onClick}>
       <Dropdown.Item href="amount=1">1</Dropdown.Item>
       <Dropdown.Item href="amount=2">2</Dropdown.Item>
       <Dropdown.Item href="amount=3">3</Dropdown.Item>
