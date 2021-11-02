@@ -28,9 +28,9 @@ class ReviewApp extends React.Component {
           reviews: res.data.results,
         });
       })
-      .then(() => {
-        console.log('state after API.getReviews', this.state);
-      })
+      // .then(() => {
+      //   console.log('state after API.getReviews', this.state);
+      // })
       .catch(() => {
         console.log('error from API.getReviews in componentDidMount');
       });
@@ -42,9 +42,9 @@ class ReviewApp extends React.Component {
           characteristics: res.data.characteristics,
         });
       })
-      .then(() => {
-        console.log('state after API.getMeta', this.state);
-      })
+      // .then(() => {
+      //   console.log('state after API.getMeta', this.state);
+      // })
       .catch(() => {
         console.log('error from API.getMeta in componentDidMount');
       });
@@ -68,11 +68,9 @@ class ReviewApp extends React.Component {
     } = this.state;
     return (
       <div data-testid="reviewapp">
-        Ratings and Reviews: a widget by Annie
+        <h4>Product Summary</h4>
         <div>
-          Average Rating :
-          {' '}
-          {this.averageRating()}
+          {`Average Rating: ${this.averageRating()}`}
         </div>
         <ProductBreakdown
           id={id}
