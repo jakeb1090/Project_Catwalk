@@ -17,9 +17,9 @@ const Title = styled.h5`
 
 const Card = (props) => {
   const { img, title, price, salesPrice, avgRating, features } = props.product;
-  const { onAddOutfitClick, addOutfit, btn } = props;
+  const { onRelatedClick, onAddOutfitClick, id, addOutfit, btn } = props;
   return(
-    <Div data-testid="card">
+    <Div data-testid="card" onClick={() => onRelatedClick(id)}>
       {
         addOutfit === 'addOutfit'
         ?

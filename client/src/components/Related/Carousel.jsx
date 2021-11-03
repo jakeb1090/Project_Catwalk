@@ -5,25 +5,18 @@ import ForwardArrow from './ForwardArrow';
 import ReverseArrow from './ReverseArrow';
 
 const Carousel = (props) => {
-  const { onAddOutfitClick, data, btn } = props;
+  const { onRelatedClick, onAddOutfitClick, data, btn } = props;
   return(
     <div data-testid="carousel">
       {/* Add Outfit Button Card */}
-      {
-        btn === 'compare'
-        ?
-        <></>
-        :
-        <Card
-          onAddOutfitClick={onAddOutfitClick}
-          addOutfit='addOutfit'
-        />
-      }
+      {btn !== 'compare' && <Card onAddOutfitClick={onAddOutfitClick} addOutfit='addOutfit'/>}
       <ReverseArrow />
       {data.map((product) => {
         return (
           <Card
             key={product.id}
+            id={product.id}
+            onRelatedClick={onRelatedClick}
             product={product}
             btn={btn}
           />

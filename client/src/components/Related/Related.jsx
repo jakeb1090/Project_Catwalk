@@ -26,9 +26,22 @@ class Related extends Component {
       loading: true,
     };
   }
-
   componentDidMount() {
-    getProductRelated(this.state.currentId)
+    this.relatedBuilder();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentProduct !== this.props.currentProduct) {
+      this.relatedBuilder();
+    }
+  }
+
+  // componentDidUpdate() {
+  //   this.relatedBuilder();
+  // };
+
+  relatedBuilder = () => {
+    getProductRelated(this.props.currentProduct)
       .then((response) => {
         const { data } = response;
         this.objectBuilder(data)
@@ -101,6 +114,7 @@ class Related extends Component {
 
   render() {
     const { related, outfit, loading } = this.state;
+    const { onRelatedClick } = this.props;
     return(
       <div data-testid="related">
         {loading
@@ -111,6 +125,7 @@ class Related extends Component {
             <Modal />
             <Title>Related Products</Title>
             <Carousel
+              onRelatedClick={onRelatedClick}
               data={related}
               btn={'compare'}
             />

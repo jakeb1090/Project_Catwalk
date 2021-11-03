@@ -5,7 +5,8 @@ import axios from 'axios';
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
 
-const { API_KEY } = require('../../../../config');
+// const { API_KEY } = require('../../../config');
+import API_KEY from '../../../config';
 
 class QuestionsList extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class QuestionsList extends React.Component {
   }
 
   fetchQuestions() {
-    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
+    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
     const { currentProductId } = this.state;
 
     const params = {
@@ -43,7 +44,8 @@ class QuestionsList extends React.Component {
       .then((res) => {
         // eslint-disable-next-line react/no-unused-state
         this.setState({ questionList: res.data.results });
-      });
+      })
+      .catch((err) => {console.log('ERROR QUESTIONSLIST', err)});
   }
 
   render() {
