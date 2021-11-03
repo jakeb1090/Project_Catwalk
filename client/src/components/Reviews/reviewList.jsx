@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 const ReviewList = (props) => {
   const { reviews } = props;
   if (typeof reviews === 'object') {
-    console.log('ReviewList reviews', reviews);
     const tile = reviews.map((review) => {
-      if (review.rating ===3) {
-      return <ReviewTile review={review} />;
+      if (review.rating === 3) {
+        return <ReviewTile review={review} />;
       }
     });
 
@@ -18,7 +17,12 @@ const ReviewList = (props) => {
           {`Number of reviews: ${reviews.length}`}
         </div>
         <div>
-          Sorted by: DROPDOWN
+          Sorted by:
+          <select>
+            <option>Relevance</option>
+            <option>Date</option>
+            <option>Helpfulness</option>
+          </select>
           {tile}
           <button>Load More</button>
           <button>Add Review</button>
@@ -36,7 +40,6 @@ ReviewList.propTypes = {
 const ReviewTile = (props) => {
   const { review } = props;
   const formattedDate = new Date(review.date).toDateString();
-  console.log('ReviewTile', review);
   return (
     <div>
       <br />
