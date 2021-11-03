@@ -23,10 +23,17 @@ const getReviewsMeta = (id) => {
   return axios.get(`/reviews/meta/?id=${id}`, headers)
 };
 
+const getProductQuestions = (id, cb) => {
+  axios.get(`/products/questions/?${id}`, headers)
+    .then((response) => { cb(null, response.data); })
+    .catch((err) => { cb(err); });
+};
+
 export {
   getPaginatedProducts,
   getProduct,
   getProductStyles,
   getProductRelated,
   getReviewsMeta,
+  getProductQuestions,
 };
