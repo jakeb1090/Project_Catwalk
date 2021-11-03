@@ -18,7 +18,7 @@ class Related extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfitIds: [/*61580, 61593, 61602, 61614, 61687, 61689, 61731*/],
+      outfitIds: [],
       currentId: 61602,
       relatedIds: [],
       related: [],
@@ -35,10 +35,6 @@ class Related extends Component {
       this.relatedBuilder();
     }
   }
-
-  // componentDidUpdate() {
-  //   this.relatedBuilder();
-  // };
 
   relatedBuilder = () => {
     getProductRelated(this.props.currentProduct)
@@ -102,10 +98,12 @@ class Related extends Component {
     }
 
     this.setState({loading: true});
-    this.setState({outfitIds: [...this.state.outfitIds, this.props.currentProduct]})
-    this.objectBuilder([this.props.currentProduct])
+    this.objectBuilder([...this.state.outfitIds, this.props.currentProduct])
       .then((outfit) => {
         this.setState({outfit});
+      })
+      .then(() => {
+        this.setState({outfitIds: [...this.state.outfitIds, this.props.currentProduct]})
       })
       .then(() => {
         this.setState({loading: false});
