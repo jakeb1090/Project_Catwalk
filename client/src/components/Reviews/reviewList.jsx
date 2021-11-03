@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ReviewList = (props) => {
-  const { reviews } = props;
+  const { reviews, starFilters } = props;
   if (typeof reviews === 'object') {
     const tile = reviews.map((review) => {
-      if (review.rating === 3) {
+      if (starFilters.indexOf(review.rating) > -1) {
         return <ReviewTile review={review} />;
       }
     });

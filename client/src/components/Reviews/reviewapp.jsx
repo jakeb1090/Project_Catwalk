@@ -15,7 +15,7 @@ class ReviewApp extends React.Component {
         1: 1,
         2: 2,
       },
-      starFilters: [1, 2, 3, 4, 5],
+      starFilters: [3, 4, 5],
       reviews: 'incorrect reviews from app state',
     };
   }
@@ -62,9 +62,35 @@ class ReviewApp extends React.Component {
     return (totalStars / qty).toFixed(1);
   }
 
+  toggleStarFilter(star) {
+    console.log(this.state.starFilters.indexOf(star))
+    if (this.state.starFilters.length === 5) {
+      this.setState({
+        starFilters: star,
+      })
+    } else if (this.state.starFilters.indexOf(star) === -1) {
+      this.setState({
+        starFilters: [...this.state.starFilters, star],
+      })
+    } else {
+      var starIndex = this.state.starFilters.indexOf(star)
+      var updated = this.state.starFilters
+      updated.splice(starIndex, 1)
+      this.setState({
+        starFilters: updated,
+      })
+    }
+  }
+
+  removeStarFilters() {
+    this.setState({
+      starFilters: [1, 2, 3, 4, 5],
+    })
+  }
+
   render() {
     const {
-      id, starFilters, reviews, characteristics, ratings,
+      id, starFilters, reviews, characteristics, ratings
     } = this.state;
     return (
       <div data-testid="reviewapp">
@@ -77,8 +103,14 @@ class ReviewApp extends React.Component {
           starFilters={starFilters}
           scale={characteristics}
           ratings={ratings}
+          toggleStarFilter={this.toggleStarFilter.bind(this)}
+          removeStarFilters={this.removeStarFilters.bind(this)}
         />
-        <ReviewList id={id} reviews={reviews} />
+        <ReviewList
+          id={id}
+          reviews={reviews}
+          starFilters={Object.values(starFilters)}
+        />
       </div>
     );
   }
