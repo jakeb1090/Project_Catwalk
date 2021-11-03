@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Carousel from './Carousel';
 import Modal from './Modal';
-import AddOutfitBtn from './AddOutfitBtn';
 import {
   getPaginatedProducts,
   getProduct,
@@ -83,6 +82,23 @@ class Related extends Component {
     return related;
   }
 
+  onAddOutfitClick = (e) => {
+    if (this.state.outfitIds.indexOf(this.props.currentProduct) !== -1) {
+      console.log('here');
+      return;
+    }
+
+    this.setState({loading: true});
+    this.setState({outfitIds: [...this.state.outfitIds, this.props.currentProduct]})
+    this.objectBuilder([this.props.currentProduct])
+      .then((outfit) => {
+        this.setState({outfit});
+      })
+      .then(() => {
+        this.setState({loading: false});
+      })
+  }
+
   render() {
     const { related, outfit, loading } = this.state;
     return(
@@ -99,15 +115,11 @@ class Related extends Component {
               btn={'compare'}
             />
             <Title>Your Outfit</Title>
-            {outfit.length
-            ?
-              <Carousel
-                data={outfit}
-                btn={'delete'}
-              />
-            :
-              <AddOutfitBtn />
-            }
+            <Carousel
+              onAddOutfitClick={this.onAddOutfitClick}
+              data={outfit}
+              btn={'delete'}
+            />
           </>
         }
       </div>

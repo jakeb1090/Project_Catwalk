@@ -16,34 +16,41 @@ const Title = styled.h5`
 `;
 
 const Card = (props) => {
-  // console.log(props.product)
   const { img, title, price, salesPrice, avgRating, features } = props.product;
-  const { btn } = props;
+  const { onAddOutfitClick, addOutfit, btn } = props;
   return(
     <Div data-testid="card">
-      {btn === 'compare' ? <CompareBtn /> : <DeleteBtn />}
-
-
-      <CardImg
-        src={img}
-        alt={title}
-      />
-      <Title>{title}hello</Title>
-      <RatingStars
-        avgRating={avgRating}
-      />
+      {
+        addOutfit === 'addOutfit'
+        ?
+        <AddOutfitBtn
+          onClick={onAddOutfitClick}
+        />
+        :
+        <>
+        {btn === 'compare' ? <CompareBtn /> : <DeleteBtn />}
+        <CardImg
+          src={img}
+          alt={title}
+        />
+        <Title>{title}</Title>
+        <RatingStars
+          avgRating={avgRating}
+        />
+        </>
+      }
     </Div>
   );
 }
 
-// Card.defaultProps = {
-//   product: {},
-//   btn: ''
-// }
+Card.defaultProps = {
+  product: {},
+  btn: ''
+}
 
 Card.propTypes = {
-  product: PropTypes.object.isRequired,
-  btn: PropTypes.string.isRequired
+  product: PropTypes.object,
+  btn: PropTypes.string
 }
 
 export default Card;

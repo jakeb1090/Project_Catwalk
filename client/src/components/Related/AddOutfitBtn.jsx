@@ -1,7 +1,7 @@
 import React from 'react';
 
-const AddOutfitBtn = () => (
-  <button type="button" aria-label="addOutfitBtn">
+const AddOutfitBtn = (props) => (
+  <button type="button" aria-label="addOutfitBtn" onClick={props.onClick}>
     --Plus Icon--
   </button>
 );

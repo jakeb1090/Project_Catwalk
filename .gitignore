@@ -12,6 +12,5 @@ server/config.js
 client/config.js
 client/dist/compiled/config.js
 
-
 ## Jest Coverage Report ##
 coverage/
