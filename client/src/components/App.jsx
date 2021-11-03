@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Overview from './Overview/Overview.jsx';
 
 class App extends Component {
   constructor() {
