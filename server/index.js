@@ -6,7 +6,6 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.json());
 const STATIC_DIR = path.join(__dirname, '../client/dist');
 app.use(express.static(STATIC_DIR));
 
@@ -74,7 +73,7 @@ app.get('/products/:id/related', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   const { authorization } = req.headers;
   const url = `${baseURL}/reviews/meta/?product_id=${id}`;
   const headers = { headers: { authorization } };
