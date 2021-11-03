@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReviewApp from './Reviews/reviewapp';
 import Overview from './Overview/Overview.jsx';
 import Related from './Related/Related';
 // import QuestionsMain from './Questions/QuestionsMain';
@@ -19,6 +20,8 @@ class App extends Component {
         <h3>An Ingenious-ly project</h3>
         <Related />
         <Questions />
+         <ReviewApp />
+
       </div>
     );
   }
