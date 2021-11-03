@@ -73,7 +73,7 @@ app.get('/products/:id/related', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   const { authorization } = req.headers;
   const url = `${baseURL}/reviews/meta/?product_id=${id}`;
   const headers = { headers: { authorization } };
