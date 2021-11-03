@@ -91,9 +91,8 @@ class Related extends Component {
     return related;
   }
 
-  onAddOutfitClick = (e) => {
+  onAddOutfitClick = () => {
     if (this.state.outfitIds.indexOf(this.props.currentProduct) !== -1) {
-      console.log('here');
       return;
     }
 
@@ -108,6 +107,18 @@ class Related extends Component {
       .then(() => {
         this.setState({loading: false});
       })
+  }
+
+  onDeleteOutfitClick = (id) => {
+    // this.setState({loading: true});
+    this.setState({
+      outfitIds: this.state.outfitIds.filter((product) => {
+        return product !== id
+      }),
+      outfit: this.state.outfit.filter((product) => {
+        return product.id !== id
+      })
+    });
   }
 
   render() {
@@ -130,6 +141,7 @@ class Related extends Component {
             <Title>Your Outfit</Title>
             <Carousel
               onAddOutfitClick={this.onAddOutfitClick}
+              onDeleteOutfitClick={this.onDeleteOutfitClick}
               data={outfit}
               btn={'delete'}
             />
