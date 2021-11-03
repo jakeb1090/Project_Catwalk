@@ -1,5 +1,5 @@
 import axios from 'axios';
-import TOKEN from './ignore';
+import API_KEY from '../../../config';
 
 const API = {
   getReviews: (prodId) => {
@@ -11,7 +11,7 @@ const API = {
         count: 5000,
       },
       headers: {
-        Authorization: TOKEN,
+        Authorization: API_KEY,
       },
     });
   },
@@ -23,7 +23,7 @@ const API = {
         product_id: prodId,
       },
       headers: {
-        Authorization: TOKEN,
+        Authorization: API_KEY,
       },
     });
   },
