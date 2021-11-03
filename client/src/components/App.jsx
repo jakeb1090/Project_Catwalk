@@ -9,19 +9,22 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-
+      currentProduct: 61622
     };
   }
 
   render() {
+    const { currentProduct } = this.state;
     return (
       <div data-testid="app">
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
-        <Related />
-        <Questions />
-         <ReviewApp />
-
+        {/* <Overview /> */}
+        <Related
+          currentProduct={currentProduct}
+        />
+        {/* <Questions /> */}
+        {/* <ReviewApp /> */}
       </div>
     );
   }
