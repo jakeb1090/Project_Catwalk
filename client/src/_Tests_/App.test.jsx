@@ -6,6 +6,6 @@ import '@testing-library/jest-dom';
 
 test('renders App to DOM', () => {
   render(<App />);
-  const appContainer = screen.queryByTestId('app');
+  const appContainer = screen.getByTestId('app');
   expect(appContainer).toBeInTheDocument();
 });
