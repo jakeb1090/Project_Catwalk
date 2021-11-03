@@ -8,7 +8,7 @@ class amount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount = 0;
+      amount: 0,
     }
     this.onClick = this.onClick.bind(this);
     this.handleClick = this.handleClick.bind(this);

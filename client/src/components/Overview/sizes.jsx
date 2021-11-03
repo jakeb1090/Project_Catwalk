@@ -9,7 +9,7 @@ import React from 'react';
     constructor(props) {
       super(props);
       this.state = {
-        size = '';
+        size: '',
       }
       this.onClick = this.onClick.bind(this);
       this.handleClick = this.handleClick.bind(this);

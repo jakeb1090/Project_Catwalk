@@ -1,5 +1,5 @@
 import React from 'react';
-import carousel from 'react-multi-carousel'; //see the link below for more details on this
+// import carousel from 'react-multi-carousel'; //see the link below for more details on this
 
 //the carousel that appears superimposed over the main picture
 //should be scrollable
