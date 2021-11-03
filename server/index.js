@@ -6,7 +6,6 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.json());
 const STATIC_DIR = path.join(__dirname, '../client/dist');
 app.use(express.static(STATIC_DIR));
 
