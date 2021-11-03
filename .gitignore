@@ -11,10 +11,6 @@ compiled/
 server/config.js
 client/config.js
 client/dist/compiled/config.js
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
 ## Jest Coverage Report ##
 coverage/
