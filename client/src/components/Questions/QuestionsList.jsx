@@ -4,62 +4,48 @@ import axios from 'axios';
 // import PropTypes from 'prop-types';
 import QAContainer from './QAContainer';
 import LoadMoreAnswers from './LoadMoreAnswers';
+import API_KEY from '../../../config';
 
-const { API_KEY } = require('../../../config');
-
+//props.currentProductId
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 61579,
-      questionList: [],
-      nList: 2,
+      currentProductId: 61601,
+      // questionList: [],
       // searchText: '',
     };
   }
 
-  componentDidMount() {
-    this.fetchQuestions();
-  }
-
-  fetchQuestions() {
-    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
-    const { currentProductId } = this.state;
-
-    const params = {
-      product_id: currentProductId,
-      // page: 2,
-      // count: 22,
-    };
-
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: API_KEY,
-    };
-
-    const config = { params, headers };
-
-    axios.get(url, config)
-      .then((res) => {
-        // eslint-disable-next-line react/no-unused-state
-        this.setState({ questionList: res.data.results });
-      });
-  }
 
   render() {
-    const { nList, questionList } = this.state;
+    const { currentProductId } = this.state;
+    const { questionsN, answersN, loadMoreAnswers, questionList, currentSearch } = this.props;
+
+    const filteredList = questionList.filter(question => question.question_body.toLowerCase().includes(currentSearch.toLowerCase()));
 
     return (
       <div data-testid="questions-list" className="question-list">
         &lt;Questions List Container&gt;
         {
-        questionList.length === 0
+        filteredList.slice(0, questionsN).length === 0
           ? (<div>No Questions for this Product</div>)
-          : questionList.slice(0, nList).map((nQuestion) => (
-            <QAContainer key={nQuestion.question_id} question={nQuestion} />
+          : filteredList.slice(0, questionsN).map((nQuestion) => (
+            <QAContainer
+              key={nQuestion.question_id}
+              question={nQuestion}
+              answersN={answersN}
+              currentProduct={currentProductId}
+            />
           ))
         }
-        <LoadMoreAnswers click={() => this.setState({ nList: nList + 2 })} />
+
+        {
+          answersN !== null
+          ? <input type="button" value="LOAD MORE ANSWERS" onClick={ () => {loadMoreAnswers()} } />
+          : <div></div>
+        }
+
       </div>
     );
   }

@@ -1,6 +1,18 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Input = styled.input`
+  border: 1px solid red;
+  padding: 12px;
+  border-radius: 8px;
+  height: 20px;
+  width: 18em;
+  font-size: 20px;
+  color: purple;
+  background-color: lightblue;
+`
 
 // updatesearch
 class SearchQuestions extends React.Component {
@@ -20,10 +32,11 @@ class SearchQuestions extends React.Component {
   render() {
     return (
       <div data-testid="search" className="search">
-        <input
+        <Input
           type="text"
           placeholder="have a question? search for answers..."
           onChange={this.handleChange}
+          value={this.state.searchText}
         />
       </div>
     );

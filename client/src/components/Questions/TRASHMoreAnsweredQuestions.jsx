@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const { API_KEY } = require('../../../config');
 
-const GetAnswers = () => {
+const MoreAnsweredQuestions = () => {
   // https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/:question_id/answers?question_id=3
   // GET /qa/questions/:question_id/answers
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
@@ -30,9 +30,9 @@ const GetAnswers = () => {
 
   return (
     <div data-testid="get-answers" className="get-answers button">
-      <input onClick={handleClick} type="button" value="more answers" />
+      <input onClick={handleClick} type="button" value="More Answered Questions" />
     </div>
   );
 };
 
-export default GetAnswers;
+export default MoreAnsweredQuestions;

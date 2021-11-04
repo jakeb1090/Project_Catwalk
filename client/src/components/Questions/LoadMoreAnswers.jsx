@@ -1,11 +1,39 @@
 import React from 'react';
-// import axios from 'axios';
-import PropTypes from 'prop-types';
-
 // const { API_KEY } = require('../../../../config');
 
-const LoadMoreAnswers = ({ click }) => {
-  const placeHolder = '';
+
+const LoadMoreAnswers = (props) => {
+  const handleClick = (e) => {
+
+  }
+
+  return (
+    <div data-testid="load-more" className="load-more">
+      <input
+        type="button"
+        value="LOAD MORE ANSWERS"
+        onClick={"hello"}
+      />
+    </div>
+  );
+};
+
+export default LoadMoreAnswers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // const handleClick = () => {
   //   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 
@@ -28,22 +56,3 @@ const LoadMoreAnswers = ({ click }) => {
   //       console.log(res);
   //     });
   // };
-
-  return (
-    <div data-testid="load-more" className="load-more">
-      <input type="button" value="load more answers" onClick={() => click()} />
-      { placeHolder }
-    </div>
-  );
-};
-
-LoadMoreAnswers.defaultProps = {
-  click: () => {},
-};
-
-LoadMoreAnswers.propTypes = {
-  click: PropTypes.func,
-
-};
-
-export default LoadMoreAnswers;

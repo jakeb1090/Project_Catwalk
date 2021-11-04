@@ -10,7 +10,7 @@ const GetQuestions = () => {
 
   const handleClick = () => {
     const params = {
-      product_id: 61577,
+      product_id: 533449,
       // page: 2,
       // count: 22,
     };

@@ -20,10 +20,11 @@ class App extends Component {
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
         {/* <Overview /> */}
-        <Related
+        {/* <Related
           currentProduct={currentProduct}
-        />
-        {/* <Questions /> */}
+        /> */}
+        <Questions
+          currentProduct={currentProduct} />
         {/* <ReviewApp /> */}
       </div>
     );
