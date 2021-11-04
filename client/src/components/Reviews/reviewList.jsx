@@ -1,35 +1,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReviewTile from './reviewTile';
+import ReviewModal from './reviewModal';
 
-const ReviewList = (props) => {
-  const { reviews, starFilters } = props;
-  if (typeof reviews === 'object') {
-    const tile = reviews.map((review) => {
-      if (starFilters.indexOf(review.rating) > -1) {
-        return <ReviewTile review={review} />;
-      }
-    });
+class ReviewList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      qtyToRender: 2,
+      rendered: 0,
+      showModal: true,
+    }
+  }
 
-    return (
-      <div>
+  loadMore(event) {
+    this.setState((prevState) => ({
+      qtyToRender: prevState.qtyToRender + 2
+    })
+    )
+  }
+
+  openModal() {
+    this.setState({
+      showModal: true
+    })
+  }
+  submitModal(reviewObject) {
+    this.setState({
+      showModal: false
+    })
+    //call reviewapp API function
+    this.props.postReview(reviewObject);
+  }
+
+  handleSort(event) {
+    this.props.sortBy(event.target.value)
+  }
+
+  render() {
+    // console.log(this.props)
+    let { reviews, starFilters } = this.props;
+    let { qtyToRender, rendered } = this.state;
+    if (typeof reviews === 'object') {
+      const tile = reviews.map((review) => {
+        if (starFilters[review.rating] === true && qtyToRender > rendered) {
+          rendered++
+          return <ReviewTile
+            review={review} />;
+        }
+      });
+
+      return (
         <div>
-          <h4>Review List</h4>
-          {`Number of reviews: ${reviews.length}`}
+          <div>
+            <h4>Review List</h4>
+            {`Number of reviews: showing ${qtyToRender} of ${reviews.length}`}
+          </div>
+          <div>
+            Sorted by:
+            <select onChange={this.handleSort.bind(this)}>
+              <option value="helpful">Helpfulness</option>
+              <option value="newness">Date</option>
+              <option value="relevance">Relevance</option>
+            </select>
+            {tile}
+            <button onClick={this.loadMore.bind(this)}>Load More</button>
+            <button onClick={this.openModal.bind(this)}>Add Review</button>
+            <ReviewModal
+              isOpen={this.state.showModal} contentLabel="Modal Example!"
+              submitModal={this.submitModal.bind(this)}/>
+          </div>
         </div>
-        <div>
-          Sorted by:
-          <select>
-            <option>Relevance</option>
-            <option>Date</option>
-            <option>Helpfulness</option>
-          </select>
-          {tile}
-          <button>Load More</button>
-          <button>Add Review</button>
-        </div>
-      </div>
-    );
-  } return null;
+      );
+    } else return null;
+  }
 };
 
 ReviewList.propTypes = {
@@ -37,40 +81,7 @@ ReviewList.propTypes = {
   id: PropTypes.number,
 };
 
-const ReviewTile = (props) => {
-  const { review } = props;
-  const formattedDate = new Date(review.date).toDateString();
-  return (
-    <div>
-      <br />
-      <div>
-        {`Number of stars: ${review.rating}`}
-      </div>
-      <div>
-        {`Reviewer Name: ${review.reviewer_name}, ${formattedDate}`}
-      </div>
-      <div>
-        {review.summary}
-      </div>
-      <div>
-        {review.body}
-      </div>
-      <div>
-        {review.recommend ? 'I recommend this product' : null}
-      </div>
-      <div>
-        {review.response ? `Response from seller: ${review.response}` : null}
-      </div>
-      <div>
-        Was this review helpful?
-        <button> Yes </button>
-        {/* {review.helpfulness} */}
-      </div>
-      <button>Report</button>
-      <br />
-    </div>
-  );
-};
+
 
 export default ReviewList;
 

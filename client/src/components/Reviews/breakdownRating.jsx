@@ -9,8 +9,8 @@ const RatingBreakdown = function (props) {
   if (qty) {
     return (
       <div>
-        <button value={qty} onClick={clickHandler}>{`${qty} stars`}</button>
-        [bar representing {star} stars]
+        <button value={star} onClick={clickHandler}>{`${star} stars`}</button>
+        [bar representing {qty} stars]
       </div>
     );
   } else return null

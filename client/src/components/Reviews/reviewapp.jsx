@@ -8,29 +8,37 @@ class ReviewApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 61597,
+      id: 61590,
       characteristics: {
       },
+      sort: 'newness',
       ratings: {
         1: 1,
         2: 2,
       },
-      starFilters: [3, 4, 5],
-      reviews: 'incorrect reviews from app state',
+      filterQty: 5,
+      starFilters: {
+        1: true,
+        2: true,
+        3: true,
+        4: true,
+        5: true,
+      },
     };
   }
 
   componentDidMount() {
+    this.fetchAPI(this.state.sort);
+  }
+
+  fetchAPI(sort) {
     const { id } = this.state;
-    API.getReviews(id)
+    API.getReviews(id, sort)
       .then((res) => {
         this.setState({
           reviews: res.data.results,
         });
       })
-      // .then(() => {
-      //   console.log('state after API.getReviews', this.state);
-      // })
       .catch(() => {
         console.log('error from API.getReviews in componentDidMount');
       });
@@ -42,12 +50,38 @@ class ReviewApp extends React.Component {
           characteristics: res.data.characteristics,
         });
       })
-      // .then(() => {
-      //   console.log('state after API.getMeta', this.state);
-      // })
       .catch(() => {
         console.log('error from API.getMeta in componentDidMount');
       });
+  }
+
+  putFeedback(action, review_id) {
+    API.put(action, review_id)
+      .then(() => {
+        fetchAPI();
+        console.log(`review #', review_id, ' was marked: ${action}`)
+      })
+      .catch(() => {
+        console.log(`error marking review as ${action}`)
+      })
+  }
+
+  postReview(review) {
+    API.post(review)
+    .then(()=>{
+      fetchAPI();
+      console.log(`review was posted!`)
+    })
+    .catch(() => {
+      console.log(`review post failed`)
+    })
+  }
+
+  sortBy(sort) {
+    // this.setState({
+    //   sort: sort
+    // })
+    this.fetchAPI(sort);
   }
 
   averageRating() {
@@ -63,34 +97,75 @@ class ReviewApp extends React.Component {
   }
 
   toggleStarFilter(star) {
-    console.log(this.state.starFilters.indexOf(star))
-    if (this.state.starFilters.length === 5) {
-      this.setState({
-        starFilters: star,
-      })
-    } else if (this.state.starFilters.indexOf(star) === -1) {
-      this.setState({
-        starFilters: [...this.state.starFilters, star],
-      })
-    } else {
-      var starIndex = this.state.starFilters.indexOf(star)
-      var updated = this.state.starFilters
-      updated.splice(starIndex, 1)
-      this.setState({
-        starFilters: updated,
-      })
+    console.log('toggle star #', star)
+    console.log(this.state.filterQty)
+    //if all stars are on, only leave this star on
+    if (this.state.filterQty === 5) {
+      console.log(1)
+      this.setState(prevState => ({
+        starFilters: {
+          1: false,
+          2: false,
+          3: false,
+          4: false,
+          5: false,
+          [star]: true,
+        },
+        filterQty: 1
+      }))
+    } else if (this.state.starFilters[star]) {
+      if (this.state.filterQty === 1) {
+        //if I just turned off the only filter, then restore all stars
+        this.setState({
+          starFilters: {
+            1: true,
+            2: true,
+            3: true,
+            4: true,
+            5: true,
+          },
+          filterQty: 5,
+        })
+      } else {
+        //if it's not the only filter, just turn it off
+        console.log(2)
+
+        this.setState(prevState => ({
+          starFilters: {
+            ...prevState.starFilters,
+            [star]: false,
+          },
+          filterQty: prevState.filterQty - 1
+        }))
+      }
+    } else { //if the star is not showing, turn it on
+      console.log(3)
+      this.setState(prevState => ({
+        starFilters: {
+          ...prevState.starFilters,
+          [star]: true,
+        },
+        filterQty: prevState.filterQty + 1
+      }))
     }
   }
 
   removeStarFilters() {
     this.setState({
-      starFilters: [1, 2, 3, 4, 5],
+      starFilters: {
+        1: true,
+        2: true,
+        3: true,
+        4: true,
+        5: true,
+      },
+      filterQty: 5,
     })
   }
 
   render() {
     const {
-      id, starFilters, reviews, characteristics, ratings
+      id, starFilters, filterQty, reviews, characteristics, ratings
     } = this.state;
     return (
       <div data-testid="reviewapp">
@@ -104,12 +179,15 @@ class ReviewApp extends React.Component {
           scale={characteristics}
           ratings={ratings}
           toggleStarFilter={this.toggleStarFilter.bind(this)}
+          filterQty={filterQty}
           removeStarFilters={this.removeStarFilters.bind(this)}
         />
         <ReviewList
           id={id}
           reviews={reviews}
           starFilters={Object.values(starFilters)}
+          sortBy={this.sortBy.bind(this)}
+          postReview={this.postReview.bind(this)}
         />
       </div>
     );

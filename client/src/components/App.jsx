@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61622
+      currentProduct: 61590
     };
   }
 
@@ -20,11 +20,11 @@ class App extends Component {
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
         {/* <Overview /> */}
-        <Related
+        {/* <Related
           currentProduct={currentProduct}
         />
-        {/* <Questions /> */}
-        {/* <ReviewApp /> */}
+        <Questions /> */}
+        <ReviewApp id={currentProduct} />
       </div>
     );
   }
