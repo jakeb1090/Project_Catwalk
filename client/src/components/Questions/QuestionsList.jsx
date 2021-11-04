@@ -21,7 +21,9 @@ class QuestionsList extends React.Component {
     let outputList = [];
 
     // eslint-disable-next-line react/prop-types
-    const filteredList = questionList.filter((question) =>
+    const sortedList = questionList.sort((b, a) => a.question_helpfulness - b.question_helpfulness);
+
+    const filteredList = sortedList.filter((question) =>
       // eslint-disable-next-line implicit-arrow-linebreak
       question.question_body.toLowerCase().includes(currentSearch.toLowerCase()),
       // eslint-disable-next-line function-paren-newline
@@ -30,7 +32,7 @@ class QuestionsList extends React.Component {
     // eslint-disable-next-line no-unused-expressions
     currentSearch.length >= 3
       ? outputList = filteredList
-      : outputList = questionList;
+      : outputList = sortedList;
 
     return (
       <div data-testid="questions-list" className="question-list">
