@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import QuestionElement from './QuestionElement';
 import AnswerInnerList from './AnswerInnerList';
 
 const QAContainer = (props) => {
-  const { question, answersN, questionsN, loadMoreAnswers } = props;
+  const {
+    question, answersN, questionsN, loadMoreAnswers,
+  } = props;
   const { answers } = question;
 
   return (
@@ -16,21 +18,24 @@ const QAContainer = (props) => {
         answers={answers}
         answersN={answersN}
         loadMoreAnswers={loadMoreAnswers}
+        questionsN={questionsN}
       />
     </div>
   );
 };
 
-// QAContainer.defaultProps = {
+QAContainer.defaultProps = {
+  questionsN: 2,
 //   question: {},
 //   answers: {},
 //   // question_id:
-// };
+};
 
-// QAContainer.propTypes = {
+QAContainer.propTypes = {
+  questionsN: PropTypes.number,
 //   question: PropTypes.objectOf(PropTypes.object),
 //   answers: PropTypes.objectOf(PropTypes.object),
 //   question_id: PropTypes.number.isRequired,
-// };
+};
 
 export default QAContainer;

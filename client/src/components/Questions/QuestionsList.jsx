@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line import/no-named-as-default
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import QAContainer from './QAContainer';
 
 // props.currentProductId
@@ -9,7 +9,6 @@ class QuestionsList extends React.Component {
     super(props);
     this.state = {
       currentProductId: 61601,
-      // questionList: [],
       // searchText: '',
     };
   }
@@ -21,10 +20,14 @@ class QuestionsList extends React.Component {
     } = this.props;
     let outputList = [];
 
-    const filteredList = questionList.filter((question) => {
-      return question.question_body.toLowerCase().includes(currentSearch.toLowerCase());
-    });
+    // eslint-disable-next-line react/prop-types
+    const filteredList = questionList.filter((question) =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      question.question_body.toLowerCase().includes(currentSearch.toLowerCase()),
+      // eslint-disable-next-line function-paren-newline
+    );
 
+    // eslint-disable-next-line no-unused-expressions
     currentSearch.length >= 3
       ? outputList = filteredList
       : outputList = questionList;
@@ -48,16 +51,23 @@ class QuestionsList extends React.Component {
         {
           answersN !== null
             ? <input type="button" value="LOAD MORE ANSWERS" onClick={() => { loadMoreAnswers(); }} />
-            : <div />
+            : <span />
         }
-
       </div>
     );
   }
 }
 
-// QuestionsList.propTypes = {
-//   currentSearch: PropTypes.string.isRequired,
-// };
+QuestionsList.defaultProps = {
+  answersN: 4,
+};
+
+QuestionsList.propTypes = {
+  currentSearch: PropTypes.string.isRequired,
+  questionsN: PropTypes.number.isRequired,
+  answersN: PropTypes.number,
+  loadMoreAnswers: PropTypes.func.isRequired,
+  questionList: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default QuestionsList;

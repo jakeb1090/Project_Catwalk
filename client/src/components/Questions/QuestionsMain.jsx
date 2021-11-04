@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import API_KEY from '../../../config';
 import AddQuestion from './AddQuestion';
 import QuestionsList from './QuestionsList';
@@ -24,15 +25,15 @@ class QuestionsMain extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchQuestions();
+    const { currentProduct } = this.props;
+    this.fetchQuestions(currentProduct);
   }
 
   fetchQuestions(productId) {
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
-    const { currentProduct } = this.props;
 
     const params = {
-      product_id: currentProduct,
+      product_id: productId,
       // page: 2,
       // count: 22,
     };
@@ -98,5 +99,9 @@ class QuestionsMain extends React.Component {
     );
   }
 }
+
+QuestionsMain.propTypes = {
+  currentProduct: PropTypes.number.isRequired,
+};
 
 export default QuestionsMain;
