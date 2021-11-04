@@ -20,7 +20,6 @@ class QuestionsList extends React.Component {
     } = this.props;
     let outputList = [];
 
-    // eslint-disable-next-line react/prop-types
     const sortedList = questionList.sort((b, a) => a.question_helpfulness - b.question_helpfulness);
 
     const filteredList = sortedList.filter((question) =>

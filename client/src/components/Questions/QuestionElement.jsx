@@ -1,30 +1,31 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 
 // { answerer_name, body, date, helpfulness, id, photos }
 const QuestionElement = ({ questionData }) => {
   const {
     question_body: questionBody,
+    question_helpfulness: questionHelpfulness,
     // question_id: questionId,
     // asker_name: askerName,
     // question_date: questionDate,
-    // question_helpfulness: questionHelpfulness,
     // reported,
   } = questionData;
 
   return (
     <li data-testid="question-element" className="question-element">
-      <div>
+
+      <div className="question-body">
         Q:
         {' '}
         { questionBody }
-        {/* { askerName }
-        { questionDate }
-        { questionHelpfulness }
-        { questionId }
-        { reported } */}
       </div>
+      <div className="question-interation">
+        Helpful? Yes{ questionHelpfulness } | Add Answer
+      </div>
+
     </li>
   );
 };

@@ -28,11 +28,24 @@
 
 .question-element {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid lightgray;
   padding: 5px;
+  justify-content: space-between;
+}
+
+.question-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.question-interation {
+  display: flex;
+  flex-direction: row;
+
 }
 
 .load-more {
@@ -46,7 +59,7 @@
 }
 
 .qa-container {
-  border: 1px solid rgb(235, 55, 190);
+  border: 4px solid rgb(235, 55, 190);
   padding: 12px;
   margin-bottom: 12px;
 }
@@ -71,3 +84,4 @@
   color: red;
   font-weight: 700  ;
 }
+

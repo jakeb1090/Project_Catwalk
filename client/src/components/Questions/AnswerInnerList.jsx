@@ -6,6 +6,7 @@ const AnswerInnerList = (props) => {
   // const [ answersN, setAnswersN ] = useState(2);
   const { answers, answersN } = props;
   const keys = Object.keys(answers);
+  // let sorted = {};
 
   return (
     <div data-testid="answer-inner-list" className="answer-inner-list">
