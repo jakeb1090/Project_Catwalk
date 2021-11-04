@@ -1,7 +1,7 @@
 import React from 'react';
 
-const DeleteBtn = () => (
-  <button type="button" aria-label="deleteBtn">
+const DeleteBtn = (props) => (
+  <button type="button" aria-label="deleteBtn" onClick={() => props.onDeleteOutfitClick(props.id)}>
     --X Icon--
   </button>
 );

@@ -13,6 +13,10 @@ class App extends Component {
     };
   }
 
+  onRelatedClick = (id) => {
+    this.setState({currentProduct: id})
+  }
+
   render() {
     const { currentProduct } = this.state;
     return (
@@ -22,8 +26,9 @@ class App extends Component {
         {/* <Overview /> */}
         <Related
           currentProduct={currentProduct}
+          onRelatedClick={this.onRelatedClick}
         />
-        {/* <Questions /> */}
+        <Questions />
         {/* <ReviewApp /> */}
       </div>
     );

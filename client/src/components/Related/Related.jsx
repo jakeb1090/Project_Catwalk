@@ -18,7 +18,7 @@ class Related extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfitIds: [/*61580, 61593, 61602, 61614, 61687, 61689, 61731*/],
+      outfitIds: [],
       currentId: 61602,
       relatedIds: [],
       related: [],
@@ -26,9 +26,18 @@ class Related extends Component {
       loading: true,
     };
   }
-
   componentDidMount() {
-    getProductRelated(this.state.currentId)
+    this.relatedBuilder();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentProduct !== this.props.currentProduct) {
+      this.relatedBuilder();
+    }
+  }
+
+  relatedBuilder = () => {
+    getProductRelated(this.props.currentProduct)
       .then((response) => {
         const { data } = response;
         this.objectBuilder(data)
@@ -82,25 +91,39 @@ class Related extends Component {
     return related;
   }
 
-  onAddOutfitClick = (e) => {
+  onAddOutfitClick = () => {
     if (this.state.outfitIds.indexOf(this.props.currentProduct) !== -1) {
-      console.log('here');
       return;
     }
 
     this.setState({loading: true});
-    this.setState({outfitIds: [...this.state.outfitIds, this.props.currentProduct]})
-    this.objectBuilder([this.props.currentProduct])
+    this.objectBuilder([...this.state.outfitIds, this.props.currentProduct])
       .then((outfit) => {
         this.setState({outfit});
+      })
+      .then(() => {
+        this.setState({outfitIds: [...this.state.outfitIds, this.props.currentProduct]})
       })
       .then(() => {
         this.setState({loading: false});
       })
   }
 
+  onDeleteOutfitClick = (id) => {
+    // this.setState({loading: true});
+    this.setState({
+      outfitIds: this.state.outfitIds.filter((product) => {
+        return product !== id
+      }),
+      outfit: this.state.outfit.filter((product) => {
+        return product.id !== id
+      })
+    });
+  }
+
   render() {
     const { related, outfit, loading } = this.state;
+    const { onRelatedClick } = this.props;
     return(
       <div data-testid="related">
         {loading
@@ -111,12 +134,14 @@ class Related extends Component {
             <Modal />
             <Title>Related Products</Title>
             <Carousel
+              onRelatedClick={onRelatedClick}
               data={related}
               btn={'compare'}
             />
             <Title>Your Outfit</Title>
             <Carousel
               onAddOutfitClick={this.onAddOutfitClick}
+              onDeleteOutfitClick={this.onDeleteOutfitClick}
               data={outfit}
               btn={'delete'}
             />
