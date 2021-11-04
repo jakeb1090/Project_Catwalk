@@ -9,11 +9,13 @@ const Div = styled.div`
   border: solid gray;
 `;
 
-const Modal = () => (
+const Modal = (props) => (
   <Div data-testid="modal">
     --Modal--
     <Title>Comparing</Title>
-    <CompareTable />
+    <CompareTable
+      data={props.data}
+    />
   </Div>
 );
 

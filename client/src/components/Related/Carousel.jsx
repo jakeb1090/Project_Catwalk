@@ -5,7 +5,7 @@ import ForwardArrow from './ForwardArrow';
 import ReverseArrow from './ReverseArrow';
 
 const Carousel = (props) => {
-  const { onDeleteOutfitClick, onRelatedClick, onAddOutfitClick, data, btn } = props;
+  const { onCompareProductClick, onDeleteOutfitClick, onRelatedClick, onAddOutfitClick, data, btn } = props;
   return(
     <div data-testid="carousel">
       {/* Add Outfit Button Card */}
@@ -17,6 +17,7 @@ const Carousel = (props) => {
             key={product.id}
             id={product.id}
             onRelatedClick={onRelatedClick}
+            onCompareProductClick={onCompareProductClick}
             onDeleteOutfitClick={onDeleteOutfitClick}
             product={product}
             btn={btn}

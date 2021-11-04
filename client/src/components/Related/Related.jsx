@@ -18,8 +18,9 @@ class Related extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentProduct: {},
+      compareData: [],
       outfitIds: [],
-      currentId: 61602,
       relatedIds: [],
       related: [],
       outfit: [],
@@ -37,6 +38,11 @@ class Related extends Component {
   }
 
   relatedBuilder = () => {
+    this.setState({loading: true});
+    getProduct(this.props.currentProduct)
+    .then((data) => {
+      this.setState({currentProduct: data.data})
+    })
     getProductRelated(this.props.currentProduct)
       .then((response) => {
         const { data } = response;
@@ -121,8 +127,51 @@ class Related extends Component {
     });
   }
 
+  onCompareProductClick = (e, id) => {
+    e.stopPropagation();
+
+    const { name, features } = this.state.currentProduct;
+    const currentName = name;
+    const currentFeatures = features.slice();
+
+    let comparingName;
+    let comparingFeatures;
+
+    this.state.related.forEach((product) => {
+      if (product.id === id) {
+        comparingName = product.title;
+        comparingFeatures = product.features;
+      }
+    });
+
+    let compareData = [[currentName, null, comparingName]];
+    currentFeatures.map((currFeat) => {
+      let compared = [currFeat.value, currFeat.feature]
+      for (const [index, compFeat] of comparingFeatures.entries()) {
+        if (compFeat.feature === currFeat.feature) {
+          compared.push(compFeat.value);
+          comparingFeatures.splice(index, 1);
+          break;
+        }
+      }
+      if (compared.length !== 3) {
+        compared.push(null);
+      }
+      compareData.push(compared);
+    });
+
+    if (comparingFeatures.length) {
+      for (const feature of comparingFeatures) {
+        const compared = [null, feature.feature, feature.value];
+        compareData.push(compared);
+      }
+    }
+
+    this.setState({compareData});
+  }
+
   render() {
-    const { related, outfit, loading } = this.state;
+    const { compareData, related, outfit, loading } = this.state;
     const { onRelatedClick } = this.props;
     return(
       <div data-testid="related">
@@ -131,9 +180,12 @@ class Related extends Component {
           <h1>loading...</h1>
         :
           <>
-            <Modal />
+            <Modal
+              data={compareData}
+            />
             <Title>Related Products</Title>
             <Carousel
+              onCompareProductClick={this.onCompareProductClick}
               onRelatedClick={onRelatedClick}
               data={related}
               btn={'compare'}

@@ -17,7 +17,7 @@ const Title = styled.h5`
 
 const Card = (props) => {
   const { img, title, price, salesPrice, avgRating, features } = props.product;
-  const { onDeleteOutfitClick, onRelatedClick, onAddOutfitClick, id, addOutfit, btn } = props;
+  const { onCompareProductClick, onDeleteOutfitClick, onRelatedClick, onAddOutfitClick, id, addOutfit, btn } = props;
   return(
     <Div data-testid="card" onClick={() => onRelatedClick(id)}>
       {
@@ -31,7 +31,10 @@ const Card = (props) => {
         {
           btn === 'compare'
           ?
-          <CompareBtn />
+          <CompareBtn
+            onCompareProductClick={onCompareProductClick}
+            id={id}
+          />
           :
           <DeleteBtn
             onDeleteOutfitClick={onDeleteOutfitClick}

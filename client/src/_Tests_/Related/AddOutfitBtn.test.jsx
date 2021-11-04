@@ -11,7 +11,7 @@ test('renders AddOutfitButton to the DOM', () => {
 });
 
 test('should call function when clicked' , () => {
-  const onAddOutfitClick = jest.fn()
+  const onAddOutfitClick = jest.fn();
   render(
     <AddOutfitBtn
       onClick={onAddOutfitClick}
