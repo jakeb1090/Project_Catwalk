@@ -12,7 +12,7 @@ const Input = styled.input`
   font-size: 20px;
   color: purple;
   background-color: lightblue;
-`
+`;
 
 // updatesearch
 class SearchQuestions extends React.Component {
@@ -30,13 +30,14 @@ class SearchQuestions extends React.Component {
   }
 
   render() {
+    const { searchText } = this.state;
     return (
       <div data-testid="search" className="search">
         <Input
           type="text"
           placeholder="have a question? search for answers..."
           onChange={this.handleChange}
-          value={this.state.searchText}
+          value={searchText}
         />
       </div>
     );

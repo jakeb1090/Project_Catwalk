@@ -1,16 +1,12 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
-// import GetProducts from './GetProducts';
-// import GetQuestions from './GetQuestions';
-// import AddAnswer from './AddAnswer';
-// import button.MoreAnsweredQuestions from './button.MoreAnsweredQuestions';
+import API_KEY from '../../../config';
 import AddQuestion from './AddQuestion';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
-import API_KEY from '../../../config';
 
-//props: currentProduct
+// props: currentProduct
 class QuestionsMain extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +25,6 @@ class QuestionsMain extends React.Component {
 
   componentDidMount() {
     this.fetchQuestions();
-
   }
 
   fetchQuestions(productId) {
@@ -61,22 +56,17 @@ class QuestionsMain extends React.Component {
   }
 
   updateAnswersN() {
-    this.setState({ answersN: null })
+    this.setState({ answersN: null });
   }
 
   render() {
     const { currentProduct } = this.props;
-    const { searchText, questionsN, answersN, questionList } = this.state;
+    const {
+      searchText, questionsN, answersN, questionList,
+    } = this.state;
     return (
       <div>
-        <div className="test-components">
-          {/* <GetProducts />
-          <GetQuestions />
-          <GetAnswers />
-          <AddQuestion />
-          <AddAnswer />
-          <SearchQuestions /> */}
-        </div>
+        <div className="test-components" />
         <div data-testid="questions-widget" className="questions-widget">
           <SearchQuestions updateSearch={this.updateSearch} />
           <QuestionsList
@@ -91,12 +81,14 @@ class QuestionsMain extends React.Component {
 
             {
               questionsN < questionList.length
-              ?<input
-                type="button"
-                value="More Answered Questions"
-                onClick={() => this.setState({questionsN: questionsN + 2})}
-              />
-              : <div />
+                ? (
+                  <input
+                    type="button"
+                    value="More Answered Questions"
+                    onClick={() => this.setState({ questionsN: questionsN + 2 })}
+                  />
+                )
+                : <div />
             }
 
             <AddQuestion />

@@ -1,12 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 // eslint-disable-next-line import/no-named-as-default
 // import PropTypes from 'prop-types';
 import QAContainer from './QAContainer';
-import LoadMoreAnswers from './LoadMoreAnswers';
-import API_KEY from '../../../config';
 
-//props.currentProductId
+// props.currentProductId
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
@@ -19,14 +16,18 @@ class QuestionsList extends React.Component {
 
   render() {
     const { currentProductId } = this.state;
-    const { questionsN, answersN, loadMoreAnswers, questionList, currentSearch } = this.props;
+    const {
+      questionsN, answersN, loadMoreAnswers, questionList, currentSearch,
+    } = this.props;
     let outputList = [];
 
-    const filteredList = questionList.filter(question => question.question_body.toLowerCase().includes(currentSearch.toLowerCase()));
+    const filteredList = questionList.filter((question) => {
+      return question.question_body.toLowerCase().includes(currentSearch.toLowerCase());
+    });
 
     currentSearch.length >= 3
-    ? outputList = filteredList
-    : outputList = questionList;
+      ? outputList = filteredList
+      : outputList = questionList;
 
     return (
       <div data-testid="questions-list" className="question-list">
@@ -46,8 +47,8 @@ class QuestionsList extends React.Component {
 
         {
           answersN !== null
-          ? <input type="button" value="LOAD MORE ANSWERS" onClick={ () => {loadMoreAnswers()} } />
-          : <div></div>
+            ? <input type="button" value="LOAD MORE ANSWERS" onClick={() => { loadMoreAnswers(); }} />
+            : <div />
         }
 
       </div>
