@@ -29,7 +29,7 @@ class App extends Component {
           onRelatedClick={this.onRelatedClick}
         />
         <Questions />
-        {/* <ReviewApp /> */}
+        <ReviewApp />
       </div>
     );
   }
