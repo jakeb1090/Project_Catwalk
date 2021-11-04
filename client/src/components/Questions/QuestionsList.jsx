@@ -17,20 +17,24 @@ class QuestionsList extends React.Component {
     };
   }
 
-
   render() {
     const { currentProductId } = this.state;
     const { questionsN, answersN, loadMoreAnswers, questionList, currentSearch } = this.props;
+    let outputList = [];
 
     const filteredList = questionList.filter(question => question.question_body.toLowerCase().includes(currentSearch.toLowerCase()));
+
+    currentSearch.length >= 3
+    ? outputList = filteredList
+    : outputList = questionList;
 
     return (
       <div data-testid="questions-list" className="question-list">
         &lt;Questions List Container&gt;
         {
-        filteredList.slice(0, questionsN).length === 0
-          ? (<div>No Questions for this Product</div>)
-          : filteredList.slice(0, questionsN).map((nQuestion) => (
+        outputList.slice(0, questionsN).length === 0
+          ? (<div className="error-text">No Matching Questions for this Product</div>)
+          : outputList.slice(0, questionsN).map((nQuestion) => (
             <QAContainer
               key={nQuestion.question_id}
               question={nQuestion}

@@ -90,12 +90,13 @@ class QuestionsMain extends React.Component {
           <div className="button-container">
 
             {
-
-              <input
+              questionsN < questionList.length
+              ?<input
                 type="button"
                 value="More Answered Questions"
                 onClick={() => this.setState({questionsN: questionsN + 2})}
               />
+              : <div />
             }
 
             <AddQuestion />
