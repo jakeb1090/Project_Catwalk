@@ -94,6 +94,7 @@ class ReviewModal extends React.Component {
           </div>
         </div>
         <button onClick={this.handleSubmit.bind(this)}>Submit Review</button>
+        <button onClick={this.props.closeModal}> Cancel </button>
       </ReactModal>
     )
   }

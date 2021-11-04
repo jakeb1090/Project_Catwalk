@@ -1,8 +1,13 @@
 import React from 'react';
 
 const ReviewTile = (props) => {
-  const { review } = props;
+  const { review,  putFeedback} = props;
   const formattedDate = new Date(review.date).toDateString();
+  const handleClick = function (event) {
+    console.log('lets put:', review.review_id)
+    putFeedback(event.target.name, review.review_id)
+  }
+
   return (
     <div key={review.review_id}>
       <br />
@@ -26,9 +31,9 @@ const ReviewTile = (props) => {
       </div>
       <div>
         Was this review helpful?
-        <button> {`Yes (${review.helpfulness})`} </button>
+        <button name="helpful" onClick={handleClick}> {`Yes (${review.helpfulness})`} </button>
       </div>
-      <button>Report</button>
+      <button name="report" onClick={handleClick}>Report</button>
       <br />
     </div>
   );

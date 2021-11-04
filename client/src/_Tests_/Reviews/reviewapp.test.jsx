@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { test, expect } from '@jest/globals';
-import ReviewApp from './reviewapp';
+import ReviewApp from '../../components/Reviews/reviewapp';
 import '@testing-library/jest-dom';
+
 
 test('renders Review widget to DOM', () => {
   render(<ReviewApp />);

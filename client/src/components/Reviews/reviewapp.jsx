@@ -56,8 +56,13 @@ class ReviewApp extends React.Component {
   }
 
   putFeedback(action, review_id) {
+    console.log(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/:review_id/${action}`)
+    console.log(review_id)
     API.put(action, review_id)
-      .then(() => {
+    .then(() =>{
+      console.log('putted!')
+    })
+    .then(() => {
         fetchAPI();
         console.log(`review #', review_id, ' was marked: ${action}`)
       })
@@ -188,6 +193,7 @@ class ReviewApp extends React.Component {
           starFilters={Object.values(starFilters)}
           sortBy={this.sortBy.bind(this)}
           postReview={this.postReview.bind(this)}
+          putFeedback={this.putFeedback.bind(this)}
         />
       </div>
     );
