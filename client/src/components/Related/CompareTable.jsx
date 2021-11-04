@@ -20,7 +20,7 @@ const CompareTable = (props) => (
       {props.data.map((feature, i) => {
         {if (i > 0) {
           return (
-            <tr>
+            <tr key={i}>
               <td>{feature[0]}</td>
               <td>{feature[1]}</td>
               <td>{feature[2]}</td>

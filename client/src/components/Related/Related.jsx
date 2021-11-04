@@ -25,6 +25,7 @@ class Related extends Component {
       related: [],
       outfit: [],
       loading: true,
+      showModal: false,
     };
   }
   componentDidMount() {
@@ -129,6 +130,7 @@ class Related extends Component {
 
   onCompareProductClick = (e, id) => {
     e.stopPropagation();
+    document.body.style.overflow = 'hidden'
 
     const { name, features } = this.state.currentProduct;
     const currentName = name;
@@ -167,11 +169,21 @@ class Related extends Component {
       }
     }
 
-    this.setState({compareData});
+    this.setState({
+      compareData,
+      showModal: true,
+    });
+  }
+
+  hideModal = () => {
+    document.body.style.overflow = 'visible'
+    this.setState({
+      showModal: false,
+    })
   }
 
   render() {
-    const { compareData, related, outfit, loading } = this.state;
+    const { showModal, compareData, related, outfit, loading } = this.state;
     const { onRelatedClick } = this.props;
     return(
       <div data-testid="related">
@@ -181,6 +193,8 @@ class Related extends Component {
         :
           <>
             <Modal
+              hideModal={this.hideModal}
+              showModal={showModal}
               data={compareData}
             />
             <Title>Related Products</Title>
