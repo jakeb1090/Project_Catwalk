@@ -63,8 +63,12 @@ class QuestionsMain extends React.Component {
   render() {
     const { currentProduct } = this.props;
     const {
-      searchText, questionsN, answersN, questionList,
+      searchText,
+      questionsN,
+      answersN,
+      questionList,
     } = this.state;
+
     return (
       <div>
         <div className="test-components" />

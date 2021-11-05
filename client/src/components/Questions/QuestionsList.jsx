@@ -1,9 +1,21 @@
 import React from 'react';
 // eslint-disable-next-line import/no-named-as-default
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import QAContainer from './QAContainer';
 
 // props.currentProductId
+const QList = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  overflow: auto;
+`;
+
+const Input = styled.div`
+  width: 200px;
+`;
+
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
@@ -35,25 +47,28 @@ class QuestionsList extends React.Component {
 
     return (
       <div data-testid="questions-list" className="question-list">
-        {/* &lt;Questions List Container&gt; */}
-        {
-        outputList.slice(0, questionsN).length === 0
-          ? (<div className="error-text">No Matching Questions for this Product</div>)
-          : outputList.slice(0, questionsN).map((nQuestion) => (
-            <QAContainer
-              key={nQuestion.question_id}
-              question={nQuestion}
-              answersN={answersN}
-              currentProduct={currentProductId}
-            />
-          ))
-        }
-
-        {
-          answersN !== null
-            ? <input type="button" value="LOAD MORE ANSWERS" onClick={() => { loadMoreAnswers(); }} />
-            : <span />
-        }
+        <QList>
+          {/* &lt;Questions List Container&gt; */}
+          {
+          outputList.slice(0, questionsN).length === 0
+            ? (<div className="error-text">No Matching Questions for this Product</div>)
+            : outputList.slice(0, questionsN).map((nQuestion) => (
+              <QAContainer
+                key={nQuestion.question_id}
+                question={nQuestion}
+                answersN={answersN}
+                currentProduct={currentProductId}
+              />
+            ))
+          }
+          <Input>
+            {
+              answersN !== null
+                ? <input type="button" value="LOAD MORE ANSWERS" onClick={() => { loadMoreAnswers(); }} />
+                : <span />
+            }
+          </Input>
+        </QList>
       </div>
     );
   }

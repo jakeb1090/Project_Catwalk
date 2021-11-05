@@ -1,5 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  margin-left: 10px;
+  color: darkslategray;
+`;
+
+const Interactive = styled.span`
+  color: gray;
+  padding-top: 14px;
+`;
 
 const AnswerElement = ({ data }) => {
   const {
@@ -13,29 +27,46 @@ const AnswerElement = ({ data }) => {
 
   const formattedDate = date.slice(0, 10);
 
+  const handleClick = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
-    <div data-testid="answer-element" className="answerElement" key={id}>
-      <div>{ body }</div>
-      <div>
+    <div data-testid="answer-element" className="answerElementx" key={id}>
+      <Body>
+        <div>{ body }</div>
         <div>
-          {
-            photos.map((img) => <img key={img} className="img" src={img} alt="cool" />)
-          }
+          <div>
+            {
+              photos.map((img) => <img key={img} className="img" src={img} alt="cool" />)
+            }
+          </div>
+          <span>
+            <Interactive>
+              by&nbsp;
+              {answererName}
+              ,&nbsp;
+              {formattedDate}
+              &nbsp;
+              |&nbsp;&nbsp;Helpful?&nbsp;
+              <span
+                onKeyUp={handleClick}
+                onClick={handleClick}
+                role="link"
+                tabIndex={0}
+              >
+                Yes
+              </span>
+              (
+              {helpfulness}
+              )
+              &nbsp;|&nbsp;&nbsp;
+              <a href="localhost:300">Report</a>
+              &nbsp;
+            </Interactive>
+          </span>
         </div>
-        <span>
-          by
-          {answererName}
-          ,&nbsp;
-          {formattedDate}
-          &nbsp;
-          |&nbsp;&nbsp;Helpful?&nbsp;
-          &nbsp;Yes&nbsp;
-          (
-          {helpfulness}
-          )
-          &nbsp;|&nbsp;&nbsp;Report&nbsp;
-        </span>
-      </div>
+      </Body>
     </div>
   );
 };

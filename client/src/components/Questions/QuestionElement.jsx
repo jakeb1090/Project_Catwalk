@@ -8,10 +8,7 @@ import styled from 'styled-components';
 const QuestionContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 5px;
-  justify-content: space-between;
+  margin-bottom: 8px;
   align-items: flex-start;
   color: slategray;
 
@@ -20,22 +17,44 @@ const QuestionContainer = styled.div`
   }
 `;
 
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const QuestionInteraction = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-self: center;
   color: slategray;
+`;
+
+const TwoThirds = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  ${'' /* align-items: space-between; */}
 `;
 
 const QuestionBody = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-self: flex-start;
   color: dimgray;
   width: 620px;
+  margin-left: 10px;
 `;
+
+const Yes = () => <span>Yes</span>;
+const AddAnswer = () => <span>Add Answer</span>;
+
+const handleYesClick = (e) => {
+  console.log('yes');
+};
+
+const handleAddAnswer = (e) => {
+  console.log('yes');
+};
 
 const QuestionElement = ({ questionData }) => {
   const {
@@ -47,22 +66,28 @@ const QuestionElement = ({ questionData }) => {
     // reported,
   } = questionData;
 
+  const stringYes = 'Yes';
+  const stringAddAnswer = 'Add Answer';
+
   return (
-    <div>
+    <div className="question-element" data-testid="question-element">
       <QuestionContainer>
-        <QuestionBody>
-          <h2>{`Q: ${questionBody} `}</h2>
-        </QuestionBody>
-        <QuestionInteraction>
-          Helpful?&nbsp;&nbsp;
-          <a href="/localhost:3000">Yes</a>
-          &nbsp;
-          {`(${questionHelpfulness}) | `}
-          &nbsp;
-          <a href="http://www.ee.com">
-            Add Answer&nbsp;
-          </a>
-        </QuestionInteraction>
+        <Title>
+          <h2>Q:</h2>
+        </Title>
+        <TwoThirds>
+          <QuestionBody>
+            <h2>{`${questionBody} `}</h2>
+          </QuestionBody>
+          <QuestionInteraction>
+            Helpful?&nbsp;&nbsp;
+            <Yes onClick={handleYesClick} />
+            &nbsp;
+            {`(${questionHelpfulness}) | `}
+            &nbsp;
+            <AddAnswer onClick={handleAddAnswer} />
+          </QuestionInteraction>
+        </TwoThirds>
       </QuestionContainer>
     </div>
   );
