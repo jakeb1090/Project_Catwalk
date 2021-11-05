@@ -10,7 +10,7 @@ class ReviewList extends React.Component {
     this.state = {
       qtyToRender: 2,
       rendered: 0,
-      showModal: false,
+      showModal: true,
     }
   }
 
@@ -51,7 +51,7 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let { reviews, starFilters, putFeedback } = this.props;
+    let { reviews, starFilters, putFeedback, characteristics } = this.props;
     let { qtyToRender, rendered } = this.state;
     if (typeof reviews === 'object') {
       const tile = reviews.map((review) => {
@@ -90,7 +90,7 @@ class ReviewList extends React.Component {
             <button onClick={this.openModal.bind(this)}>Add Review</button>
             <ReviewModal
               isOpen={this.state.showModal}
-              contentLabel="Modal Example!"
+              characteristics={characteristics}
               closeModal={this.closeModal.bind(this)}
               submitModal={this.submitModal.bind(this)} />
           </div>

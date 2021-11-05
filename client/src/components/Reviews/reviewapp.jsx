@@ -196,6 +196,7 @@ class ReviewApp extends React.Component {
           sortBy={this.sortBy.bind(this)}
           postReview={this.postReview.bind(this)}
           putFeedback={this.putFeedback.bind(this)}
+          characteristics={characteristics}
         />
       </div>
     );

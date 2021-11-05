@@ -8,7 +8,8 @@ class ReviewModal extends React.Component {
     this.state = {
       recommend: undefined,
       rating: undefined,
-      bodyChar: 0
+      bodyChar: 0,
+      photos: [],
     }
   }
 
@@ -22,10 +23,8 @@ class ReviewModal extends React.Component {
       recommend: this.state.recommend,
       name: document.getElementById('name').value,
       email: document.getElementById('email').value,
-      photos: [],
-      characteristics: {},
-      // photos: document.getElementById('photos'),
-      // characteristics: document.getElementById('characteristics'),
+      photos: this.state.photos,
+      characteristics: this.state.characteristics,
     }
     console.log(reviewObject)
     if (!reviewObject.rating) {
@@ -50,20 +49,58 @@ class ReviewModal extends React.Component {
       rating: event.target.value
     })
   }
-  changeRecommend() {
+  changeRecommend(event) {
     const boolean = event.target.value == 'true';
     this.setState({
       recommend: boolean
     })
   }
 
+  changeChar(event) {
+    this.setState(prevState => ({
+      characteristics: {
+        ...prevState.characteristics,
+        [event.target.id]: Number(event.target.value)
+      }
+    }))
+  }
+
+  addPhoto(event) {
+      this.setState(prevState => ({
+        photos: [...prevState.photos, document.getElementById('photo').value]
+      }))
+  }
+
   render() {
+    const { isOpen, closeModal, submitModal, characteristics } = this.props
+    const charAndId = Object.keys(characteristics).map((char, index) => {
+      return (
+        <div key={characteristics[char].id}>
+          <h5>{char}</h5>
+          <input name={char} id={characteristics[char].id} value={1} type="radio" onChange={this.changeChar.bind(this)} />
+          <label>Poor</label>
+
+          <input name={char} id={characteristics[char].id} value={2} type="radio" onChange={this.changeChar.bind(this)} />
+          <label>Below Average</label>
+
+          <input name={char} id={characteristics[char].id} value={3} type="radio" onChange={this.changeChar.bind(this)} />
+          <label>What I Expected</label>
+
+          <input name={char} id={characteristics[char].id} value={4} type="radio" onChange={this.changeChar.bind(this)} />
+          <label>Pretty Great</label>
+
+          <input name={char} id={characteristics[char].id} value={5} type="radio" onChange={this.changeChar.bind(this)} />
+          <label>Perfect</label>
+        </div>
+      )
+    })
     return (
-      <ReactModal isOpen={this.props.isOpen} contentLabel="Modal Example!" >
+      <ReactModal isOpen={isOpen} >
         <div>
           <h3>Write Your Review</h3>
           <h4>{`For [product name]`} </h4>
-          <div>Rating:
+          <div>
+            <h5>Rating:</h5>
             <input name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
             <label >One Star - "Poor"</label>
 
@@ -78,10 +115,10 @@ class ReviewModal extends React.Component {
 
             <input name="rating" value="5" type="radio" onChange={this.changeRating.bind(this)} />
             <label >Five Stars - "Great"</label>
-
-
-
           </div>
+
+          <div>{charAndId}</div>
+          <br></br>
           <div>Your Review Headline:
             <input id="summary" placeholder="Example: Best purchase ever!" />
           </div>
@@ -89,6 +126,7 @@ class ReviewModal extends React.Component {
             <input id="body" placeholder="Why did you like the product or not?" />
             <div>{`Character count: ${this.state.bodyChar} of 1000`}</div>
           </div>
+
           <div>Do you recommend this product?
             <input name="recommend" value="true" type="radio" onChange={this.changeRecommend.bind(this)} />
             <label>Yes</label>
@@ -96,6 +134,13 @@ class ReviewModal extends React.Component {
             <input name="recommend" value="false" type="radio" onChange={this.changeRecommend.bind(this)} />
             <label>No</label>
           </div>
+
+          <div>Add photo URL:
+            <input id="photo" />
+            <button name="addPhoto" onClick={this.addPhoto.bind(this)}> Attach Photo</button>
+          </div>
+
+
           <div>Your username:
             <input id="name" placeholder="jackson11!" />
             <p>For privacy reasons, do not use your full name or email address as your display name.</p>
@@ -105,7 +150,7 @@ class ReviewModal extends React.Component {
           </div>
         </div>
         <button onClick={this.handleSubmit.bind(this)}>Submit Review</button>
-        <button onClick={this.props.closeModal}> Cancel </button>
+        <button onClick={closeModal}> Cancel </button>
       </ReactModal>
     )
   }
