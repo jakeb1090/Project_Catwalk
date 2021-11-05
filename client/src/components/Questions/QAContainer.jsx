@@ -6,19 +6,20 @@ import AnswerInnerList from './AnswerInnerList';
 
 const QAContainer = (props) => {
   const {
-    question, answersN, questionsN, loadMoreAnswers,
+    question, answersN, questionsN, loadMoreAnswers, currentProduct,
   } = props;
   const { answers } = question;
 
   return (
     <div data-testid="qa-container" className="qa-container">
-      &lt;QA container&gt;
+      {/* &lt;QA container&gt; */}
       <QuestionElement key={question.question_id} questionData={question} />
       <AnswerInnerList
         answers={answers}
         answersN={answersN}
         loadMoreAnswers={loadMoreAnswers}
         questionsN={questionsN}
+        currentProduct={currentProduct}
       />
     </div>
   );

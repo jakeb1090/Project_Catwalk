@@ -4,6 +4,39 @@ import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 
 // { answerer_name, body, date, helpfulness, id, photos }
+
+const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: slategray;
+
+  a {
+    color: slategray;
+  }
+`;
+
+const QuestionInteraction = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  color: slategray;
+`;
+
+const QuestionBody = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: dimgray;
+  width: 620px;
+`;
+
 const QuestionElement = ({ questionData }) => {
   const {
     question_body: questionBody,
@@ -15,18 +48,23 @@ const QuestionElement = ({ questionData }) => {
   } = questionData;
 
   return (
-    <li data-testid="question-element" className="question-element">
-
-      <div className="question-body">
-        Q:
-        {' '}
-        { questionBody }
-      </div>
-      <div className="question-interation">
-        Helpful? Yes{ questionHelpfulness } | Add Answer
-      </div>
-
-    </li>
+    <div>
+      <QuestionContainer>
+        <QuestionBody>
+          <h2>{`Q: ${questionBody} `}</h2>
+        </QuestionBody>
+        <QuestionInteraction>
+          Helpful?&nbsp;&nbsp;
+          <a href="/localhost:3000">Yes</a>
+          &nbsp;
+          {`(${questionHelpfulness}) | `}
+          &nbsp;
+          <a href="http://www.ee.com">
+            Add Answer&nbsp;
+          </a>
+        </QuestionInteraction>
+      </QuestionContainer>
+    </div>
   );
 };
 

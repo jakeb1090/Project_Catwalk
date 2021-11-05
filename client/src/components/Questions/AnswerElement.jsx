@@ -17,6 +17,11 @@ const AnswerElement = ({ data }) => {
     <div data-testid="answer-element" className="answerElement" key={id}>
       <div>{ body }</div>
       <div>
+        <div>
+          {
+            photos.map((img) => <img key={img} className="img" src={img} alt="cool" />)
+          }
+        </div>
         <span>
           by
           {answererName}
@@ -30,11 +35,6 @@ const AnswerElement = ({ data }) => {
           )
           &nbsp;|&nbsp;&nbsp;Report&nbsp;
         </span>
-        <div>
-          {
-            photos.map((img) => <img key={img} className="img" src={img} alt="cool" />)
-          }
-        </div>
       </div>
     </div>
   );

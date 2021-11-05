@@ -6,7 +6,7 @@ const Questions = ({currentProduct}) => (
     Questions/Answers widget...
     <QuestionsMain
       // currentProduct={currentProduct}
-      currentProduct={61602}
+      currentProduct={currentProduct}
     />
   </div>
 );

@@ -35,7 +35,7 @@ class QuestionsList extends React.Component {
 
     return (
       <div data-testid="questions-list" className="question-list">
-        &lt;Questions List Container&gt;
+        {/* &lt;Questions List Container&gt; */}
         {
         outputList.slice(0, questionsN).length === 0
           ? (<div className="error-text">No Matching Questions for this Product</div>)

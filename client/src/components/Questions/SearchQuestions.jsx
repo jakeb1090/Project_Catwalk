@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Input = styled.input`
-  border: 1px solid red;
+  border: 1px solid gray;
   padding: 12px;
   border-radius: 8px;
-  height: 20px;
-  width: 18em;
-  font-size: 20px;
-  color: purple;
-  background-color: lightblue;
+  height: 30px;
+  width: 97%;
+  font-size: 17px;
+  color: gray;
 `;
 
 // updatesearch
@@ -35,7 +34,7 @@ class SearchQuestions extends React.Component {
       <div data-testid="search" className="search">
         <Input
           type="text"
-          placeholder="have a question? search for answers..."
+          placeholder="HAVE A QUESTION, SEARCH FOR ANSWERS..."
           onChange={this.handleChange}
           value={searchText}
         />
