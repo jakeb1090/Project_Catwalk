@@ -24,7 +24,11 @@ const ProductBreakdown = function (props) {
         {filterQty < 5 ?
           <div>
             <br></br>
-            {`Filter: currently showing ${starFilters} star reviews`}
+            {`Filter: currently showing ${Object.keys(starFilters).map(star =>{
+              if(starFilters[star]){
+                return star
+              }
+            })} star reviews`}
             <br></br>
             <button onClick={clickHandler}>Clear Filters</button>
           </div>

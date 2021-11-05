@@ -105,10 +105,8 @@ class ReviewApp extends React.Component {
 
   toggleStarFilter(star) {
     console.log('toggle star #', star)
-    console.log(this.state.filterQty)
     //if all stars are on, only leave this star on
     if (this.state.filterQty === 5) {
-      console.log(1)
       this.setState(prevState => ({
         starFilters: {
           1: false,
@@ -120,33 +118,28 @@ class ReviewApp extends React.Component {
         },
         filterQty: 1
       }))
+    } else if (this.state.starFilters[star] && this.state.filterQty === 1) {
+      //if i'm turning off the last filter, then restore all stars
+      this.setState({
+        starFilters: {
+          1: true,
+          2: true,
+          3: true,
+          4: true,
+          5: true,
+        },
+        filterQty: 5,
+      })
     } else if (this.state.starFilters[star]) {
-      if (this.state.filterQty === 1) {
-        //if I just turned off the only filter, then restore all stars
-        this.setState({
-          starFilters: {
-            1: true,
-            2: true,
-            3: true,
-            4: true,
-            5: true,
-          },
-          filterQty: 5,
-        })
-      } else {
-        //if it's not the only filter, just turn it off
-        console.log(2)
-
-        this.setState(prevState => ({
-          starFilters: {
-            ...prevState.starFilters,
-            [star]: false,
-          },
-          filterQty: prevState.filterQty - 1
-        }))
-      }
-    } else { //if the star is not showing, turn it on
-      console.log(3)
+      //normal case: turn a star off
+      this.setState(prevState => ({
+        starFilters: {
+          ...prevState.starFilters,
+          [star]: false,
+        },
+        filterQty: prevState.filterQty - 1
+      }))
+    } else { //normal case: turn the star on
       this.setState(prevState => ({
         starFilters: {
           ...prevState.starFilters,
@@ -192,7 +185,7 @@ class ReviewApp extends React.Component {
         <ReviewList
           id={id}
           reviews={reviews}
-          starFilters={Object.values(starFilters)}
+          starFilters={starFilters}
           sortBy={this.sortBy.bind(this)}
           postReview={this.postReview.bind(this)}
           putFeedback={this.putFeedback.bind(this)}

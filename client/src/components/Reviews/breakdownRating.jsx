@@ -11,7 +11,10 @@ const RatingBreakdown = function (props) {
   if (qty) {
     return (
       <div>
-        <button value={star} onClick={clickHandler}>{`${star} stars`}</button>
+        <button
+        value={star}
+        // style={(filter is on ? styles.greenButton : style.greyButton)}
+        onClick={clickHandler}>{`${star} stars`}</button>
         [bar representing {qty} stars]
       </div>
     );

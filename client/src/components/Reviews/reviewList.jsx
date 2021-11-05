@@ -10,7 +10,7 @@ class ReviewList extends React.Component {
     this.state = {
       qtyToRender: 2,
       rendered: 0,
-      showModal: true,
+      showModal: false,
     }
   }
 
@@ -56,7 +56,7 @@ class ReviewList extends React.Component {
     if (typeof reviews === 'object') {
       const tile = reviews.map((review) => {
         if (
-          // starFilters[review.rating] === true &&
+          starFilters[review.rating] &&
           qtyToRender > rendered) {
             if (rendered < qtyToRender) {
             rendered++
