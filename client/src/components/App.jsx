@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReviewApp from './Reviews/reviewapp';
-import Overview from './Overview/Overview.jsx';
+// import Overview from './Overview/Overview.jsx';
 import Related from './Related/Related';
 // import QuestionsMain from './Questions/QuestionsMain';
 import Questions from './Questions/Questions';
@@ -9,12 +9,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61622
+      currentProduct: 61622,
     };
+    this.onRelatedClick = this.onRelatedClick.bind(this);
   }
 
-  onRelatedClick = (id) => {
-    this.setState({currentProduct: id})
+  onRelatedClick(id) {
+    this.setState({ currentProduct: id });
   }
 
   render() {
@@ -29,7 +30,7 @@ class App extends Component {
           onRelatedClick={this.onRelatedClick}
         />
         <Questions />
-        {/* <ReviewApp /> */}
+        <ReviewApp />
       </div>
     );
   }

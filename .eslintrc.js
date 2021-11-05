@@ -12,8 +12,12 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parser: 'babel-eslint',
   parserOptions: {
+    // parser: '@babel/eslint-parser',
+    babelOptions: {
+      presets: ['@babel/preset-react'],
+    },
+    requireConfigFile: false,
     ecmaFeatures: {
       jsx: true,
     },
@@ -22,6 +26,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    // '@babel',
   ],
   rules: {
   },

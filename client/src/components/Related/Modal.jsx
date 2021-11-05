@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import CompareTable from './CompareTable';
 
 const Title = styled.h5`
@@ -14,7 +15,7 @@ const Overlay = styled.div`
   height: 100vh;
   background-color: rgba(128,128,128,0.5);
   overflow: hidden;
-  display: ${({show}) => (show ? 'block' : 'none')};
+  display: ${({ show }) => (show ? 'block' : 'none')};
 `;
 
 const Div = styled.div`
@@ -26,20 +27,31 @@ const Div = styled.div`
   height: 400px;
   width: 600px;
   background-color: white;
-  display: ${({show}) => (show ? 'block' : 'none')};
+  display: ${({ show }) => (show ? 'block' : 'none')};
 `;
 
-const Modal = (props) => (
-  <Overlay show={props.showModal}>
-    <Div data-testid="modal" show={props.showModal}>
-      <button type="button" onClick={props.hideModal}>--X ICON--</button>
-      <Title>Comparing</Title>
-      <CompareTable
-        data={props.data}
-      />
-    </Div>
+const Modal = (props) => {
+  const { showModal, hideModal, data } = props;
+  return (
+    <Overlay show={showModal}>
+      <Div data-testid="modal" show={showModal}>
+        <button type="button" aria-label="modalClose" onClick={hideModal}>--X ICON--</button>
+        <Title>Comparing</Title>
+        <CompareTable
+          data={data}
+        />
+      </Div>
 
-  </Overlay>
-);
+    </Overlay>
+  );
+};
+Modal.defaultProps = {
+
+};
+Modal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string).isRequired).isRequired,
+};
 
 export default Modal;
