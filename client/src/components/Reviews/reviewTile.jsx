@@ -4,11 +4,14 @@ const ReviewTile = (props) => {
   const { review,  putFeedback} = props;
   const formattedDate = new Date(review.date).toDateString();
   const handleClick = function (event) {
-    console.log('lets put:', review.review_id)
     putFeedback(event.target.name, review.review_id)
   }
-
-  return (
+  console.log(review.date)
+  const year = review.date.slice(0,4)
+  const month= review.date.slice(5,7)
+  const day = review.date.slice(8,10)
+  console.log(year, month, day)
+  return(
     <div key={review.review_id}>
       <br />
       <div>

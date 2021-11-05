@@ -11,7 +11,7 @@ class ReviewApp extends React.Component {
       id: 61590,
       characteristics: {
       },
-      sort: 'newness',
+      sort: 'relevance',
       ratings: {
         1: 1,
         2: 2,
@@ -28,11 +28,11 @@ class ReviewApp extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAPI(this.state.sort);
+    this.fetchAPI();
   }
 
-  fetchAPI(sort) {
-    const { id } = this.state;
+  fetchAPI() {
+    const { id, sort } = this.state;
     API.getReviews(id, sort)
       .then((res) => {
         this.setState({
@@ -56,37 +56,39 @@ class ReviewApp extends React.Component {
   }
 
   putFeedback(action, review_id) {
-    console.log(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/:review_id/${action}`)
-    console.log(review_id)
-    API.put(action, review_id)
-    .then(() =>{
-      console.log('putted!')
-    })
-    .then(() => {
-        fetchAPI();
+    API.put(action, review_id) //there is an error here!
+      .then(() => {
+        this.fetchAPI();
         console.log(`review #', review_id, ' was marked: ${action}`)
       })
-      .catch(() => {
-        console.log(`error marking review as ${action}`)
+      .catch((err) => {
+        console.log(`error marking review as ${action}`, err)
       })
   }
 
   postReview(review) {
+    review.product_id = this.state.id;
+    console.log('post request for:', review);
+    console.log('post request for:', JSON.stringify(review));
+
     API.post(review)
-    .then(()=>{
-      fetchAPI();
-      console.log(`review was posted!`)
-    })
-    .catch(() => {
-      console.log(`review post failed`)
-    })
+      .then((result) => {
+        console.log('post result', result)
+        this.fetchAPI();
+      })
+      .then((result) => {
+        console.log(`review was posted!`, result)
+      })
+      .catch((err) => {
+        console.log(`review post failed`, err)
+      })
   }
 
   sortBy(sort) {
-    // this.setState({
-    //   sort: sort
-    // })
-    this.fetchAPI(sort);
+    this.setState({
+      sort: sort
+    })
+    console.log('now sorting by:', sort)
   }
 
   averageRating() {

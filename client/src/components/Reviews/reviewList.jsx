@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReviewTile from './reviewTile';
 import ReviewModal from './reviewModal';
 
+
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +19,12 @@ class ReviewList extends React.Component {
       qtyToRender: prevState.qtyToRender + 2
     })
     )
+    if (this.state.qtyToRender >= this.props.reviews.length)
+    { this.setState((prevState) => ({
+        qtyToRender: this.props.reviews.length
+      })
+      )
+    }
   }
 
   openModal() {
@@ -44,16 +51,20 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    // console.log(this.props)
     let { reviews, starFilters, putFeedback } = this.props;
     let { qtyToRender, rendered } = this.state;
     if (typeof reviews === 'object') {
       const tile = reviews.map((review) => {
-        if (starFilters[review.rating] === true && qtyToRender > rendered) {
-          rendered++
+        if (
+          // starFilters[review.rating] === true &&
+          qtyToRender > rendered) {
+            if (rendered < qtyToRender) {
+            rendered++
+          }
           return <ReviewTile
+            key={review.review_id}
             review={review}
-            putFeedback={putFeedback}/>;
+            putFeedback={putFeedback} />;
         }
       });
 
@@ -61,14 +72,18 @@ class ReviewList extends React.Component {
         <div>
           <div>
             <h4>Review List</h4>
+            <div>
+              <button onClick={this.loadMore.bind(this)}>Load More</button>
+              <button onClick={this.openModal.bind(this)}>Add Review</button>
+            </div>
             {`Number of reviews: showing ${qtyToRender} of ${reviews.length}`}
           </div>
           <div>
             Sorted by:
             <select onChange={this.handleSort.bind(this)}>
+              <option value="relevance">Relevance</option>
               <option value="helpful">Helpfulness</option>
               <option value="newness">Date</option>
-              <option value="relevance">Relevance</option>
             </select>
             {tile}
             <button onClick={this.loadMore.bind(this)}>Load More</button>
@@ -77,7 +92,7 @@ class ReviewList extends React.Component {
               isOpen={this.state.showModal}
               contentLabel="Modal Example!"
               closeModal={this.closeModal.bind(this)}
-              submitModal={this.submitModal.bind(this)}/>
+              submitModal={this.submitModal.bind(this)} />
           </div>
         </div>
       );

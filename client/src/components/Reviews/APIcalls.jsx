@@ -32,20 +32,17 @@ const API = {
     return axios({
       method: 'post',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews',
+      data: JSON.stringify(review),
       headers: {
         Authorization: API_KEY,
-        // ContentType: 'application/json'
+        'Content-Type': 'application/json'
       },
-      data: JSON.stringify(review)
     })
   },
   put: (action, review_id) => {
     return axios({
       method: 'put',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/:review_id/${action}`,
-      params: {
-        review_id: review_id,
-      },
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/${review_id}/${action}`,
       headers: {
         Authorization: API_KEY,
       },

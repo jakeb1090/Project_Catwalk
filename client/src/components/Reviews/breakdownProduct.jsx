@@ -12,6 +12,7 @@ const ProductBreakdown = function (props) {
   if (typeof ratings === 'object') {
     const stars = Object.keys(ratings).map(rating => {
       return <RatingBreakdown
+        key={rating}
         star={rating}
         qty={ratings[rating]}
         toggleStarFilter={props.toggleStarFilter}
@@ -19,7 +20,6 @@ const ProductBreakdown = function (props) {
     })
     return (
       <div data-testid="productBreakdown">
-        <RatingBreakdown ratings={ratings} />
         <div>{stars}</div>
         {filterQty < 5 ?
           <div>
