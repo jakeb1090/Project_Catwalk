@@ -126,7 +126,7 @@ app.post('/qa/questions', (req, res) => {
   const url = `${baseURL}/qa/questions`;
   const headers = { authorization };
 
-  axios.post(url, data, {headers})
+  axios.post(url, data, { headers })
     .then((response) => {
       res.status(response.status).send(response);
     })
@@ -180,7 +180,7 @@ app.put('/qa/answer/:answer_id/helpful', (req, res) => {
     .then((response) => {
       res.status(response.status).send(response);
     })
-    .catch((error) =>{
+    .catch((error) => {
       res.send(error);
     });
 });
