@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import axios from 'axios';
 import API_KEY from '../config';
 
@@ -29,6 +30,34 @@ const getProductQuestions = (id, cb) => {
     .catch((err) => { cb(err); });
 };
 
+const getAnswers = (questionId) => {
+  return axios.get(`/qa/${questionId}/answers`, headers);
+};
+
+const addQuestion = (questionBody) => {
+  return axios.post('/qa/questions', questionBody, headers);
+};
+
+const addAnswer = (questionId, answerBody) => {
+  return axios.post(`/qa/${questionId}/answers`, answerBody, headers);
+};
+
+const markQuestionHelpful = (questionId) => {
+  return axios.put(`/qa/question/${questionId}/helpful`, headers);
+};
+
+const markAnswerHelpful = (answerId) => {
+  return axios.put(`/qa/answer/${answerId}/helpful`, headers);
+};
+
+// const reportQuestion = (questionId) => {
+//   return axios.put(`/`)
+// };
+
+const reportAnswer = (answerId) => {
+  return axios.put(`/qa/answer/${answerId}/report`);
+};
+
 export {
   getPaginatedProducts,
   getProduct,
@@ -36,4 +65,11 @@ export {
   getProductRelated,
   getReviewsMeta,
   getProductQuestions,
+  getAnswers,
+  addQuestion,
+  addAnswer,
+  markQuestionHelpful,
+  markAnswerHelpful,
+  // reportQuestion,
+  reportAnswer,
 };

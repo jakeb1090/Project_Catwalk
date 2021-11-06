@@ -185,7 +185,7 @@ app.put('/qa/answer/:answer_id/helpful', (req, res) => {
     });
 });
 
-// report
+// report answer
 app.put('/qa/answer/:answer_id/report', (req, res) => {
   const { answer_id } = req.params;
   const url = `${baseURL}/qa/answers/${answer_id}/report`;
