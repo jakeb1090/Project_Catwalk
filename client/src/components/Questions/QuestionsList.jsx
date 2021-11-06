@@ -5,11 +5,12 @@ import styled from 'styled-components';
 import QAContainer from './QAContainer';
 
 // props.currentProductId
+
 const QList = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 550px;
-  overflow: auto;
+display: flex;
+flex-direction: column;
+height: 550px;
+overflow: scroll;
 `;
 
 const Input = styled.div`

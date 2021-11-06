@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import API_KEY from '../../../config';
 import AddQuestion from './AddQuestion';
@@ -8,6 +9,7 @@ import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
 
 // props: currentProduct
+
 class QuestionsMain extends React.Component {
   constructor(props) {
     super(props);
