@@ -16,52 +16,80 @@ const Title = styled.h5`
 `;
 
 const Card = (props) => {
-  const { img, title, price, salesPrice, avgRating, features } = props.product;
-  const { onDeleteOutfitClick, onRelatedClick, onAddOutfitClick, id, addOutfit, btn } = props;
-  return(
+  const {
+    onCompareProductClick,
+    onDeleteOutfitClick,
+    onRelatedClick,
+    onAddOutfitClick,
+    id,
+    addOutfit,
+    btn,
+    product,
+  } = props;
+
+  const {
+    img,
+    name,
+    avgRating,
+    features,
+  } = product;
+
+  return (
     <Div data-testid="card" onClick={() => onRelatedClick(id)}>
       {
-        addOutfit === 'addOutfit'
-        ?
-        <AddOutfitBtn
-          onClick={onAddOutfitClick}
-        />
-        :
-        <>
-        {
-          btn === 'compare'
-          ?
-          <CompareBtn />
-          :
-          <DeleteBtn
-            onDeleteOutfitClick={onDeleteOutfitClick}
-            id={id}
-          />
-        }
-        <CardImg
-          src={img}
-          alt={title}
-        />
-        <Title>{title}</Title>
-        <RatingStars
-          avgRating={avgRating}
-        />
-        </>
+        addOutfit
+          ? <AddOutfitBtn onAddOutfitClick={onAddOutfitClick} />
+          : (
+            <>
+              { btn === 'compare'
+                ? (
+                  <CompareBtn
+                    onCompareProductClick={onCompareProductClick}
+                    id={id}
+                    features={features}
+                  />
+                )
+                : <DeleteBtn onDeleteOutfitClick={onDeleteOutfitClick} id={id} /> }
+
+              <CardImg src={img} alt={name} />
+              <Title>{ name }</Title>
+              <RatingStars avgRating={avgRating} />
+            </>
+          )
       }
     </Div>
   );
-}
-
+};
 Card.defaultProps = {
   product: {},
   btn: '',
-  onRelatedClick: () => {}
-}
+  id: null,
+  addOutfit: false,
+  onRelatedClick: () => {},
+  onCompareProductClick: () => {},
+  onDeleteOutfitClick: () => {},
+  onAddOutfitClick: () => {},
+};
 
 Card.propTypes = {
-  product: PropTypes.object,
+  product: PropTypes.shape({
+    img: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    salesPrice: PropTypes.string,
+    avgRating: PropTypes.number,
+    features: PropTypes.arrayOf(PropTypes.shape({
+      feature: PropTypes.string,
+      value: PropTypes.string,
+    })),
+  }),
   btn: PropTypes.string,
-  onRelatedClick: PropTypes.func
-}
+  id: PropTypes.number,
+  addOutfit: PropTypes.bool,
+  onRelatedClick: PropTypes.func,
+  onCompareProductClick: PropTypes.func,
+  onDeleteOutfitClick: PropTypes.func,
+  onAddOutfitClick: PropTypes.func,
+};
 
 export default Card;
