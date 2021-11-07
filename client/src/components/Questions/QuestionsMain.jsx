@@ -76,7 +76,7 @@ class QuestionsMain extends React.Component {
                   <input
                     type="button"
                     value="More Answered Questions"
-                    onClick={() => this.setState({ questionsN: questionsN + 2 })}
+                    onClick={(prevState) => {...prevState, questionsN + 2}}
                   />
                 )
                 : <div />
