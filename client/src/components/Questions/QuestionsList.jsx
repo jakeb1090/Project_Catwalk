@@ -77,6 +77,7 @@ class QuestionsList extends React.Component {
 
 QuestionsList.defaultProps = {
   answersN: 4,
+  questionList: [],
 };
 
 QuestionsList.propTypes = {
@@ -84,7 +85,7 @@ QuestionsList.propTypes = {
   questionsN: PropTypes.number.isRequired,
   answersN: PropTypes.number,
   loadMoreAnswers: PropTypes.func.isRequired,
-  questionList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  questionList: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default QuestionsList;

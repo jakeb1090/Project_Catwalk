@@ -88,18 +88,20 @@ app.get('/reviews/meta', (req, res) => {
 });
 
 /* eslint-disable camelcase */
+// get questions
 app.get('/qa/questions/:id', (req, res) => {
   const { id } = req.params;
+  const { count } = req.query;
   const { authorization } = req.headers;
   const url = `${baseURL}/qa/questions/?product_id=${id}`;
-  const headers = { headers: { authorization } };
+  const headers = { params: { count }, headers: { authorization } };
 
   axios.get(url, headers)
     .then((response) => {
-      res.status(response.status).send(response.data);
+      res.send(response.data);
     })
     .catch((err) => {
-      res.status(err.response.status).send(err.response.data);
+      res.send(err);
     });
 });
 
@@ -121,7 +123,7 @@ app.get('/qa/:question_id/answers', (req, res) => {
 
 // add question
 app.post('/qa/questions', (req, res) => {
-  const data = req.body;
+  const { data } = req.body;
   const { authorization } = req.headers;
   const url = `${baseURL}/qa/questions`;
   const headers = { authorization };
@@ -155,49 +157,65 @@ app.post('/qa/:question_id/answers', (req, res) => {
 });
 
 // helpful question
-app.put('/qa/question/:question_id/helpful', (req, res) => {
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
   const { question_id } = req.params;
   const url = `${baseURL}/qa/questions/${question_id}/helpful`;
   const { authorization } = req.headers;
   const headers = { authorization };
-  axios.put(url, {}, { headers })
+  axios.put(url, null, { headers })
     .then((response) => {
       res.status(response.status).send(response.data);
-    })
-    .catch((error) => {
-      res.status(error.status).send(error);
-    });
-});
-
-// helpful answer
-app.put('/qa/answer/:answer_id/helpful', (req, res) => {
-  const { answer_id } = req.params;
-  const url = `${baseURL}/qa/answers/${answer_id}/helpful`;
-  const { authorization } = req.headers;
-  const headers = { authorization };
-
-  axios.put(url, {}, { headers })
-    .then((response) => {
-      res.status(response.status).send(response);
     })
     .catch((error) => {
       res.send(error);
     });
 });
 
+// helpful answer
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  const { answer_id } = req.params;
+  const url = `${baseURL}/qa/answers/${answer_id}/helpful`;
+  const { authorization } = req.headers;
+  const headers = { authorization };
+
+  axios.put(url, {}, { headers })
+    .then(({ status, body }) => {
+      res.status(status).send(body);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+// report question
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  const { question_id } = req.params;
+  const url = `${baseURL}/qa/questions/${question_id}/report`;
+  const { authorization } = req.headers;
+  const headers = { authorization };
+
+  axios.put(url, null, { headers })
+    .then((response) => {
+      res.status(response.status).send(response);
+    })
+    .catch((error) => {
+      res.status(error.status).send(error);
+    });
+});
+
 // report answer
-app.put('/qa/answer/:answer_id/report', (req, res) => {
+app.put('/qa/answers/:answer_id/report', (req, res) => {
   const { answer_id } = req.params;
   const url = `${baseURL}/qa/answers/${answer_id}/report`;
   const { authorization } = req.headers;
   const headers = { authorization };
 
-  axios.put(url, {}, { headers })
-    .then((response) => {
-      res.status(response.status).send(response.data);
+  axios.put(url, null, { headers })
+    .then((response, status) => {
+      res.status(status).send(response.data);
     })
     .catch((error) => {
-      res.status(error.status).send(error);
+      res.send(error);
     });
 });
 

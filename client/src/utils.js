@@ -34,8 +34,12 @@ const getAnswers = (questionId) => {
   return axios.get(`/qa/${questionId}/answers`, headers);
 };
 
+const getQuestions = (productId, count) => {
+  return axios.get(`/qa/questions/${productId}/?count=${count}`, headers);
+};
+
 const addQuestion = (questionBody) => {
-  return axios.post('/qa/questions', questionBody, headers);
+  return axios.post('/qa/questions', { questionBody }, headers);
 };
 
 const addAnswer = (questionId, answerBody) => {
@@ -43,19 +47,19 @@ const addAnswer = (questionId, answerBody) => {
 };
 
 const markQuestionHelpful = (questionId) => {
-  return axios.put(`/qa/question/${questionId}/helpful`, headers);
+  return axios.put(`/qa/questions/${questionId}/helpful`, headers);
 };
 
 const markAnswerHelpful = (answerId) => {
-  return axios.put(`/qa/answer/${answerId}/helpful`, headers);
+  return axios.put(`/qa/answers/${answerId}/helpful`, headers);
 };
 
-// const reportQuestion = (questionId) => {
-//   return axios.put(`/`)
-// };
+const reportQuestion = (questionId) => {
+  return axios.put(`/qa/questions/${questionId}/report`);
+};
 
 const reportAnswer = (answerId) => {
-  return axios.put(`/qa/answer/${answerId}/report`);
+  return axios.put(`/qa/answers/${answerId}/report`);
 };
 
 export {
@@ -70,6 +74,7 @@ export {
   addAnswer,
   markQuestionHelpful,
   markAnswerHelpful,
-  // reportQuestion,
+  reportQuestion,
   reportAnswer,
+  getQuestions,
 };

@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {
+  getAnswers,
+  addQuestion,
+  addAnswer,
+  markAnswerHelpful,
+  reportQuestion,
+  reportAnswer,
+} from '../../utils';
 
 const Body = styled.div`
   display: flex;
@@ -13,6 +21,11 @@ const Body = styled.div`
 const Interactive = styled.span`
   color: gray;
   padding-top: 14px;
+
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const AnswerElement = ({ data }) => {
@@ -27,8 +40,24 @@ const AnswerElement = ({ data }) => {
 
   const formattedDate = date.slice(0, 10);
 
-  const handleClick = (e) => {
-    console.log(e.target.value);
+  const handleHelpful = () => {
+    markAnswerHelpful(id)
+      .then((res) => {
+        console.log(res, res.status, 'success');
+      })
+      .catch((error) => {
+        console.log(error.status, 'error');
+      });
+  };
+
+  const handleReport = () => {
+    reportAnswer(id)
+      .then((res) => {
+        console.log(res, res.status);
+      })
+      .catch((error) => {
+        console.log(error.status, 'error');
+      });
   };
 
   return (
@@ -38,7 +67,9 @@ const AnswerElement = ({ data }) => {
         <div>
           <div>
             {
-              photos.map((img) => <img key={img} className="img" src={img} alt="cool" />)
+              photos.length
+                ? photos.map((img) => <img key={img} className="img" src={img.url} alt="cool" />)
+                : <span />
             }
           </div>
           <span>
@@ -49,19 +80,12 @@ const AnswerElement = ({ data }) => {
               {formattedDate}
               &nbsp;
               |&nbsp;&nbsp;Helpful?&nbsp;
-              <span
-                onKeyUp={handleClick}
-                onClick={handleClick}
-                role="link"
-                tabIndex={0}
-              >
-                Yes
-              </span>
+              <span aria-hidden="true" role="link" onClick={handleHelpful}>Yes</span>
               (
-              {helpfulness}
+              { helpfulness }
               )
               &nbsp;|&nbsp;&nbsp;
-              <a href="localhost:300">Report</a>
+              <span aria-hidden="true" role="link" onClick={handleReport}>Report</span>
               &nbsp;
             </Interactive>
           </span>

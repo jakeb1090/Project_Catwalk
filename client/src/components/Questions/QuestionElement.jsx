@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { markQuestionHelpful, addQuestion } from '../../utils';
 // import PropTypes from 'prop-types';
 
 // { answerer_name, body, date, helpfulness, id, photos }
@@ -15,6 +16,7 @@ const QuestionContainer = styled.div`
   a {
     color: slategray;
   }
+
 `;
 
 const Title = styled.div`
@@ -27,6 +29,11 @@ const QuestionInteraction = styled.div`
   flex-direction: row;
   align-self: center;
   color: slategray;
+
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const TwoThirds = styled.div`
@@ -45,29 +52,43 @@ const QuestionBody = styled.div`
   margin-left: 10px;
 `;
 
-const Yes = () => <span>Yes</span>;
-const AddAnswer = () => <span>Add Answer</span>;
-
-const handleYesClick = (e) => {
-  console.log('yes');
-};
-
-const handleAddAnswer = (e) => {
-  console.log('yes');
-};
-
-const QuestionElement = ({ questionData }) => {
+const QuestionElement = ({ questionData, currentProduct }) => {
   const {
     question_body: questionBody,
     question_helpfulness: questionHelpfulness,
-    // question_id: questionId,
+    question_id: questionId,
     // asker_name: askerName,
     // question_date: questionDate,
     // reported,
   } = questionData;
 
-  const stringYes = 'Yes';
-  const stringAddAnswer = 'Add Answer';
+  const handleHelpful = () => {
+    markQuestionHelpful(questionId)
+      .then((response) => {
+        console.log('helpfule');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleAddQuestion = () => {
+    console.log('added');
+    const data = {
+      body: 'but are the sleeves organic thought?',
+      name: 'Tyler Durden',
+      email: 'r123@paper.com',
+      product_id: currentProduct,
+    };
+    addQuestion(data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="question-element" data-testid="question-element">
@@ -80,12 +101,13 @@ const QuestionElement = ({ questionData }) => {
             <h2>{`${questionBody} `}</h2>
           </QuestionBody>
           <QuestionInteraction>
-            Helpful?&nbsp;&nbsp;
-            <Yes onClick={handleYesClick} />
+            Helpful?
+            &nbsp;&nbsp;
+            <span aria-hidden="true" role="link" onClick={handleHelpful}>Yes</span>
             &nbsp;
             {`(${questionHelpfulness}) | `}
             &nbsp;
-            <AddAnswer onClick={handleAddAnswer} />
+            <span aria-hidden="true" role="link" onClick={handleAddQuestion}>Add Question</span>
           </QuestionInteraction>
         </TwoThirds>
       </QuestionContainer>
