@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { test, expect } from '@jest/globals';
 import ReviewApp from '../../components/Reviews/reviewapp';
@@ -400,18 +400,34 @@ test('renders Product Breakdown to DOM', () => {
 });
 
 describe('Star Filter', () => {
-  test('clicking the first star filter shows results only of that rating', () => {
+  test('clicking the first star filter shows results only of that rating', async () => {
     render(<ReviewApp id={reviews.product} />);
-    userEvent.click(screen.getByRole('button', { name: '3 stars' })); //this is finding all buttons; how do I narrow it down by name/value?
-    expect(screen.getAllByText('Number of stars: 3').length).toBe(0);
-  });
-  test('clicking filters 2, 3, 4 will NOT show any 1 or 5 star ratings', () => {
 
+    await waitFor(() => screen.getByRole('button', { name: '3 stars' }));
+
+    userEvent.click(screen.getByRole('button', { name: '3 stars' }));
+
+    expect(screen.queryAllByText('Number of stars: 1').length).toBe(0);
+    expect(screen.queryAllByText('Number of stars: 2').length).toBe(0);
+    expect(screen.queryAllByText('Number of stars: 4').length).toBe(0);
+    expect(screen.queryAllByText('Number of stars: 5').length).toBe(0);
+  });
+  test('clicking filters 2, 3, 4 will NOT show any 1 or 5 star ratings', async () => {
+    render(<ReviewApp id={reviews.product} />);
+
+    await waitFor(() => screen.getByRole('button', { name: '5 stars' }));
+    userEvent.click(screen.getByRole('button', { name: '2 stars' }));
+    userEvent.click(screen.getByRole('button', { name: '3 stars' }));
+    userEvent.click(screen.getByRole('button', { name: '4 stars' }));
+
+    expect(screen.queryAllByText('Number of stars: 1').length).toBe(0);
+    expect(screen.queryAllByText('Number of stars: 5').length).toBe(0);
   });
 });
 
-test('Average rating displays correctly', () => {
+test('Average rating displays correctly', async () => {
   render(<ReviewApp id={reviews.product} />);
-  expect(screen.getByText('Average Rating: 2.9')).toBeInTheDocument();
+  await waitFor(() => screen.getByRole('button', { name: '5 stars' }));
+  expect(screen.getByText('Average Rating: 4.2')).toBeInTheDocument();
 
 })

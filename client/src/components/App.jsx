@@ -34,7 +34,7 @@ class App extends Component {
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
         {/* <Overview /> */}
-        <Related
+        {/* <Related
           currentProduct={currentProduct}
           innerWidth={innerWidth}
           innerHeight={innerHeight}
@@ -42,7 +42,7 @@ class App extends Component {
         />
         <Questions
           currentProduct={currentProduct}
-        />
+        /> */}
         <ReviewApp id={currentProduct} />
       </div>
     );

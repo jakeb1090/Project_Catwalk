@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { test, expect } from '@jest/globals';
 import ReviewTile from '../../components/Reviews/reviewTile';
 import '@testing-library/jest-dom';
@@ -60,10 +60,13 @@ describe("Review Tile", () => {
 
   });
 
-  test('helpfulness count increases on click', () => {
+  test('helpfulness count increases on click', async () => {
     render(<ReviewTile review={review} />);
-    expect(screen.getByText(/Yes (29)/i)).toBeInTheDocument(); //this is broken!
+    const YES = screen.getByTestId('helpfulButton');
+    await waitFor(() => screen.getByText(/Yes (29)/i));
+    expect(YES).toBeInTheDocument(); //this is broken!
     //click the button
+    userEvent.click(YES);
 
     expect(screen.getByText(/Yes (30)/i)).toBeInTheDocument();
 
