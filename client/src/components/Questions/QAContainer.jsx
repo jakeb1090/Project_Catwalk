@@ -12,22 +12,33 @@ class QAContainer extends React.Component {
     this.state = {
       answers: [],
     };
+    this.fetchAnswers = this.fetchAnswers.bind(this);
   }
 
   componentDidMount() {
+    this.fetchAnswers();
+  }
+
+  fetchAnswers() {
     const { question: { question_id: questionId } } = this.props;
     getAnswers(questionId)
       .then((res) => {
-        this.setState({ answers: res.data });
+        // eslint-disable-next-line arrow-body-style
+        this.setState((prevState) => { return ({ ...prevState, answers: res.data }); });
       })
       .catch((err) => {
-        this.setState([{ status: err }]);
+        this.setState({ answers: [err] });
       });
   }
 
   render() {
     const {
-      question, answersN, questionsN, loadMoreAnswers, currentProduct,
+      question,
+      answersN,
+      questionsN,
+      loadMoreAnswers,
+      currentProduct,
+      onFetchQuestions,
     } = this.props;
     const { answers } = this.state;
 
@@ -35,7 +46,7 @@ class QAContainer extends React.Component {
       <div data-testid="qa-container" className="qa-container">
         &lt;QA container&gt;
         <QuestionElement
-          key={question.question_id}
+          key={`Q${question.question_id}`}
           questionData={question}
           currentProduct={currentProduct}
         />
@@ -45,6 +56,10 @@ class QAContainer extends React.Component {
           loadMoreAnswers={loadMoreAnswers}
           questionsN={questionsN}
           currentProduct={currentProduct}
+          questionId={question.question_id}
+          key={`QAL${question.question_id}`}
+          onFetchQuestions={onFetchQuestions}
+          onFetchAnswers={this.fetchAnswers}
         />
       </div>
     );

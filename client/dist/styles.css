@@ -48,7 +48,7 @@
 .questions {
   /* margin-top: 30px; */
   /* border: 1px solid lightgray; */
-  width: 80%;
+  width: 100%;
 }
 
 .qa-container {
@@ -78,6 +78,7 @@
 } */
 
 .error-text {
+  margin: 20px;
   color: red;
   font-weight: 700  ;
 }

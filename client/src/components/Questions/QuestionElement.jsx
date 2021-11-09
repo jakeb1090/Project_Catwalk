@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { markQuestionHelpful, addQuestion } from '../../utils';
 // import PropTypes from 'prop-types';
@@ -53,6 +53,9 @@ const QuestionBody = styled.div`
 `;
 
 const QuestionElement = ({ questionData, currentProduct }) => {
+  const [hasUpVoted, setHasUpVoted] = useState(false);
+  const [helpfulCount, setHelpfulCount] = useState(false);
+
   const {
     question_body: questionBody,
     question_helpfulness: questionHelpfulness,
@@ -62,18 +65,29 @@ const QuestionElement = ({ questionData, currentProduct }) => {
     // reported,
   } = questionData;
 
+  useEffect(() => {
+    setHelpfulCount(questionHelpfulness);
+  }, []);
+
   const handleHelpful = () => {
-    markQuestionHelpful(questionId)
-      .then((response) => {
-        console.log('helpfule');
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!hasUpVoted) {
+      setHasUpVoted(true);
+      // eslint-disable-next-line no-return-assign
+      setHelpfulCount((prevState) => prevState += 1);
+      markQuestionHelpful(questionId)
+        .then((response) => {
+          // eslint-disable-next-line no-console
+          console.log(response, 'marked as helpful');
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error);
+        });
+    }
   };
 
   const handleAddQuestion = () => {
+    // eslint-disable-next-line no-console
     console.log('added');
     const data = {
       body: 'but are the sleeves organic thought?',
@@ -83,9 +97,11 @@ const QuestionElement = ({ questionData, currentProduct }) => {
     };
     addQuestion(data)
       .then((response) => {
+        // eslint-disable-next-line no-console
         console.log(response);
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
       });
   };
@@ -105,7 +121,7 @@ const QuestionElement = ({ questionData, currentProduct }) => {
             &nbsp;&nbsp;
             <span aria-hidden="true" role="link" onClick={handleHelpful}>Yes</span>
             &nbsp;
-            {`(${questionHelpfulness}) | `}
+            {`(${helpfulCount}) | `}
             &nbsp;
             <span aria-hidden="true" role="link" onClick={handleAddQuestion}>Add Question</span>
           </QuestionInteraction>

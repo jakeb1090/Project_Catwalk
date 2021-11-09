@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 import AnswerElement from './AnswerElement';
@@ -28,11 +28,18 @@ const Answers = styled.div`
 
 const AnswerInnerList = (props) => {
   const [answerArray, setAnswerArray] = useState([]);
-  const { answers, answersN, currentProduct } = props;
+
+  const {
+    answers,
+    answersN,
+    currentProduct,
+    questionId,
+    onFetchQuestions,
+    onFetchAnswers,
+  } = props;
   // const keys = Object.keys(answers);
 
   const sortedAnswers = answers.sort((a, b) => b.helpfulness - a.helpfulness);
-  console.log(sortedAnswers, 'sorted');
 
   return (
     <div>
@@ -42,7 +49,16 @@ const AnswerInnerList = (props) => {
         </Title>
         <Answers data-testid="answer-list">
           {
-            sortedAnswers.map((answer) => <AnswerElement data={answer} />)
+            sortedAnswers.map((answer) => (
+              <AnswerElement
+                amswers={answers}
+                data={answer}
+                questionId={questionId}
+                onFetchQuestions={onFetchQuestions}
+                onFetchAnswers={onFetchAnswers}
+                key={`AE${answer.answer_id}`}
+              />
+            ))
           }
         </Answers>
       </AnswerContainer>

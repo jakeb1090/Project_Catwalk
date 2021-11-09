@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
+import axios from 'axios';
 // import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getQuestions, getAnswers } from '../../utils';
+import API_KEY from '../../../config';
 import AddQuestion from './AddQuestion';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
@@ -16,7 +17,6 @@ class QuestionsMain extends React.Component {
       currentQuestionId: 38,
       currentProduct: 0,
       questionList: [],
-      answerList: [],
       searchText: '',
       questionsN: 2,
       answersN: 2,
@@ -24,17 +24,34 @@ class QuestionsMain extends React.Component {
     };
     this.updateSearch = this.updateSearch.bind(this);
     this.updateAnswersN = this.updateAnswersN.bind(this);
+    this.fetchQuestions = this.fetchQuestions.bind(this);
   }
 
   componentDidMount() {
     const { currentProduct } = this.props;
-    this.setState({ currentProduct });
-    getQuestions(currentProduct, 12)
+    this.fetchQuestions(currentProduct);
+  }
+
+  fetchQuestions(productId) {
+    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
+
+    const params = {
+      product_id: productId,
+      // page: 2,
+      // count: 22,
+    };
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: API_KEY,
+    };
+
+    const config = { params, headers };
+
+    axios.get(url, config)
       .then((res) => {
+        // eslint-disable-next-line react/no-unused-state
         this.setState({ questionList: res.data.results });
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
 
@@ -67,6 +84,7 @@ class QuestionsMain extends React.Component {
             answersN={answersN}
             loadMoreAnswers={this.updateAnswersN}
             questionList={questionList}
+            onFetchQuestions={this.fetchQuestions}
           />
           <div className="button-container">
 
@@ -76,7 +94,9 @@ class QuestionsMain extends React.Component {
                   <input
                     type="button"
                     value="More Answered Questions"
-                    onClick={(prevState) => {...prevState, questionsN + 2}}
+                    onClick={(prevState) =>
+                      // eslint-disable-next-line implicit-arrow-linebreak
+                      this.setState({ ...prevState, questionsN: questionsN + 2 })}
                   />
                 )
                 : <div />

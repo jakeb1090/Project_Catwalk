@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-  getAnswers,
-  addQuestion,
-  addAnswer,
   markAnswerHelpful,
-  reportQuestion,
   reportAnswer,
 } from '../../utils';
 
@@ -28,7 +24,7 @@ const Interactive = styled.span`
   }
 `;
 
-const AnswerElement = ({ data }) => {
+const AnswerElement = ({ data, questionId, onFetchAnswers }) => {
   const {
     answerer_name: answererName,
     body,
@@ -38,26 +34,48 @@ const AnswerElement = ({ data }) => {
     photos,
   } = data;
 
+  // eslint-disable-next-line prefer-const
+  let [helpfulCount, setHelpfulCount] = useState(false);
+  const [hasUpVoted, setHasUpVoted] = useState(false);
+  const [hasReported, setHasReported] = useState(false);
+
+  useEffect(() => {
+    setHelpfulCount(helpfulness);
+  }, []);
+
   const formattedDate = date.slice(0, 10);
 
   const handleHelpful = () => {
-    markAnswerHelpful(id)
-      .then((res) => {
-        console.log(res, res.status, 'success');
-      })
-      .catch((error) => {
-        console.log(error.status, 'error');
-      });
+    if (!hasUpVoted) {
+      setHelpfulCount(helpfulCount += 1);
+      setHasUpVoted(true);
+      markAnswerHelpful(id)
+        .then((res) => {
+          // eslint-disable-next-line no-console
+          console.log(res, res.status, 'marked as helpful');
+        })
+        .then(() => {
+          onFetchAnswers(questionId);
+        });
+    }
   };
 
   const handleReport = () => {
-    reportAnswer(id)
-      .then((res) => {
-        console.log(res, res.status);
-      })
-      .catch((error) => {
-        console.log(error.status, 'error');
-      });
+    if (!hasReported) {
+      setHasReported((prevState) => !prevState);
+      reportAnswer(id)
+        .then((res) => {
+          // eslint-disable-next-line no-console
+          console.log(res, res.status, 'answer reported');
+        })
+        .then(() => {
+          onFetchAnswers(questionId);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error, 'error');
+        });
+    }
   };
 
   return (
@@ -82,10 +100,14 @@ const AnswerElement = ({ data }) => {
               |&nbsp;&nbsp;Helpful?&nbsp;
               <span aria-hidden="true" role="link" onClick={handleHelpful}>Yes</span>
               (
-              { helpfulness }
+              { helpfulCount }
               )
               &nbsp;|&nbsp;&nbsp;
-              <span aria-hidden="true" role="link" onClick={handleReport}>Report</span>
+              {
+                !hasReported
+                  ? <span aria-hidden="true" role="link" onClick={handleReport}>Report</span>
+                  : <span aria-hidden="true" role="link" onClick={handleReport}><i>Reported</i></span>
+              }
               &nbsp;
             </Interactive>
           </span>
@@ -97,6 +119,7 @@ const AnswerElement = ({ data }) => {
 
 AnswerElement.defaultProps = {
   data: {},
+  questionId: 99,
   answerer_name: 'default_person',
   body: 'default_answer',
   date: 'default_data',
@@ -106,6 +129,7 @@ AnswerElement.defaultProps = {
 };
 
 AnswerElement.propTypes = {
+  questionId: PropTypes.number,
   data: PropTypes.objectOf(PropTypes.any),
   answerer_name: PropTypes.string,
   body: PropTypes.string,
@@ -113,6 +137,7 @@ AnswerElement.propTypes = {
   helpfulness: PropTypes.number,
   id: PropTypes.number,
   photos: PropTypes.arrayOf(PropTypes.string),
+  onFetchAnswers: PropTypes.func.isRequired,
 };
 
 export default AnswerElement;

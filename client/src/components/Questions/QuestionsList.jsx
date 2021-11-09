@@ -29,7 +29,12 @@ class QuestionsList extends React.Component {
   render() {
     const { currentProductId } = this.state;
     const {
-      questionsN, answersN, loadMoreAnswers, questionList, currentSearch,
+      questionsN,
+      answersN,
+      loadMoreAnswers,
+      questionList,
+      currentSearch,
+      onFetchQuestions,
     } = this.props;
     let outputList = [];
 
@@ -59,6 +64,7 @@ class QuestionsList extends React.Component {
                 question={nQuestion}
                 answersN={answersN}
                 currentProduct={currentProductId}
+                onFetchQuestions={onFetchQuestions}
               />
             ))
           }
