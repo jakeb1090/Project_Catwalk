@@ -7,8 +7,28 @@ import CardImg from './CardImg';
 import RatingStars from './RatingStars';
 import AddOutfitBtn from './AddOutfitBtn';
 
-const Div = styled.div`
-  border: solid purple;
+// max-width: ${({ innerWidth }) => {
+//   if (innerWidth < 1920) {
+//     return '375px';
+//   }
+//   return '375px';
+// }};
+// min-width: ${({ innerWidth }) => {
+//   if (innerWidth < 1920) {
+//     return '375px';
+//   }
+//   return '375px';
+// }};
+const Product = styled.span`
+  position: relative;
+  min-width: 320px;
+  max-width: 320px;
+  height: 90%;
+  background: whitesmoke;
+  margin:  0 5px 0 0;
+  border-radius: 1%;
+  left: ${({ productLeft }) => productLeft};
+  transition: 0.5s;
 `;
 
 const Title = styled.h5`
@@ -25,6 +45,7 @@ const Card = (props) => {
     addOutfit,
     btn,
     product,
+    productLeft,
   } = props;
 
   const {
@@ -35,7 +56,7 @@ const Card = (props) => {
   } = product;
 
   return (
-    <Div data-testid="card" onClick={() => onRelatedClick(id)}>
+    <Product data-testid="card" onClick={() => onRelatedClick(id)} productLeft={productLeft}>
       {
         addOutfit
           ? <AddOutfitBtn onAddOutfitClick={onAddOutfitClick} />
@@ -57,7 +78,7 @@ const Card = (props) => {
             </>
           )
       }
-    </Div>
+    </Product>
   );
 };
 Card.defaultProps = {
@@ -86,6 +107,7 @@ Card.propTypes = {
   btn: PropTypes.string,
   id: PropTypes.number,
   addOutfit: PropTypes.bool,
+  productLeft: PropTypes.string.isRequired,
   onRelatedClick: PropTypes.func,
   onCompareProductClick: PropTypes.func,
   onDeleteOutfitClick: PropTypes.func,

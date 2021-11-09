@@ -1,12 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { MdStarOutline } from 'react-icons/md';
+
+const Button = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  `;
+const ButtonContext = styled.div`
+  border-radius: 2px;
+  font-size: 2em;
+  &:hover {
+    color: lightgray;
+  }
+`;
 
 const CompareBtn = (props) => {
   const { onCompareProductClick, id } = props;
   return (
-    <button type="button" aria-label="compareBtn" onClick={(event) => onCompareProductClick(event, id)}>
-      --Star Icon--
-    </button>
+    <Button type="button" aria-label="compareBtn" onClick={(event) => onCompareProductClick(event, id)}>
+      <ButtonContext>
+        <MdStarOutline />
+      </ButtonContext>
+    </Button>
   );
 };
 

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Table = styled.table`
-  border: solid red;
+  width: 80%;
+  background-color: whitesmoke;
 `;
 
 const CompareTable = (props) => {
@@ -38,7 +39,12 @@ const CompareTable = (props) => {
 
 CompareTable.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.string).isRequired,
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool,
+      ]),
+    ).isRequired,
   ).isRequired,
 };
 
