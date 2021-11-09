@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import {render, screen, fireEvent, waitFor} from '@testing-library/react';
 import {
   test,
   expect,
@@ -18,11 +18,10 @@ afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
 test('should render Modal to the DOM', () => {
-  const mockShowModal = jest.fn();
   const mockHideModal = jest.fn();
-  const mockData = [[null, null, null], [null, null, null], [null, null, null]];
+  const mockData = [['brass', 'buttons', 'ivory'], ['cotten', 'material', 'linen'], [true, 'sustainable', null]];
   render(<Modal
-    showModal={mockShowModal}
+    showModal
     hideModal={mockHideModal}
     data={mockData}
   />);

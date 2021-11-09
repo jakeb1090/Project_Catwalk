@@ -8,9 +8,19 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 62000,
+      currentProduct: 61590,
+      innerWidth: 0,
+      innerHeight: 0,
     };
     this.onRelatedClick = this.onRelatedClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { innerWidth, innerHeight } = window;
+    this.setState({
+      innerWidth,
+      innerHeight,
+    });
   }
 
   onRelatedClick(id) {
@@ -18,17 +28,21 @@ class App extends Component {
   }
 
   render() {
-    const { currentProduct } = this.state;
+    const { currentProduct, innerWidth, innerHeight } = this.state;
     return (
       <div data-testid="app">
         <h1>Project Catwalk</h1>
         <h3>An Ingenious-ly project</h3>
         {/* <Overview /> */}
-        {/* <Related
+        <Related
           currentProduct={currentProduct}
+          innerWidth={innerWidth}
+          innerHeight={innerHeight}
           onRelatedClick={this.onRelatedClick}
         />
-        <Questions /> */}
+        <Questions
+          currentProduct={currentProduct}
+        />
         <ReviewApp id={currentProduct} />
       </div>
     );

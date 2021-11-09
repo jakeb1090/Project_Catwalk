@@ -39,8 +39,8 @@ describe('Question and Answer Container', () => {
     const text = screen.getByTestId('question-element');
     expect(text).toBeInTheDocument();
   });
-  // test('should display Answer header', () => {
-  //   const text = screen.getByTestId('answer-inner-list');
-  //   expect(text).toBeInTheDocument();
-  // });
+  test('should display Answer header', () => {
+    const element = screen.getByText(/[0-9]/);
+    expect(element).toBeInTheDocument();
+  });
 });

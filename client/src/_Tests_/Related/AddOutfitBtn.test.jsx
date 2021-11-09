@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { test, expect } from '@jest/globals';
+import { test, expect, jest } from '@jest/globals';
 import AddOutfitBtn from '../../components/Related/AddOutfitBtn';
 import '@testing-library/jest-dom';
 
@@ -10,14 +10,14 @@ test('renders AddOutfitButton to the DOM', () => {
   expect(screen.getByRole('button', { name: /addOutfitBtn/i })).toBeInTheDocument();
 });
 
-test('should call function when clicked' , () => {
+test('should call function when clicked', () => {
   const onAddOutfitClick = jest.fn();
   render(
     <AddOutfitBtn
       onClick={onAddOutfitClick}
-    />
-  )
-    const addOutfitBtn = screen.getByRole('button', { name: /addOutfitBtn/i });
-    userEvent.click(addOutfitBtn);
-    expect(onAddOutfitClick.mock.calls.length).toBe(1);
+    />,
+  );
+  const addOutfitBtn = screen.getByRole('button', { name: /addOutfitBtn/i });
+  userEvent.click(addOutfitBtn);
+  expect(onAddOutfitClick.mock.calls.length).toBe(1);
 });
