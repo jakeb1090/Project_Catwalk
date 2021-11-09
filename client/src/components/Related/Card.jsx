@@ -29,6 +29,9 @@ const Product = styled.span`
   border-radius: 1%;
   left: ${({ productLeft }) => productLeft};
   transition: 0.5s;
+  &:hover {
+    border: solid 1px black;
+  }
 `;
 
 const Title = styled.h5`

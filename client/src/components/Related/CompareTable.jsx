@@ -6,6 +6,9 @@ const Table = styled.table`
   width: 80%;
   background-color: whitesmoke;
 `;
+const ColumnHead = styled.th`
+  text-align: left;
+`;
 
 const CompareTable = (props) => {
   const { data } = props;
@@ -13,9 +16,9 @@ const CompareTable = (props) => {
     <Table>
       <thead>
         <tr>
-          <th>{data[0] && data[0][0]}</th>
-          <th>{data[0] && data[0][1]}</th>
-          <th>{data[0] && data[0][2]}</th>
+          <ColumnHead>{data[0] && data[0][0]}</ColumnHead>
+          <ColumnHead>{data[0] && data[0][1]}</ColumnHead>
+          <ColumnHead>{data[0] && data[0][2]}</ColumnHead>
         </tr>
       </thead>
       <tbody>

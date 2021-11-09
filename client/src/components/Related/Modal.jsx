@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { MdClose } from 'react-icons/md';
-import { IconContext } from 'react-icons';
 import CompareTable from './CompareTable';
 
 const Title = styled.h4`
@@ -33,6 +32,15 @@ const ModalDiv = styled.div`
   background-color: white;
 `;
 
+const ButtonContext = styled.div`
+  border-radius: 2px;
+  font-size: 2em;
+  &:hover {
+    color: lightgray;
+    cursor: pointer;
+  }
+`;
+
 const Button = styled.button`
   display: flex;
   justify-content: flex-end;
@@ -47,9 +55,9 @@ const Modal = (props) => {
     <Overlay show={showModal}>
       <ModalDiv data-testid="modal" show={showModal}>
         <Button type="button" aria-label="modalClose" onClick={hideModal}>
-          <IconContext.Provider value={{ size: '2em' }}>
+          <ButtonContext>
             <MdClose />
-          </IconContext.Provider>
+          </ButtonContext>
         </Button>
         <Title>Comparing</Title>
         <CompareTable

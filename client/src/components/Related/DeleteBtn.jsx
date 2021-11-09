@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
-import { IconContext } from 'react-icons';
 
 const Button = styled.button`
   width: 100%;
@@ -12,13 +11,22 @@ const Button = styled.button`
   border: none;
 `;
 
+const ButtonContext = styled.div`
+  border-radius: 2px;
+  font-size: 2em;
+  &:hover {
+    color: lightgray;
+    cursor: pointer;
+  }
+`;
+
 const DeleteBtn = (props) => {
   const { onDeleteOutfitClick, id } = props;
   return (
     <Button type="button" aria-label="deleteBtn" onClick={() => onDeleteOutfitClick(id)}>
-      <IconContext.Provider value={{ size: '2em' }}>
+      <ButtonContext>
         <MdClose />
-      </IconContext.Provider>
+      </ButtonContext>
     </Button>
   );
 };

@@ -2,20 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MdArrowBackIos } from 'react-icons/md';
-import { IconContext } from 'react-icons';
 
 const Button = styled.button`
   background-color: transparent;
   border: none;
 `;
 
+const ButtonContext = styled.div`
+  border-radius: 2px;
+  font-size: 2em;
+  &:hover {
+    color: lightgray;
+    cursor: pointer;
+  }
+`;
+
 const ReverseArrow = (props) => {
   const { onClick } = props;
   return (
     <Button type="button" aria-label="reverseArrow" onClick={onClick}>
-      <IconContext.Provider value={{ size: '2em' }}>
+      <ButtonContext>
         <MdArrowBackIos />
-      </IconContext.Provider>
+      </ButtonContext>
     </Button>
   );
 };

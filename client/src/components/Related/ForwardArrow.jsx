@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { IconContext } from 'react-icons';
 
 import { MdArrowForwardIos } from 'react-icons/md';
 
@@ -10,13 +9,22 @@ const Button = styled.button`
   border: none;
 `;
 
+const ButtonContext = styled.div`
+  border-radius: 2px;
+  font-size: 2em;
+  &:hover {
+    color: lightgray;
+    cursor: pointer;
+  }
+`;
+
 const ForwardArrow = (props) => {
   const { onClick } = props;
   return (
     <Button type="button" aria-label="forwardArrow" onClick={onClick}>
-      <IconContext.Provider value={{ size: '2em' }}>
+      <ButtonContext>
         <MdArrowForwardIos />
-      </IconContext.Provider>
+      </ButtonContext>
     </Button>
   );
 };

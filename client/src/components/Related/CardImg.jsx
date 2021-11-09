@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Picture = styled.picture`
   width: 100%;
-  height: 70%;
+  height: 65%;
   overflow: hidden;
   margin-bottom: 10%;
   display: flex;

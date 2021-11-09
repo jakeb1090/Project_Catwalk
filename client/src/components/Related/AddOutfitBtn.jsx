@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-import { IconContext } from 'react-icons';
 
 const Button = styled.button`
   display: flex;
@@ -14,13 +13,22 @@ const Button = styled.button`
   border: none;
 `;
 
+const ButtonContext = styled.div`
+  border-radius: 2px;
+  font-size: 2em;
+  &:hover {
+    color: lightgray;
+    cursor: pointer;
+  }
+`;
+
 const AddOutfitBtn = (props) => {
   const { onAddOutfitClick } = props;
   return (
     <Button type="button" aria-label="addOutfitBtn" onClick={onAddOutfitClick}>
-      <IconContext.Provider value={{ size: '2em' }}>
+      <ButtonContext>
         <MdAdd />
-      </IconContext.Provider>
+      </ButtonContext>
     </Button>
   );
 };
