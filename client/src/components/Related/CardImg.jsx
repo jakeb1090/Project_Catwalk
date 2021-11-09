@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CardImg = (props) => {
-  // console.log(props);
   const { src, alt } = props;
   return (
     <div>
@@ -10,11 +9,6 @@ const CardImg = (props) => {
     </div>
   );
 };
-
-// CardImg.defaultProps = {
-//   src: 'broken link',
-//   alt: 'image link is broken',
-// };
 
 CardImg.propTypes = {
   src: PropTypes.string.isRequired,

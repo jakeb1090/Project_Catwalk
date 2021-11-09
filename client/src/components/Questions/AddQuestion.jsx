@@ -2,7 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const { API_KEY } = require('../../../../config');
+const { API_KEY } = require('../../../config');
 
 const AddQuestion = () => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';

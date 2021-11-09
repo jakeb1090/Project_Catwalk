@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import ReviewApp from './Reviews/reviewapp';
-import Overview from './Overview/Overview.jsx';
+// import Overview from './Overview/Overview.jsx';
 import Related from './Related/Related';
-// import QuestionsMain from './Questions/QuestionsMain';
 import Questions from './Questions/Questions';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+<<<<<<< HEAD
       currentProduct: 61590
+=======
+      currentProduct: 61622,
+>>>>>>> main
     };
+    this.onRelatedClick = this.onRelatedClick.bind(this);
+  }
+
+  onRelatedClick(id) {
+    this.setState({ currentProduct: id });
   }
 
   render() {
@@ -22,9 +30,15 @@ class App extends Component {
         {/* <Overview /> */}
         {/* <Related
           currentProduct={currentProduct}
+          onRelatedClick={this.onRelatedClick}
         />
+<<<<<<< HEAD
         <Questions /> */}
         <ReviewApp id={currentProduct} />
+=======
+        <Questions />
+        <ReviewApp />
+>>>>>>> main
       </div>
     );
   }
