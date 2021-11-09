@@ -1,12 +1,10 @@
 import React from 'react';
 
 const ScaleBreakdown = (props) => (
-  <div>
+  <div data-testid="scaleBreakdown" >
     {Object.keys(props.scale).map((characteristic) => (
-      <div>
-        <div>
+      <div key={characteristic}>
           {`${characteristic}: ${Number(props.scale[characteristic].value).toFixed(1)}`}
-        </div>
       </div>
     ))}
   </div>

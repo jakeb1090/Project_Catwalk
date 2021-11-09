@@ -1,13 +1,23 @@
 import React from 'react';
 
-class RatingBreakdown extends React.Component {
-  render() {
-    return (
-      <div>Rating Breakdown by number of stars
+const RatingBreakdown = function (props) {
+  const { qty, star, toggleStarFilter, removeStarFilters } = props;
 
-      </div>
-
-    );
+  const clickHandler = function (event) {
+    event.preventDefault();
+    toggleStarFilter(Number(event.target.value));
   }
+
+  if (qty) {
+    return (
+      <div data-testid="ratingBreakdown">
+        <button
+          value={star}
+          // style={(filter is on ? styles.greenButton : style.greyButton)}
+          onClick={clickHandler}>{`${star} stars`}</button>
+        [bar representing {qty} stars]
+      </div>
+    );
+  } else return null
 }
 export default RatingBreakdown;

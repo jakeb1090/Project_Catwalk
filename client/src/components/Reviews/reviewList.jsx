@@ -1,35 +1,101 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReviewTile from './reviewTile';
+import ReviewModal from './reviewModal';
 
-const ReviewList = (props) => {
-  const { reviews } = props;
-  if (typeof reviews === 'object') {
+
+class ReviewList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      qtyToRender: 2,
+      rendered: 0,
+      showModal: false,
+    }
+  }
+
+  loadMore(event) {
+    if (this.state.qtyToRender >= this.props.reviews.length -1) {
+      this.setState((prevState) => ({
+        qtyToRender: this.props.reviews.length
+      })
+      )
+    } else {
+      this.setState((prevState) => ({
+        qtyToRender: prevState.qtyToRender + 2
+      })
+      )
+    }
+  }
+
+  openModal() {
+    this.setState({
+      showModal: true
+    })
+  }
+  closeModal() {
+    this.setState({
+      showModal: false,
+    })
+  }
+
+  submitModal(reviewObject) {
+    this.setState({
+      showModal: false
+    })
+    //call reviewapp API function
+    this.props.postReview(reviewObject);
+  }
+
+  handleSort(event) {
+    this.props.sortBy(event.target.value)
+  }
+
+  render() {
+    let { reviews, starFilters, putFeedback, characteristics } = this.props;
+    let { qtyToRender, rendered } = this.state;
+    if (typeof reviews !== 'object') { return null; }
     const tile = reviews.map((review) => {
-      if (review.rating === 3) {
-        return <ReviewTile review={review} />;
+      if (
+        starFilters[review.rating] &&
+        qtyToRender > rendered) {
+        if (rendered < qtyToRender) {
+          rendered++
+        }
+        return <ReviewTile
+          key={review.review_id}
+          review={review}
+          putFeedback={putFeedback} />;
       }
     });
 
     return (
-      <div>
+      <div data-testid="reviewlist">
         <div>
           <h4>Review List</h4>
-          {`Number of reviews: ${reviews.length}`}
+          <div>
+            <button data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</button>
+            <button data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</button>
+          </div>
+          {`Number of reviews: showing ${qtyToRender} of ${reviews.length}`}
         </div>
         <div>
           Sorted by:
-          <select>
-            <option>Relevance</option>
-            <option>Date</option>
-            <option>Helpfulness</option>
+          <select data-testid="dropdown" onChange={this.handleSort.bind(this)}>
+            <option value="relevance">Relevance</option>
+            <option value="helpful">Helpfulness</option>
+            <option value="newness">Date</option>
           </select>
           {tile}
-          <button>Load More</button>
-          <button>Add Review</button>
+          <ReviewModal
+            isOpen={this.state.showModal}
+            characteristics={characteristics}
+            closeModal={this.closeModal.bind(this)}
+            submitModal={this.submitModal.bind(this)} />
         </div>
       </div>
     );
-  } return null;
+  }
 };
 
 ReviewList.propTypes = {
@@ -37,40 +103,7 @@ ReviewList.propTypes = {
   id: PropTypes.number,
 };
 
-const ReviewTile = (props) => {
-  const { review } = props;
-  const formattedDate = new Date(review.date).toDateString();
-  return (
-    <div>
-      <br />
-      <div>
-        {`Number of stars: ${review.rating}`}
-      </div>
-      <div>
-        {`Reviewer Name: ${review.reviewer_name}, ${formattedDate}`}
-      </div>
-      <div>
-        {review.summary}
-      </div>
-      <div>
-        {review.body}
-      </div>
-      <div>
-        {review.recommend ? 'I recommend this product' : null}
-      </div>
-      <div>
-        {review.response ? `Response from seller: ${review.response}` : null}
-      </div>
-      <div>
-        Was this review helpful?
-        <button> Yes </button>
-        {/* {review.helpfulness} */}
-      </div>
-      <button>Report</button>
-      <br />
-    </div>
-  );
-};
+
 
 export default ReviewList;
 

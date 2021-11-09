@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-// import ReviewApp from './Reviews/reviewapp';
+import ReviewApp from './Reviews/reviewapp';
 // import Overview from './Overview/Overview.jsx';
 import Related from './Related/Related';
-// import Questions from './Questions/Questions';
+import Questions from './Questions/Questions';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61622,
+      currentProduct: 61590,
       innerWidth: 0,
       innerHeight: 0,
     };
@@ -40,8 +40,8 @@ class App extends Component {
           innerHeight={innerHeight}
           onRelatedClick={this.onRelatedClick}
         />
-        {/* <Questions /> */}
-        {/* <ReviewApp /> */}
+        <Questions />
+        <ReviewApp id={currentProduct} />
       </div>
     );
   }
