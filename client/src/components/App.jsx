@@ -8,11 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-<<<<<<< HEAD
-      currentProduct: 61590
-=======
       currentProduct: 61622,
->>>>>>> main
     };
     this.onRelatedClick = this.onRelatedClick.bind(this);
   }
@@ -32,13 +28,8 @@ class App extends Component {
           currentProduct={currentProduct}
           onRelatedClick={this.onRelatedClick}
         />
-<<<<<<< HEAD
         <Questions /> */}
         <ReviewApp id={currentProduct} />
-=======
-        <Questions />
-        <ReviewApp />
->>>>>>> main
       </div>
     );
   }
