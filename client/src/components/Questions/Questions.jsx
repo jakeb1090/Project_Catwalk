@@ -1,10 +1,13 @@
 import React from 'react';
 import QuestionsMain from './QuestionsMain';
 
-const Questions = () => (
+const Questions = ({currentProduct}) => (
   <div data-testid="questions" className="questions">
     Questions/Answers widget...
-    <QuestionsMain />
+    <QuestionsMain
+      // currentProduct={currentProduct}
+      currentProduct={currentProduct}
+    />
   </div>
 );
 

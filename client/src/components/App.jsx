@@ -40,7 +40,9 @@ class App extends Component {
           innerHeight={innerHeight}
           onRelatedClick={this.onRelatedClick}
         />
-        <Questions />
+        <Questions
+          currentProduct={currentProduct}
+        />
         <ReviewApp id={currentProduct} />
       </div>
     );

@@ -1,7 +1,9 @@
 import React from 'react';
 
 const GetMoreQuestions = () => {
-  const handleClick = () => { console.log('clicked'); };
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div data-testid="more-questions">
