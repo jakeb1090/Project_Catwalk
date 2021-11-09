@@ -6,7 +6,7 @@ const { API_KEY } = require('../../../config');
 const MoreAnsweredQuestions = () => {
   // https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/:question_id/answers?question_id=3
   // GET /qa/questions/:question_id/answers
-  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions';
+  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 
   const handleClick = () => {
     const params = {

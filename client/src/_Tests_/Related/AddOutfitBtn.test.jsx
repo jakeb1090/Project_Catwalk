@@ -10,8 +10,8 @@ test('renders AddOutfitButton to the DOM', () => {
   expect(screen.getByRole('button', { name: /addOutfitBtn/i })).toBeInTheDocument();
 });
 
-test('should add current product to outfit carousel' , () => {
-  const onAddOutfitClick = jest.fn()
+test('should call function when clicked' , () => {
+  const onAddOutfitClick = jest.fn();
   render(
     <AddOutfitBtn
       onClick={onAddOutfitClick}
