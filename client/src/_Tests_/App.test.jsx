@@ -9,4 +9,3 @@ test('renders App to DOM', () => {
   const appContainer = screen.getByTestId('app');
   expect(appContainer).toBeInTheDocument();
 });
-

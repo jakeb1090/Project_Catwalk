@@ -38,7 +38,7 @@ class QuestionsMain extends React.Component {
     const params = {
       product_id: productId,
       // page: 2,
-      // count: 22,
+      count: 10,
     };
 
     const headers = {

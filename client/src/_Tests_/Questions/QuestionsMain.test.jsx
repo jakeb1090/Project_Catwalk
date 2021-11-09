@@ -14,8 +14,8 @@ describe('QuestionsMain container', () => {
   test('clicking "More Answered Question" trigger event', () => {
     render(<QuestionsMain currentProduct={60161} />);
     const mockFn = jest.fn();
-    const buttons = screen.getAllByRole('button')[0];
+    const buttons = screen.getByText(/2/);
     userEvent.click(buttons, mockFn);
-    expect(mockFn).toHaveBeenCalledTimes(0);
+    expect(mockFn).toHaveBeenCalled();
   });
 });

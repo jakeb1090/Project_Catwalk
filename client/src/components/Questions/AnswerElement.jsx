@@ -86,7 +86,8 @@ const AnswerElement = ({ data, questionId, onFetchAnswers }) => {
           <div>
             {
               photos.length
-                ? photos.map((img) => <img key={img} className="img" src={img.url} alt="cool" />)
+                // eslint-disable-next-line react/no-array-index-key
+                ? photos.map((img, idx) => <img key={`${img}${idx}`} className="img" src={img.url} alt="cool" />)
                 : <span />
             }
           </div>
