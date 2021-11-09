@@ -52,8 +52,8 @@ const Button = styled.button`
 const Modal = (props) => {
   const { showModal, hideModal, data } = props;
   return (
-    <Overlay show={showModal}>
-      <ModalDiv data-testid="modal" show={showModal}>
+    <Overlay data-testid="modal" show={showModal}>
+      <ModalDiv show={showModal}>
         <Button type="button" aria-label="modalClose" onClick={hideModal}>
           <ButtonContext>
             <MdClose />
