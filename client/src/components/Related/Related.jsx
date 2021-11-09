@@ -11,8 +11,7 @@ import {
   getReviewsMeta,
 } from '../../utils';
 
-const Title = styled.h5`
-  border: solid black;
+const Title = styled.h4`
 `;
 
 const objectBuilder = (products) => {
@@ -197,7 +196,7 @@ class Related extends Component {
     const {
       showModal, compareData, related, outfit, loading,
     } = this.state;
-    const { onRelatedClick } = this.props;
+    const { onRelatedClick, innerWidth, innerHeight } = this.props;
     return (
       <div data-testid="related">
         {loading
@@ -215,6 +214,8 @@ class Related extends Component {
                 onRelatedClick={onRelatedClick}
                 data={related}
                 btn="compare"
+                innerWidth={innerWidth}
+                innerHeight={innerHeight}
               />
               <Title>Your Outfit</Title>
               <Carousel
@@ -222,6 +223,8 @@ class Related extends Component {
                 onDeleteOutfitClick={this.onDeleteOutfitClick}
                 data={outfit}
                 btn="delete"
+                innerWidth={innerWidth}
+                innerHeight={innerHeight}
               />
             </>
           )}

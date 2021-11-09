@@ -28,7 +28,7 @@ test('should render Card to the DOM', () => {
 });
 
 test('should call function with id parameter when clicked', () => {
-  const onRelatedClick = jest.fn((id) => id)
+  const onRelatedClick = jest.fn((id) => id);
   const product = {
     id: 4,
     img: '',
@@ -37,7 +37,7 @@ test('should call function with id parameter when clicked', () => {
     salesPrice: null,
     avgRating: null,
     features: [],
-  }
+  };
   render(
     <Card
       key={product.id}

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Table = styled.table`
-  border: solid red;
+  width: 80%;
+  background-color: whitesmoke;
+`;
+const ColumnHead = styled.th`
+  text-align: left;
 `;
 
 const CompareTable = (props) => {
@@ -12,9 +16,9 @@ const CompareTable = (props) => {
     <Table>
       <thead>
         <tr>
-          <th>{data[0] && data[0][0]}</th>
-          <th>{data[0] && data[0][1]}</th>
-          <th>{data[0] && data[0][2]}</th>
+          <ColumnHead>{data[0] && data[0][0]}</ColumnHead>
+          <ColumnHead>{data[0] && data[0][1]}</ColumnHead>
+          <ColumnHead>{data[0] && data[0][2]}</ColumnHead>
         </tr>
       </thead>
       <tbody>
@@ -38,7 +42,12 @@ const CompareTable = (props) => {
 
 CompareTable.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.string).isRequired,
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool,
+      ]),
+    ).isRequired,
   ).isRequired,
 };
 
