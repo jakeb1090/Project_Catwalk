@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61622,
+      currentProduct: 61590
     };
     this.onRelatedClick = this.onRelatedClick.bind(this);
   }
@@ -29,7 +29,7 @@ class App extends Component {
           onRelatedClick={this.onRelatedClick}
         />
         <Questions />
-        <ReviewApp />
+        <ReviewApp id={currentProduct} />
       </div>
     );
   }
