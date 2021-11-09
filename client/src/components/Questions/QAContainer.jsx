@@ -44,7 +44,7 @@ class QAContainer extends React.Component {
 
     return (
       <div data-testid="qa-container" className="qa-container">
-        &lt;QA container&gt;
+        {/* &lt;QA container&gt; */}
         <QuestionElement
           key={`Q${question.question_id}`}
           questionData={question}

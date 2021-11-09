@@ -85,11 +85,12 @@ const AnswerElement = ({ data, questionId, onFetchAnswers }) => {
         <div>
           <div>
             {
-              photos.length
-                // eslint-disable-next-line react/no-array-index-key
-                ? photos.map((img, idx) => <img key={`${img}${idx}`} className="img" src={img.url} alt="cool" />)
-                : <span />
-            }
+                photos.length
+                  // eslint-disable-next-line react/no-array-index-key
+                  ? photos.map((img, idx) => <img key={`${img}${idx}`} className="img" src={img.url} alt="cool" />)
+                  : <span />
+              }
+
           </div>
           <span>
             <Interactive>

@@ -87,6 +87,7 @@ QuestionsList.defaultProps = {
 };
 
 QuestionsList.propTypes = {
+  onFetchQuestions: PropTypes.func.isRequired,
   currentSearch: PropTypes.string.isRequired,
   questionsN: PropTypes.number.isRequired,
   answersN: PropTypes.number,

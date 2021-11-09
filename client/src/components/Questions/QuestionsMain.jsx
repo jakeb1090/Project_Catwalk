@@ -7,6 +7,7 @@ import API_KEY from '../../../config';
 import AddQuestion from './AddQuestion';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
+import ModalAddQuestion from './ModalAddQuestion';
 
 // props: currentProduct
 
@@ -21,10 +22,12 @@ class QuestionsMain extends React.Component {
       questionsN: 2,
       answersN: 2,
       questionListLength: 0,
+      isModalOpen: false,
     };
     this.updateSearch = this.updateSearch.bind(this);
     this.updateAnswersN = this.updateAnswersN.bind(this);
     this.fetchQuestions = this.fetchQuestions.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +66,10 @@ class QuestionsMain extends React.Component {
     this.setState({ answersN: null });
   }
 
+  toggleModal() {
+    this.setState((prevState) => ({ isModalOpen: !prevState }));
+  }
+
   render() {
     const { currentProduct } = this.props;
     const {
@@ -70,6 +77,7 @@ class QuestionsMain extends React.Component {
       questionsN,
       answersN,
       questionList,
+      isModalOpen,
     } = this.state;
 
     return (
@@ -102,7 +110,11 @@ class QuestionsMain extends React.Component {
                 : <div />
             }
 
-            <AddQuestion />
+            {/* <AddQuestion onClick={this.setState({ modalIsOpen: true })} /> */}
+            {/* <input type="button" value="Add Question" /> */}
+            <ModalAddQuestion
+              isOpen={isModalOpen}
+            />
           </div>
         </div>
       </div>
