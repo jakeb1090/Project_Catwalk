@@ -3,7 +3,6 @@ import ProductBreakdown from './breakdownProduct';
 import ReviewList from './reviewList';
 import API from './APIcalls';
 
-
 class ReviewApp extends React.Component {
   constructor(props) {
     super(props);
@@ -56,14 +55,14 @@ class ReviewApp extends React.Component {
   }
 
   putFeedback(action, review_id) {
-    API.put(action, review_id) //there is an error here!
+    API.put(action, review_id) // there is an error here!
       .then(() => {
         this.fetchAPI();
-        console.log(`review #', review_id, ' was marked: ${action}`)
+        console.log(`review #', review_id, ' was marked: ${action}`);
       })
       .catch((err) => {
-        console.log(`error marking review as ${action}`, err)
-      })
+        console.log(`error marking review as ${action}`, err);
+      });
   }
 
   postReview(review) {
@@ -73,22 +72,21 @@ class ReviewApp extends React.Component {
 
     API.post(review)
       .then((result) => {
-        console.log('post result', result)
+        console.log('post result', result);
         this.fetchAPI();
       })
       .then((result) => {
-        console.log(`review was posted!`, result)
+        console.log('review was posted!', result);
       })
       .catch((err) => {
-        console.log(`review post failed`, err)
-      })
+        console.log('review post failed', err);
+      });
   }
 
   sortBy(sort) {
     this.setState({
-      sort: sort
-    })
-    console.log('now sorting by:', sort)
+      sort,
+    });
   }
 
   averageRating() {
@@ -104,10 +102,9 @@ class ReviewApp extends React.Component {
   }
 
   toggleStarFilter(star) {
-    console.log('toggle star #', star)
-    //if all stars are on, only leave this star on
+    // if all stars are on, only leave this star on
     if (this.state.filterQty === 5) {
-      this.setState(prevState => ({
+      this.setState(({
         starFilters: {
           1: false,
           2: false,
@@ -116,10 +113,10 @@ class ReviewApp extends React.Component {
           5: false,
           [star]: true,
         },
-        filterQty: 1
-      }))
+        filterQty: 1,
+      }));
     } else if (this.state.starFilters[star] && this.state.filterQty === 1) {
-      //if i'm turning off the last filter, then restore all stars
+      // if i'm turning off the last filter, then restore all stars
       this.setState({
         starFilters: {
           1: true,
@@ -129,24 +126,24 @@ class ReviewApp extends React.Component {
           5: true,
         },
         filterQty: 5,
-      })
+      });
     } else if (this.state.starFilters[star]) {
-      //normal case: turn a star off
-      this.setState(prevState => ({
+      // normal case: turn a star off
+      this.setState((prevState) => ({
         starFilters: {
           ...prevState.starFilters,
           [star]: false,
         },
-        filterQty: prevState.filterQty - 1
-      }))
-    } else { //normal case: turn the star on
-      this.setState(prevState => ({
+        filterQty: prevState.filterQty - 1,
+      }));
+    } else { // normal case: turn the star on
+      this.setState((prevState) => ({
         starFilters: {
           ...prevState.starFilters,
           [star]: true,
         },
-        filterQty: prevState.filterQty + 1
-      }))
+        filterQty: prevState.filterQty + 1,
+      }));
     }
   }
 
@@ -160,12 +157,12 @@ class ReviewApp extends React.Component {
         5: true,
       },
       filterQty: 5,
-    })
+    });
   }
 
   render() {
     const {
-      id, starFilters, filterQty, reviews, characteristics, ratings
+      id, starFilters, filterQty, reviews, characteristics, ratings,
     } = this.state;
     return (
       <div data-testid="reviewapp">
