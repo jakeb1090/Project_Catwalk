@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import AnswerElement from './AnswerElement';
+import { getProductQuestions,
+  getAnswers,
+  addQuestion,
+  addAnswer,
+  markQuestionHelpful,
+  markAnswerHelpful,
+  reportQuestion,
+  reportAnswer,
+} from '../../utils';
 
 const AnswerContainer = styled.div`
   display: flex;
@@ -28,18 +38,8 @@ const Answers = styled.div`
 
 const AnswerInnerList = (props) => {
   const [answerArray, setAnswerArray] = useState([]);
-
-  const {
-    answers,
-    answersN,
-    currentProduct,
-    questionId,
-    onFetchQuestions,
-    onFetchAnswers,
-  } = props;
-  // const keys = Object.keys(answers);
-
-  const sortedAnswers = answers.sort((a, b) => b.helpfulness - a.helpfulness);
+  const { answers, answersN, currentProduct } = props;
+  const keys = Object.keys(answers);
 
   return (
     <div>
@@ -49,16 +49,9 @@ const AnswerInnerList = (props) => {
         </Title>
         <Answers data-testid="answer-list">
           {
-            sortedAnswers.map((answer) => (
-              <AnswerElement
-                amswers={answers}
-                data={answer}
-                questionId={questionId}
-                onFetchQuestions={onFetchQuestions}
-                onFetchAnswers={onFetchAnswers}
-                key={`AE${answer.answer_id}`}
-              />
-            ))
+          answersN !== null
+            ? keys.slice(0, answersN).map((key) => <AnswerElement key={key} data={answers[key]} />)
+            : keys.map((key) => <AnswerElement key={key} data={answers[key]} />)
           }
         </Answers>
       </AnswerContainer>
@@ -66,14 +59,14 @@ const AnswerInnerList = (props) => {
   );
 };
 
-// AnswerInnerList.defaultProps = {
-//   answers: [{}, {}],
-//   answersN: null,
-// };
+AnswerInnerList.defaultProps = {
+  answers: {},
+  answersN: null,
+};
 
-// AnswerInnerList.propTypes = {
-//   answers: PropTypes.arrayOf(PropTypes.object),
-//   answersN: PropTypes.number,
-// };
+AnswerInnerList.propTypes = {
+  answers: PropTypes.objectOf(PropTypes.object),
+  answersN: PropTypes.number,
+};
 
 export default AnswerInnerList;
