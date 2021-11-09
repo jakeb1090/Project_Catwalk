@@ -23,7 +23,7 @@ const ModalAddQuestion = () => {
           onRequestClose={toggleModal}
           contentLabel="My dialog"
         >
-          <div />
+          <div>My modal dialog.</div>
           <input type="button" value="close" onClick={toggleModal} />
         </Modal>
       </StyledModal>

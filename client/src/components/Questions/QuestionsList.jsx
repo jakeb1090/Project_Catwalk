@@ -26,12 +26,6 @@ class QuestionsList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchQuestions();
-  }
-
-  fetchQuestions() {
-    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
   render() {
     const { currentProductId } = this.state;
     const {
@@ -46,20 +40,6 @@ class QuestionsList extends React.Component {
 
     const sortedList = questionList.sort((b, a) => a.question_helpfulness - b.question_helpfulness);
 
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: API_KEY,
-    };
-
-    const config = { params, headers };
-
-    axios.get(url, config)
-      .then((res) => {
-        // eslint-disable-next-line react/no-unused-state
-        this.setState({ questionList: res.data.results });
-      })
-      .catch((err) => {console.log('ERROR QUESTIONSLIST', err)});
-  }
     const filteredList = sortedList.filter((question) =>
       // eslint-disable-next-line implicit-arrow-linebreak
       question.question_body.toLowerCase().includes(currentSearch.toLowerCase()),
@@ -107,7 +87,6 @@ QuestionsList.defaultProps = {
 };
 
 QuestionsList.propTypes = {
-  onFetchQuestions: PropTypes.func.isRequired,
   currentSearch: PropTypes.string.isRequired,
   questionsN: PropTypes.number.isRequired,
   answersN: PropTypes.number,
