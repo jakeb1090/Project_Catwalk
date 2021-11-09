@@ -33,6 +33,7 @@ describe('integration test', () => {
     await waitFor(() => screen.getByRole('button', { name: /addOutfitBtn/i }));
     userEvent.click(screen.getByRole('button', { name: /addOutfitBtn/i }));
 
+    // check that button is not already in DOM
     expect(() => screen.getByRole('button', { name: /deleteBtn/i })).toThrow();
 
     await waitFor(() => screen.getByRole('button', { name: /deleteBtn/i }));
@@ -43,7 +44,6 @@ describe('integration test', () => {
     expect(deleteBtn).not.toBeInTheDocument();
   });
 });
-
 test('renders AddOutfitButton to the DOM', () => {
   const onAddOutfitClick = jest.fn();
   render(
