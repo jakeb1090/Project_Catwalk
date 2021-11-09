@@ -110,7 +110,7 @@ class QuestionsMain extends React.Component {
                 : <div />
             }
 
-            {/* <AddQuestion onClick={this.setState({ modalIsOpen: true })} /> */}
+            <AddQuestion onClick={this.setState({ modalIsOpen: true })} />
             {/* <input type="button" value="Add Question" /> */}
             <ModalAddQuestion
               isOpen={isModalOpen}
