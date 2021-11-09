@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const { API_KEY } = require('../../../../config');
+const { API_KEY } = require('../../../config');
 
 // const API_KEY = require('./api.config');
 

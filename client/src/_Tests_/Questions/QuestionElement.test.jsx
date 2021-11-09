@@ -1,6 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { test, expect, describe } from '@jest/globals';
+import {
+  test, expect, describe, jest,
+} from '@jest/globals';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import QuestionElement from '../../components/Questions/QuestionElement';
 
@@ -36,4 +39,17 @@ describe('Qustion element component', () => {
     const component = screen.getByTestId('question-element');
     expect(component).toBeInTheDocument();
   });
+  test('should trigger "Yes" helpful event', () => {
+    render(<QuestionElement questionData={questionData} />);
+    const mockFn = jest.fn();
+    const clickableElement = screen.getByText('Yes');
+    userEvent.click(clickableElement, mockFn());
+    expect(mockFn).toHaveBeenCalled();
+  });
+  // test('clicking "Add Question" should trigger event handler', () => {
+  //   render(<QuestionElement questionData={questionData} />);
+  //   const handler = jest.fn();
+  //   const button = screen.getByText(/add/i);
+  //   userEvent.click(button, handler);
+  // });
 });
