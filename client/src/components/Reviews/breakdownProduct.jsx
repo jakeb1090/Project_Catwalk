@@ -19,13 +19,13 @@ const ProductBreakdown = function (props) {
         removeStarFilters={props.removeStarFilter} />
     })
     return (
-      <div data-testid="productBreakdown">
+      <div data-testid="productbreakdown">
         <div>{stars}</div>
         {filterQty < 5 ?
           <div>
             <br></br>
-            {`Filter: currently showing ${Object.keys(starFilters).map(star =>{
-              if(starFilters[star]){
+            {`Filter: currently showing ${Object.keys(starFilters).map(star => {
+              if (starFilters[star]) {
                 return star
               }
             })} star reviews`}

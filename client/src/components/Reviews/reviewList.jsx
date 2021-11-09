@@ -15,13 +15,14 @@ class ReviewList extends React.Component {
   }
 
   loadMore(event) {
-    this.setState((prevState) => ({
-      qtyToRender: prevState.qtyToRender + 2
-    })
-    )
-    if (this.state.qtyToRender >= this.props.reviews.length)
-    { this.setState((prevState) => ({
+    if (this.state.qtyToRender >= this.props.reviews.length -1) {
+      this.setState((prevState) => ({
         qtyToRender: this.props.reviews.length
+      })
+      )
+    } else {
+      this.setState((prevState) => ({
+        qtyToRender: prevState.qtyToRender + 2
       })
       )
     }
@@ -53,50 +54,47 @@ class ReviewList extends React.Component {
   render() {
     let { reviews, starFilters, putFeedback, characteristics } = this.props;
     let { qtyToRender, rendered } = this.state;
-    if (typeof reviews === 'object') {
-      const tile = reviews.map((review) => {
-        if (
-          starFilters[review.rating] &&
-          qtyToRender > rendered) {
-            if (rendered < qtyToRender) {
-            rendered++
-          }
-          return <ReviewTile
-            key={review.review_id}
-            review={review}
-            putFeedback={putFeedback} />;
+    if (typeof reviews !== 'object') { return null; }
+    const tile = reviews.map((review) => {
+      if (
+        starFilters[review.rating] &&
+        qtyToRender > rendered) {
+        if (rendered < qtyToRender) {
+          rendered++
         }
-      });
+        return <ReviewTile
+          key={review.review_id}
+          review={review}
+          putFeedback={putFeedback} />;
+      }
+    });
 
-      return (
+    return (
+      <div data-testid="reviewlist">
         <div>
+          <h4>Review List</h4>
           <div>
-            <h4>Review List</h4>
-            <div>
-              <button onClick={this.loadMore.bind(this)}>Load More</button>
-              <button onClick={this.openModal.bind(this)}>Add Review</button>
-            </div>
-            {`Number of reviews: showing ${qtyToRender} of ${reviews.length}`}
+            <button data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</button>
+            <button data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</button>
           </div>
-          <div>
-            Sorted by:
-            <select onChange={this.handleSort.bind(this)}>
-              <option value="relevance">Relevance</option>
-              <option value="helpful">Helpfulness</option>
-              <option value="newness">Date</option>
-            </select>
-            {tile}
-            <button onClick={this.loadMore.bind(this)}>Load More</button>
-            <button onClick={this.openModal.bind(this)}>Add Review</button>
-            <ReviewModal
-              isOpen={this.state.showModal}
-              characteristics={characteristics}
-              closeModal={this.closeModal.bind(this)}
-              submitModal={this.submitModal.bind(this)} />
-          </div>
+          {`Number of reviews: showing ${qtyToRender} of ${reviews.length}`}
         </div>
-      );
-    } else return null;
+        <div>
+          Sorted by:
+          <select data-testid="dropdown" onChange={this.handleSort.bind(this)}>
+            <option value="relevance">Relevance</option>
+            <option value="helpful">Helpfulness</option>
+            <option value="newness">Date</option>
+          </select>
+          {tile}
+          <ReviewModal
+            isOpen={this.state.showModal}
+            characteristics={characteristics}
+            closeModal={this.closeModal.bind(this)}
+            submitModal={this.submitModal.bind(this)} />
+        </div>
+      </div>
+    );
   }
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-ReactModal.setAppElement('#reviewmodal')
+// ReactModal.setAppElement('#reviewmodal')
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -75,8 +75,8 @@ class ReviewModal extends React.Component {
     const { isOpen, closeModal, submitModal, characteristics } = this.props
     const charAndId = Object.keys(characteristics).map((char, index) => {
       return (
-        <div key={characteristics[char].id}>
-          <h5>{char}</h5>
+        <div data-testid="reviewModal" key={characteristics[char].id}>
+          <h5>*{char}</h5>
           <input name={char} id={characteristics[char].id} value={1} type="radio" onChange={this.changeChar.bind(this)} />
           <label>Poor</label>
 
@@ -99,8 +99,8 @@ class ReviewModal extends React.Component {
         <div>
           <h3>Write Your Review</h3>
           <h4>{`For [product name]`} </h4>
-          <div>
-            <h5>Rating:</h5>
+          <div>* = mandatory field
+            <h5>*Overall Rating:</h5>
             <input name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
             <label >One Star - "Poor"</label>
 
@@ -120,14 +120,14 @@ class ReviewModal extends React.Component {
           <div>{charAndId}</div>
           <br></br>
           <div>Your Review Headline:
-            <input id="summary" placeholder="Example: Best purchase ever!" />
+            <input id="summary" data-testid="summary" placeholder="Example: Best purchase ever!" />
           </div>
-          <div>Enter your review here:
-            <input id="body" placeholder="Why did you like the product or not?" />
+          <div>*Enter your review here:
+            <input id="body" data-testid="body" placeholder="Why did you like the product or not?" />
             <div>{`Character count: ${this.state.bodyChar} of 1000`}</div>
           </div>
 
-          <div>Do you recommend this product?
+          <div>*Do you recommend this product?
             <input name="recommend" value="true" type="radio" onChange={this.changeRecommend.bind(this)} />
             <label>Yes</label>
 
@@ -141,12 +141,12 @@ class ReviewModal extends React.Component {
           </div>
 
 
-          <div>Your username:
-            <input id="name" placeholder="jackson11!" />
+          <div>*Your username:
+            <input id="name" data-testid="username" placeholder="jackson11!" />
             <p>For privacy reasons, do not use your full name or email address as your display name.</p>
           </div>
-          <div> You email address:
-            <input id="email" placeholder="jackson11@email.com" />
+          <div>*Your email address:
+            <input id="email" data-testid="email" placeholder="jackson11@email.com" />
           </div>
         </div>
         <button onClick={this.handleSubmit.bind(this)}>Submit Review</button>

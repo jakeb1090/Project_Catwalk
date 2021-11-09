@@ -1,9 +1,3 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { test, expect } from '@jest/globals';
-import ProductBreakdown from '../../components/Reviews/breakdownProduct';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event'
 
 const meta62000 = {
   "product_id": "62000",
@@ -382,57 +376,6 @@ const reviews62000 = {
     }
   ]
 }
-const reviews = reviews62000.results;
-const starFilters = { 1: true, 2: true, 3: true, 4: true, 5: true }
-
-
-describe('Product Breakdown: main component', () => {
-
-  test('ScaleBreakdown and RatingBreakdown render to DOM', () => {
-    render(<ProductBreakdown
-      id={reviews62000.product}
-      starFilters={starFilters}
-      scale={meta62000.characteristics}
-      ratings={meta62000.ratings}
-    />)
-    expect(screen.getByTestId('scaleBreakdown')).toBeInTheDocument();
-    expect(screen.getAllByTestId('ratingBreakdown').length).toBe(5);
-
-  })
-
-})
-
-describe('rating summary component', () => {
-  test('star rating quantities are correct', () => {
-    render(<ProductBreakdown
-      id={reviews62000.product}
-      starFilters={starFilters}
-      scale={meta62000.characteristics}
-      ratings={meta62000.ratings}
-    />)
-
-    expect(screen.getByText('1 stars')).toBeInTheDocument();
-    expect(screen.getAllByText(/bar representing 4 stars/i).length).toBe(3);
-    expect(screen.getAllByText(/bar representing 2 stars/i).length).toBe(1);
-    expect(screen.getAllByText(/bar representing 3 stars/i).length).toBe(1);
-
-  })
-})
-
-describe('characteristics summary component', () => {
-  test('characteristic averages are correct', () => {
-    render(<ProductBreakdown
-      id={reviews62000.product}
-      starFilters={starFilters}
-      scale={meta62000.characteristics}
-      ratings={meta62000.ratings}
-    // toggleStarFilter={this.toggleStarFilter.bind(this)}
-    // filterQty={filterQty}
-    // removeStarFilters={this.removeStarFilters.bind(this)}
-    />)
-    expect(screen.getByText('Fit: 2.6')).toBeInTheDocument();
-    expect(screen.getByText('Length: 2.7')).toBeInTheDocument();
-    expect(screen.getByText('Comfort: 3.4')).toBeInTheDocument();
-    expect(screen.getByText('Quality: 3.2')).toBeInTheDocument();
-  })
-})
+console.log(reviews62000.results.length);
+module.exports = { reviews62000, meta62000 };
+// console.log(module.exports)

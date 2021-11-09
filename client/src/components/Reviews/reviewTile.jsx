@@ -15,7 +15,7 @@ const ReviewTile = (props) => {
     putFeedback(event.target.name, review.review_id)
   }
   return (
-    <div key={review.review_id}>
+    <div data-testid="ReviewTile" key={review.review_id}>
       <br />
       <div>
         {`Number of stars: ${review.rating}`}
@@ -42,9 +42,9 @@ const ReviewTile = (props) => {
       </div>
       <div>
         Was this review helpful?
-        <button name="helpful" onClick={handleClick}> {`Yes (${review.helpfulness})`} </button>
+        <button data-testid="helpfulButton" name="helpful" onClick={handleClick}> {`Yes (${review.helpfulness})`} </button>
       </div>
-      <button name="report" onClick={handleClick}>Report</button>
+      <button data-testid="reportButton" name="report" onClick={handleClick}>Report</button>
       <br />
     </div>
   );
