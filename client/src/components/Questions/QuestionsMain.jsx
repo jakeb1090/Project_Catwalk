@@ -4,7 +4,6 @@ import axios from 'axios';
 // import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import API_KEY from '../../../config';
-import AddQuestion from './AddQuestion';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestions';
 import ModalAddQuestion from './ModalAddQuestion';
@@ -77,7 +76,6 @@ class QuestionsMain extends React.Component {
       questionsN,
       answersN,
       questionList,
-      isModalOpen,
     } = this.state;
 
     return (
@@ -109,7 +107,7 @@ class QuestionsMain extends React.Component {
                 )
                 : <div />
             }
-            <input type="button" value="Add Question" />
+            <ModalAddQuestion currentProduct={currentProduct} appElement="app" />
           </div>
         </div>
       </div>

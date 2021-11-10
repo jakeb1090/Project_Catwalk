@@ -10,7 +10,7 @@ const LoadMoreAnswers = () => {
     <div data-testid="load-more" className="load-more">
       <input
         type="button"
-        value="LOAD MORE ANSWERS"
+        value="Load More Answers"
         onClick={handleClick}
       />
     </div>
