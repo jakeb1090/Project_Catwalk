@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { markQuestionHelpful, addQuestion } from '../../utils';
+import ModalAddAnswer from './ModalAddAnswer';
 // import PropTypes from 'prop-types';
 
 // { answerer_name, body, date, helpfulness, id, photos }
@@ -123,7 +124,7 @@ const QuestionElement = ({ questionData, currentProduct }) => {
             &nbsp;
             {`(${helpfulCount}) | `}
             &nbsp;
-            <span aria-hidden="true" role="link" onClick={handleAddQuestion}>Add Question</span>
+            <ModalAddAnswer currentProduct={48395} />
           </QuestionInteraction>
         </TwoThirds>
       </QuestionContainer>
