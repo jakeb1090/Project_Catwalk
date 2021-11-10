@@ -25,7 +25,7 @@ const Product = styled.span`
   max-width: 320px;
   height: 90%;
   background: whitesmoke;
-  margin:  0 5px 0 0;
+  margin:  0 7px 0 0;
   border-radius: 1%;
   left: ${({ productLeft }) => productLeft};
   transition: 0.5s;
@@ -37,12 +37,15 @@ const Product = styled.span`
 const Title = styled.h5`
 
 `;
+const Price = styled.p`
+
+`;
 
 const Card = (props) => {
   const {
     onCompareProductClick,
     onDeleteOutfitClick,
-    onRelatedClick,
+    onCardClick,
     onAddOutfitClick,
     id,
     addOutfit,
@@ -56,10 +59,12 @@ const Card = (props) => {
     name,
     avgRating,
     features,
+    price,
+    salesPrice,
   } = product;
 
   return (
-    <Product data-testid="card" onClick={() => onRelatedClick(id)} productLeft={productLeft}>
+    <Product data-testid="card" onClick={() => onCardClick(id)} productLeft={productLeft}>
       {
         addOutfit
           ? <AddOutfitBtn onAddOutfitClick={onAddOutfitClick} />
@@ -77,6 +82,10 @@ const Card = (props) => {
 
               <CardImg src={img} alt={name} />
               <Title>{ name }</Title>
+              <Price>
+                {price}
+                <span>{salesPrice}</span>
+              </Price>
               <RatingStars avgRating={avgRating} />
             </>
           )
@@ -89,7 +98,7 @@ Card.defaultProps = {
   btn: '',
   id: null,
   addOutfit: false,
-  onRelatedClick: () => {},
+  onCardClick: () => {},
   onCompareProductClick: () => {},
   onDeleteOutfitClick: () => {},
   onAddOutfitClick: () => {},
@@ -111,7 +120,7 @@ Card.propTypes = {
   id: PropTypes.number,
   addOutfit: PropTypes.bool,
   productLeft: PropTypes.string.isRequired,
-  onRelatedClick: PropTypes.func,
+  onCardClick: PropTypes.func,
   onCompareProductClick: PropTypes.func,
   onDeleteOutfitClick: PropTypes.func,
   onAddOutfitClick: PropTypes.func,

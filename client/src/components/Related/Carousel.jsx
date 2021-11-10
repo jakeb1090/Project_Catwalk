@@ -77,7 +77,7 @@ class Carousel extends React.Component {
     const {
       onCompareProductClick,
       onDeleteOutfitClick,
-      onRelatedClick,
+      onCardClick,
       onAddOutfitClick,
       data,
       btn,
@@ -98,7 +98,7 @@ class Carousel extends React.Component {
               key={product.id}
               id={product.id}
               productLeft={productLeft}
-              onRelatedClick={onRelatedClick}
+              onCardClick={onCardClick}
               onCompareProductClick={onCompareProductClick}
               onDeleteOutfitClick={onDeleteOutfitClick}
               product={product}
@@ -119,14 +119,14 @@ class Carousel extends React.Component {
 Carousel.defaultProps = {
   onCompareProductClick: () => {},
   onDeleteOutfitClick: () => {},
-  onRelatedClick: () => {},
+  onCardClick: () => {},
   onAddOutfitClick: () => {},
 };
 
 Carousel.propTypes = {
   onCompareProductClick: PropTypes.func,
   onDeleteOutfitClick: PropTypes.func,
-  onRelatedClick: PropTypes.func,
+  onCardClick: PropTypes.func,
   onAddOutfitClick: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({
