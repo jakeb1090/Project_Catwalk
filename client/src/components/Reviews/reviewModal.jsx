@@ -75,7 +75,7 @@ class ReviewModal extends React.Component {
     const { isOpen, closeModal, submitModal, characteristics } = this.props
     const charAndId = Object.keys(characteristics).map((char, index) => {
       return (
-        <div data-testid="reviewModal" key={characteristics[char].id}>
+        <div  key={characteristics[char].id}>
           <h5>*{char}</h5>
           <input name={char} id={characteristics[char].id} value={1} type="radio" onChange={this.changeChar.bind(this)} />
           <label>Poor</label>
@@ -95,13 +95,13 @@ class ReviewModal extends React.Component {
       )
     })
     return (
-      <ReactModal isOpen={isOpen} >
-        <div>
+      <ReactModal  isOpen={isOpen} >
+        <div data-testid="reviewModal">
           <h3>Write Your Review</h3>
           <h4>{`For [product name]`} </h4>
           <div>* = mandatory field
             <h5>*Overall Rating:</h5>
-            <input name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
+            <input data-testid="ratingRadio1" name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
             <label >One Star - "Poor"</label>
 
             <input name="rating" value="2" type="radio" onChange={this.changeRating.bind(this)} />
