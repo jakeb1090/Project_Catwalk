@@ -1,5 +1,2 @@
 # Coverage Report
-1. Open coverage folder
-2. Open Icov-report
-3. Open index.html
-4. Click "Preview"
+Navigate to https://htmlpreview.github.io/?https://github.com/INGENIOUS-LY/Project_Catwalk/blob/coverage-report/coverage/lcov-report/index.html
