@@ -5,8 +5,6 @@ import { test, expect } from '@jest/globals';
 import ReviewApp from '../../components/Reviews/reviewapp';
 import '@testing-library/jest-dom';
 
-<<<<<<< HEAD
-=======
 const meta62000 = {
   product_id: '62000',
   ratings: {
@@ -389,7 +387,6 @@ const starFilters = {
   1: true, 2: true, 3: true, 4: true, 5: true,
 };
 
->>>>>>> main
 test('renders Review widget to DOM', () => {
   render(<ReviewApp />);
   const appContainer = screen.queryByTestId('reviewapp');
@@ -401,8 +398,6 @@ test('renders Product Breakdown to DOM', () => {
   const appContainer = screen.queryByTestId('productbreakdown');
   expect(appContainer).toBeInTheDocument();
 });
-<<<<<<< HEAD
-=======
 
 describe('Star Filter', () => {
   test('clicking the first star filter shows results only of that rating', async () => {
@@ -436,4 +431,3 @@ test('Average rating displays correctly', async () => {
   expect(screen.getByText('Average Rating: 4.2')).toBeInTheDocument();
 
 })
->>>>>>> main
