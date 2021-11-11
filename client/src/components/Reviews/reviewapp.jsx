@@ -1,13 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import ProductBreakdown from './breakdownProduct';
 import ReviewList from './reviewList';
 import API from './APIcalls';
+
+const ReviewWidget = styled.section`
+  background: pink;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+`;
 
 class ReviewApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 61590,
+      id: 61599,
       characteristics: {
       },
       sort: 'relevance',
@@ -104,7 +112,7 @@ class ReviewApp extends React.Component {
   toggleStarFilter(star) {
     // if all stars are on, only leave this star on
     if (this.state.filterQty === 5) {
-      this.setState(({
+      this.setState((prevState) => ({
         starFilters: {
           1: false,
           2: false,
@@ -166,28 +174,28 @@ class ReviewApp extends React.Component {
     } = this.state;
     return (
       <div data-testid="reviewapp">
-        <h4>Product Summary</h4>
-        <div>
-          {`Average Rating: ${this.averageRating()}`}
-        </div>
-        <ProductBreakdown
-          id={id}
-          starFilters={starFilters}
-          scale={characteristics}
-          ratings={ratings}
-          toggleStarFilter={this.toggleStarFilter.bind(this)}
-          filterQty={filterQty}
-          removeStarFilters={this.removeStarFilters.bind(this)}
-        />
-        <ReviewList
-          id={id}
-          reviews={reviews}
-          starFilters={starFilters}
-          sortBy={this.sortBy.bind(this)}
-          postReview={this.postReview.bind(this)}
-          putFeedback={this.putFeedback.bind(this)}
-          characteristics={characteristics}
-        />
+          <title>RATINGS & REVIEWS</title>
+        <ReviewWidget>
+          <ProductBreakdown
+            id={id}
+            avg={this.averageRating()}
+            starFilters={starFilters}
+            scale={characteristics}
+            ratings={ratings}
+            toggleStarFilter={this.toggleStarFilter.bind(this)}
+            filterQty={filterQty}
+            removeStarFilters={this.removeStarFilters.bind(this)}
+          />
+          <ReviewList
+            id={id}
+            reviews={reviews}
+            starFilters={starFilters}
+            sortBy={this.sortBy.bind(this)}
+            postReview={this.postReview.bind(this)}
+            putFeedback={this.putFeedback.bind(this)}
+            characteristics={characteristics}
+          />
+        </ReviewWidget>
       </div>
     );
   }

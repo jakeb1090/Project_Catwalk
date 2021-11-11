@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import ReviewApp from './Reviews/reviewapp';
 // import Overview from './Overview/Overview.jsx';
 import Related from './Related/Related';
 import Questions from './Questions/Questions';
+
+const AppStyle = styled.div`
+padding: 15px 50px;
+`;
+
+const WidgetTitle = styled.h4`
+  color:green;
+`;
 
 class App extends Component {
   constructor() {
@@ -31,19 +40,21 @@ class App extends Component {
     const { currentProduct, innerWidth, innerHeight } = this.state;
     return (
       <div data-testid="app">
-        <h1>Project Catwalk</h1>
-        <h3>An Ingenious-ly project</h3>
-        {/* <Overview /> */}
-        {/* <Related
-          currentProduct={currentProduct}
-          innerWidth={innerWidth}
-          innerHeight={innerHeight}
-          onRelatedClick={this.onRelatedClick}
-        />
-        <Questions
-          currentProduct={currentProduct}
-        /> */}
-        <ReviewApp id={currentProduct} />
+        <AppStyle>
+          <h1>Project Catwalk</h1>
+          <h3>An Ingenious-ly project</h3>
+          {/* <Overview /> */}
+          {/* <Related
+            currentProduct={currentProduct}
+            innerWidth={innerWidth}
+            innerHeight={innerHeight}
+            onRelatedClick={this.onRelatedClick}
+          />
+          <Questions
+            currentProduct={currentProduct}
+          /> */}
+          <ReviewApp id={currentProduct} />
+        </AppStyle>
       </div>
     );
   }
