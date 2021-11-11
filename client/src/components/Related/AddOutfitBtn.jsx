@@ -15,7 +15,7 @@ const Button = styled.button`
 
 const ButtonContext = styled.div`
   border-radius: 2px;
-  font-size: 2em;
+  font-size: 6em;
   &:hover {
     color: lightgray;
     cursor: pointer;

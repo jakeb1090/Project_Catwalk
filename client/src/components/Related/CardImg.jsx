@@ -6,16 +6,16 @@ const Picture = styled.picture`
   height: 65%;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 10%;
   display: flex;
   justify-content: center;
   background-color: white;
   border-radius: 1% 1% 0 0;
+  margin-bottom: 10%;
 `;
 
 const Image = styled.img`
-height: 100%;
-width: auto;
+  height: 100%;
+  width: auto;
 `;
 
 const CardImg = (props) => {
