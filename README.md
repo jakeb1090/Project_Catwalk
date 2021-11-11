@@ -12,15 +12,17 @@
 
 <!-- PROJECT LOGO -->
 <br />
+<!--
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/INGENIOUS-LY/Project_Catwalk/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
+-->
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Project Catwalk</h3>
 
   <p align="center">
-    project_description
+    The initial release will focus on providing the minimum viable product for our retail application. Features implemented will be constrained to the client experience which enables customers to search, browse, add to cart, and checkout
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
@@ -66,7 +68,9 @@
 
 The initial release will focus on providing the minimum viable product for our retail application. Features implemented will be constrained to the client experience which enables customers to search, browse, add to cart, and checkout
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
+<!--
+Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description` 
+-->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -87,17 +91,14 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 
 <!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+## Quick Start
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+* Install dependencies
   ```sh
-  npm install npm@latest -g
+  npm install
   ```
 
 ### Quick Start
@@ -124,8 +125,6 @@ npm run react-dev
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
