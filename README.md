@@ -84,26 +84,16 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Quick Start
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* Install dependencies
-  ```sh
-  npm install
-  ```
-
-### Quick Start
-
 1. Open two terminals
 2. In each terminal verify you are in the Project_Catwalk main directory
 3. In the first terminal run command to build using webpack
-```sh
-npm run react-dev
-```
+  ```sh
+  npm run react-dev
+  ```
 4. In the second terminal run command to start the dev server
-```sh
-npm run react-dev
-```
+  ```sh
+  npm run react-dev
+  ```
 5. In your default browser, navigate to http://localhost:3000
    
 <div id="top"></div>
@@ -134,7 +124,7 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## Team Members
 
 * []()
 * []()
