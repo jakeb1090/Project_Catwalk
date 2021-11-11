@@ -40,6 +40,7 @@ class App extends Component {
     const { currentProduct, innerWidth, innerHeight } = this.state;
     return (
       <div data-testid="app">
+<<<<<<< HEAD
         <AppStyle>
           <h1>Project Catwalk</h1>
           <h3>An Ingenious-ly project</h3>
@@ -55,6 +56,21 @@ class App extends Component {
           /> */}
           <ReviewApp id={currentProduct} />
         </AppStyle>
+=======
+        <h1>Project Catwalk</h1>
+        <h3>An Ingenious-ly project</h3>
+        {/* <Overview /> */}
+        <Related
+          currentProduct={currentProduct}
+          innerWidth={innerWidth}
+          innerHeight={innerHeight}
+          onRelatedClick={this.onRelatedClick}
+        />
+        <Questions
+          currentProduct={currentProduct}
+        />
+        <ReviewApp id={currentProduct} />
+>>>>>>> main
       </div>
     );
   }

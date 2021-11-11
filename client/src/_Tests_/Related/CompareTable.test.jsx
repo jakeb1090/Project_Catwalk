@@ -5,7 +5,16 @@ import CompareTable from '../../components/Related/CompareTable';
 import '@testing-library/jest-dom';
 
 test('should render CompareTable to the DOM', () => {
-  render(<CompareTable />);
-  const compareTable = screen.getByRole('columnheader', { name: /Current Product/i });
+  const data = [
+    ['Maximo 1000 Backpack', null, 'shoes'],
+    [null, 'Sustainably Sourced', true],
+    ['cotten', 'fabric', 'linen'],
+  ];
+  render(
+    <CompareTable
+      data={data}
+    />,
+  );
+  const compareTable = screen.getByRole('columnheader', { name: /Maximo 1000 Backpack/i });
   expect(compareTable).toBeInTheDocument();
 });

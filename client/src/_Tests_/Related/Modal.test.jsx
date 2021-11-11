@@ -1,5 +1,6 @@
 import React from 'react';
-import {render, screen, fireEvent, waitFor} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
   test,
   expect,
@@ -46,13 +47,13 @@ test('should show hide/modal', async () => {
       .getComputedStyle(screen.getByTestId(/modal/i))
       .getPropertyValue('display'),
   ).toEqual('none');
-  fireEvent.click(compareBtn);
+  userEvent.click(compareBtn);
   await waitFor(() => expect(
     window
       .getComputedStyle(screen.getByTestId(/modal/i))
       .getPropertyValue('display'),
   ).toEqual('block'));
-  fireEvent.click(screen.getByRole('button', { name: /modalClose/i }));
+  userEvent.click(screen.getByRole('button', { name: /modalClose/i }));
   expect(
     window
       .getComputedStyle(screen.getByTestId(/modal/i))
