@@ -1,8 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ReviewTile from './reviewTile';
 import ReviewModal from './reviewModal';
 
+const List = styled.div`
+  margin: 10px 0px;
+  flex: 2 1 0;
+  width: 200px;
+`
+const Tile = styled.section`
+  border-style: solid;
+  border-radius: 15%;
+  background: rebeccapurple;
+  padding: 10px;
+  margin: 10px 0px;
+`;
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -11,99 +24,105 @@ class ReviewList extends React.Component {
       qtyToRender: 2,
       rendered: 0,
       showModal: false,
-    }
+    };
   }
 
-  loadMore(event) {
-    if (this.state.qtyToRender >= this.props.reviews.length -1) {
-      this.setState((prevState) => ({
-        qtyToRender: this.props.reviews.length
-      })
-      )
-    } else {
-      this.setState((prevState) => ({
-        qtyToRender: prevState.qtyToRender + 2
-      })
-      )
-    }
+  handleSort(event) {
+    this.props.sortBy(event.target.value);
   }
 
   openModal() {
     this.setState({
-      showModal: true
-    })
+      showModal: true,
+    });
   }
+
   closeModal() {
     this.setState({
       showModal: false,
-    })
+    });
   }
 
   submitModal(reviewObject) {
     this.setState({
-      showModal: false
-    })
-    //call reviewapp API function
+      showModal: false,
+    });
+    // call reviewapp API function
     this.props.postReview(reviewObject);
   }
 
-  handleSort(event) {
-    this.props.sortBy(event.target.value)
+  loadMore() {
+    const { qtyToRender } = this.state;
+    const { reviews } = this.props;
+    if (qtyToRender >= reviews.length - 1) {
+      this.setState({
+        qtyToRender: reviews.length,
+      });
+    } else {
+      this.setState((prevState) => ({
+        qtyToRender: prevState.qtyToRender + 2,
+      }));
+    }
   }
 
   render() {
-    let { reviews, starFilters, putFeedback, characteristics } = this.props;
+    const {
+      reviews, starFilters, putFeedback, characteristics,
+    } = this.props;
     let { qtyToRender, rendered } = this.state;
     if (typeof reviews !== 'object') { return null; }
     const tile = reviews.map((review) => {
       if (
-        starFilters[review.rating] &&
-        qtyToRender > rendered) {
+        starFilters[review.rating]
+        && qtyToRender > rendered) {
         if (rendered < qtyToRender) {
-          rendered++
+          rendered++;
         }
-        return <ReviewTile
-          key={review.review_id}
-          review={review}
-          putFeedback={putFeedback} />;
+        return (
+          <Tile>
+            <ReviewTile
+              key={review.review_id}
+              review={review}
+              putFeedback={putFeedback}
+            />
+          </Tile>
+        );
       }
     });
 
     return (
-      <div data-testid="reviewlist">
+      <List data-testid="reviewlist">
+        {`Showing ${qtyToRender} of ${reviews.length} reviews, sorted by`}
+        <select data-testid="dropdown" onChange={this.handleSort.bind(this)}>
+          <option value="relevance">Relevance</option>
+          <option value="helpful">Helpfulness</option>
+          <option value="newness">Date</option>
+        </select>
         <div>
-          <h4>Review List</h4>
-          <div>
-            <button data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</button>
-            <button data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</button>
-          </div>
-          {`Number of reviews: showing ${qtyToRender} of ${reviews.length}`}
+          <button data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</button>
+          <button data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</button>
         </div>
-        <div>
-          Sorted by:
-          <select data-testid="dropdown" onChange={this.handleSort.bind(this)}>
-            <option value="relevance">Relevance</option>
-            <option value="helpful">Helpfulness</option>
-            <option value="newness">Date</option>
-          </select>
-          {tile}
-          <ReviewModal
-            isOpen={this.state.showModal}
-            characteristics={characteristics}
-            closeModal={this.closeModal.bind(this)}
-            submitModal={this.submitModal.bind(this)} />
-        </div>
-      </div>
+        {tile}
+        <ReviewModal
+          isOpen={this.state.showModal}
+          characteristics={characteristics}
+          closeModal={this.closeModal.bind(this)}
+          submitModal={this.submitModal.bind(this)}
+        />
+      </List>
     );
   }
-};
+}
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array,
-  id: PropTypes.number,
+  reviews: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
+  starFilters: PropTypes.object,
+  characteristics: PropTypes.object,
+  putFeedback: PropTypes.func,
+  postReview: PropTypes.func,
+  sortBy: PropTypes.func,
 };
-
-
 
 export default ReviewList;
 
