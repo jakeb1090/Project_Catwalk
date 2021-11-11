@@ -4,6 +4,31 @@
  */
 
 module.exports = {
+  // Automatically clear mock calls and instances between every test
+  clearMocks: true,
+
+  // Indicates whether the coverage information should be collected while executing the test
+  collectCoverage: true,
+
+  // The directory where Jest should output its coverage files
+  coverageDirectory: 'coverage',
+
+  // An array of regexp pattern strings used to skip coverage collection
+  coveragePathIgnorePatterns: [
+    // NPM
+    'node_modules',
+    // API keys
+    'server/config.js',
+    'client/config.js',
+    'client/dist/compiled/config.js',
+  ],
+
+  // Use this configuration option to add custom reporters to Jest
+  reporters: ['default', 'jest-summarizing-reporter'],
+
+  // The test environment that will be used for testing
+  testEnvironment: 'jsdom',
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -13,22 +38,8 @@ module.exports = {
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "/private/var/folders/9z/3vdkyfgs3bn__zl2ttf_ghv00000gn/T/jest_dx",
 
-  // Automatically clear mock calls and instances between every test
-  clearMocks: true,
-
-  // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
-
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
-
-  // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
@@ -98,9 +109,6 @@ module.exports = {
   // Run tests from one or more projects
   // projects: undefined,
 
-  // Use this configuration option to add custom reporters to Jest
-  reporters: ['default', 'jest-summarizing-reporter'],
-
   // Automatically reset mock state between every test
   // resetMocks: false,
 
@@ -135,9 +143,6 @@ module.exports = {
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
-
-  // The test environment that will be used for testing
-  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

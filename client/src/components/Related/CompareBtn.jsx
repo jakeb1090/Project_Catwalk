@@ -4,32 +4,26 @@ import styled from 'styled-components';
 import { MdStarOutline } from 'react-icons/md';
 
 const Button = styled.button`
+  position: absolute;
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   background-color: transparent;
   border: none;
 `;
 
-const Tip = styled.span`
-  font-size: 10px;
-  color: black;
-  border: solid 0.5px black;
-  border-radius: 2.5px;
-  padding: 1px;
-  background-color: OldLace;
-  display: none;
-`;
 const ButtonContext = styled.div`
-  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
   font-size: 2em;
+  padding-bottom: -5px;
   &:hover {
-    color: lightgray;
+    background-color: rgba(200, 200, 200, 0.5);
+    color: white;
     cursor: pointer;
-  }
-  &:hover ${Tip} {
-    display: inline;
   }
 `;
 
@@ -38,7 +32,6 @@ const CompareBtn = (props) => {
   return (
     <Button type="button" aria-label="compareBtn" onClick={(event) => onCompareProductClick(event, id)}>
       <ButtonContext>
-        <Tip>Compare Product</Tip>
         <MdStarOutline />
       </ButtonContext>
     </Button>

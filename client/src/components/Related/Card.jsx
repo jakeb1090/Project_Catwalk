@@ -25,7 +25,7 @@ const Product = styled.span`
   max-width: 320px;
   height: 90%;
   background: whitesmoke;
-  margin:  0 5px 0 0;
+  margin:  0 4px 0 4px;
   border-radius: 1%;
   left: ${({ productLeft }) => productLeft};
   transition: 0.5s;
@@ -34,15 +34,31 @@ const Product = styled.span`
   }
 `;
 
-const Title = styled.h5`
+const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  height: 25%;
+  margin: 0 10px 0 10px;
+  `;
+const Title = styled.span`
+  font-weight: 700;
+`;
+const Price = styled.span`
+  color: ${({ sale }) => (sale ? 'red;' : 'inherit;')}
+  text-decoration: ${({ sale }) => (sale ? 'line-through red;' : 'inherit;')}
+`;
 
+const SalePrice = styled.span`
+  margin-left: 10px;
 `;
 
 const Card = (props) => {
   const {
     onCompareProductClick,
     onDeleteOutfitClick,
-    onRelatedClick,
+    onCardClick,
     onAddOutfitClick,
     id,
     addOutfit,
@@ -56,10 +72,12 @@ const Card = (props) => {
     name,
     avgRating,
     features,
+    price,
+    salesPrice,
   } = product;
 
   return (
-    <Product data-testid="card" onClick={() => onRelatedClick(id)} productLeft={productLeft}>
+    <Product data-testid="card" onClick={() => onCardClick(id)} productLeft={productLeft}>
       {
         addOutfit
           ? <AddOutfitBtn onAddOutfitClick={onAddOutfitClick} />
@@ -76,8 +94,30 @@ const Card = (props) => {
                 : <DeleteBtn onDeleteOutfitClick={onDeleteOutfitClick} id={id} /> }
 
               <CardImg src={img} alt={name} />
-              <Title>{ name }</Title>
-              <RatingStars avgRating={avgRating} />
+              <Details>
+                <Title>{ name }</Title>
+                <hr style={{width: '100%'}}/>
+                {salesPrice
+                  ? (
+                    <div>
+                      <Price sale>
+                        $
+                        {price}
+                      </Price>
+                      <SalePrice>
+                        $
+                        {salesPrice}
+                      </SalePrice>
+                    </div>
+                  )
+                  : (
+                    <Price>
+                      $
+                      {price}
+                    </Price>
+                  )}
+                <RatingStars avgRating={avgRating} />
+              </Details>
             </>
           )
       }
@@ -89,7 +129,7 @@ Card.defaultProps = {
   btn: '',
   id: null,
   addOutfit: false,
-  onRelatedClick: () => {},
+  onCardClick: () => {},
   onCompareProductClick: () => {},
   onDeleteOutfitClick: () => {},
   onAddOutfitClick: () => {},
@@ -111,7 +151,7 @@ Card.propTypes = {
   id: PropTypes.number,
   addOutfit: PropTypes.bool,
   productLeft: PropTypes.string.isRequired,
-  onRelatedClick: PropTypes.func,
+  onCardClick: PropTypes.func,
   onCompareProductClick: PropTypes.func,
   onDeleteOutfitClick: PropTypes.func,
   onAddOutfitClick: PropTypes.func,

@@ -21,7 +21,7 @@ class App extends Component {
       innerWidth: 0,
       innerHeight: 0,
     };
-    this.onRelatedClick = this.onRelatedClick.bind(this);
+    this.onCardClick = this.onCardClick.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class App extends Component {
     });
   }
 
-  onRelatedClick(id) {
+  onCardClick(id) {
     this.setState({ currentProduct: id });
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
             currentProduct={currentProduct}
             innerWidth={innerWidth}
             innerHeight={innerHeight}
-            onRelatedClick={this.onRelatedClick}
+            onCardClick={this.onCardClick}
           />
           <Questions
             currentProduct={currentProduct}

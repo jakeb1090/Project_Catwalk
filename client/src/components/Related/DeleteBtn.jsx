@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
 const Button = styled.button`
+  position: absolute;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -12,12 +13,18 @@ const Button = styled.button`
 `;
 
 const ButtonContext = styled.div`
-  border-radius: 2px;
-  font-size: 2em;
-  &:hover {
-    color: lightgray;
-    cursor: pointer;
-  }
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50%;
+background-color: rgba(255, 255, 255, 0.5);
+font-size: 2em;
+padding-bottom: -5px;
+&:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+  color: white;
+  cursor: pointer;
+}
 `;
 
 const DeleteBtn = (props) => {

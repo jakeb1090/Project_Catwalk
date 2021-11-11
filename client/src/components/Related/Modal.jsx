@@ -42,6 +42,7 @@ const ButtonContext = styled.div`
 `;
 
 const Button = styled.button`
+  position: absolute;
   display: flex;
   justify-content: flex-end;
   background-color: transparent;
