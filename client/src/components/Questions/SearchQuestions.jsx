@@ -11,6 +11,7 @@ const Input = styled.input`
   width: 60%;
   font-size: 18px;
   color: gray;
+  marginBottom: 15px;
 `;
 
 // updatesearch
