@@ -48,7 +48,7 @@ class App extends Component {
             currentProduct={currentProduct}
             innerWidth={innerWidth}
             innerHeight={innerHeight}
-            onRelatedClick={this.onRelatedClick}
+            onCardClick={this.onCardClick}
           />
           <Questions
             currentProduct={currentProduct}

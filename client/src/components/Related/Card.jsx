@@ -35,10 +35,10 @@ const Product = styled.span`
 `;
 
 const Details = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
   height: 25%;
   margin: 0 10px 0 10px;
   `;
