@@ -9,8 +9,6 @@
 
 <br />
 <br />
-<br />
-<br />
 <!-- PROJECT LOGO -->
 <br />
 <!--
@@ -21,7 +19,7 @@
 -->
 
 <h3 align="center">Project Catwalk</h3>
-
+<br />
   <p align="center">
     The initial release will focus on providing the minimum viable product for our retail application. Features implemented will be constrained to the client experience which enables customers to search, browse, add to cart, and checkout
     <br />
