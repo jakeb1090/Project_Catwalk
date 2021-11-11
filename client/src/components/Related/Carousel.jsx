@@ -33,8 +33,8 @@ class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movePer: 320,
-      maxMove: ((this.props.data.length * 320) + 320) - this.props.innerWidth,
+      movePer: 328,
+      maxMove: ((this.props.data.length * 328) + 328) - (this.props.innerWidth * 1.02),
       location: 0,
       productLeft: '0',
     };
@@ -43,9 +43,10 @@ class Carousel extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { data, innerWidth } = this.props;
+    const { data, innerWidth, btn } = this.props;
+    const maxOffset = btn === 'compare' ? 320 : 0;
     if (prevProps.data !== data) {
-      this.setState({ maxMove: ((data.length * 320) + 320) - innerWidth });
+      this.setState({ maxMove: ((data.length * 328) + 328) - (innerWidth * 1.02) - maxOffset });
     }
   }
 
@@ -77,7 +78,7 @@ class Carousel extends React.Component {
     const {
       onCompareProductClick,
       onDeleteOutfitClick,
-      onRelatedClick,
+      onCardClick,
       onAddOutfitClick,
       data,
       btn,
@@ -98,7 +99,7 @@ class Carousel extends React.Component {
               key={product.id}
               id={product.id}
               productLeft={productLeft}
-              onRelatedClick={onRelatedClick}
+              onCardClick={onCardClick}
               onCompareProductClick={onCompareProductClick}
               onDeleteOutfitClick={onDeleteOutfitClick}
               product={product}
@@ -119,14 +120,14 @@ class Carousel extends React.Component {
 Carousel.defaultProps = {
   onCompareProductClick: () => {},
   onDeleteOutfitClick: () => {},
-  onRelatedClick: () => {},
+  onCardClick: () => {},
   onAddOutfitClick: () => {},
 };
 
 Carousel.propTypes = {
   onCompareProductClick: PropTypes.func,
   onDeleteOutfitClick: PropTypes.func,
-  onRelatedClick: PropTypes.func,
+  onCardClick: PropTypes.func,
   onAddOutfitClick: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({

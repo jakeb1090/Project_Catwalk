@@ -1,8 +1,10 @@
+// const compression = require('compression');
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
 
 const app = express();
+// app.use(compression());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

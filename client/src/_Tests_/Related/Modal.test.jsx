@@ -9,9 +9,9 @@ import {
   afterAll,
   afterEach,
 } from '@jest/globals';
+import '@testing-library/jest-dom';
 import Modal from '../../components/Related/Modal';
 import Related from '../../components/Related/Related';
-import '@testing-library/jest-dom';
 import server from '../utils.test';
 
 beforeAll(() => server.listen());
