@@ -1,14 +1,3 @@
-# Project_Catwalk
-The initial release will focus on providing the minimum viable product for our retail application. Features implemented will be constrained to the client experience which enables customers to search, browse, add to cart, and checkout
-
-Quick Start:
-  1. Open two terminals
-  2. In each terminal verify you are in the  Project_Catwalk main directory
-  3. In the first terminal run command npm run react-dev to build using webpack
-  4. In the second terminal run command npm run server-dev to start the dev server
-  5. In your default browser, navigate to http://localhost:3000
-<div id="top"></div>
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -19,11 +8,6 @@ Quick Start:
 -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -116,34 +100,20 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
-### Installation
+### Quick Start
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/INGENIOUS-LY/Project_Catwalk
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+1. Open two terminals
+2. In each terminal verify you are in the Project_Catwalk main directory
+3. In the first terminal run command to build using webpack
+```sh
+npm run react-dev
+```
+4. In the second terminal run command to start the dev server
+```sh
+npm run react-dev
+```
+5. In your default browser, navigate to http://localhost:3000
    
-   
-Quick Start:
-  1. Open two terminals
-  2. In each terminal verify you are in the Project_Catwalk main directory
-  3. In the first terminal run command to build using webpack
-  ```sh
-  npm run react-dev
-  ```
-  5. In the second terminal run command to start the dev server
-  ```sh
-  npm run react-dev
-  ```
-  7. In your default browser, navigate to http://localhost:3000
 <div id="top"></div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
