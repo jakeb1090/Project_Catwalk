@@ -7,8 +7,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<br />
-<br />
+
 <!-- PROJECT LOGO -->
 <br />
 <!--
