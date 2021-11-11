@@ -124,7 +124,7 @@ const QuestionElement = ({ questionData, currentProduct }) => {
             &nbsp;
             {`(${helpfulCount}) | `}
             &nbsp;
-            <ModalAddAnswer currentProduct={48395} />
+            <ModalAddAnswer currentProduct={currentProduct} />
           </QuestionInteraction>
         </TwoThirds>
       </QuestionContainer>

@@ -119,7 +119,7 @@ const ModalAddPhotos = () => {
 
   return (
     <div>
-      <input type="button" onClick={toggleModal} value="Add Question +" />
+      <input type="button" onClick={toggleModal} value="Add Photos" />
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -129,7 +129,7 @@ const ModalAddPhotos = () => {
         <FormStyle>
           <form onSubmit={handleSubmit}>
             <h2>
-              Ask Your Question
+              Add Photos
               <div>
                 about the&nbsp;
                 <span className="product">
@@ -138,32 +138,13 @@ const ModalAddPhotos = () => {
               </div>
             </h2>
 
-            <label htmlFor="question">
-              <span>
-                Your Question
-                <Red> *</Red>
-              </span>
-              <textarea onChange={handleChange} name="question" rows={10} cols={50} id="question" placeholder="Up to 1000 characters" />
-            </label>
-
-            <label htmlFor="nickname">
-              <span>
-                What is your nickname?
-                <Red> *</Red>
-              </span>
-              <input onChange={handleChange} type="text" name="nickname" id="nickname" placeholder="jack543!" />
-            </label>
-
             <label htmlFor="email">
               <span>
                 Your email
                 <Red> *</Red>
               </span>
               <input onChange={handleChange} type="text" id="nickname" name="email" placeholder="Why did you like the product or not?" />
-              <Red>* Required</Red>
-              <div className="notice">
-                For authentication reasons, you will not be emailed
-              </div>
+
             </label>
             <div className="footer">
               <button type="submit">Submit</button>
