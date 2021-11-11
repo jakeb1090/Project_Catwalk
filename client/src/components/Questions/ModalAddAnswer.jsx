@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getProduct, addQuestion } from '../../utils';
+import ModalAddPhotos from './ModalAddPhotos';
 
 const customStyles = {
   content: {
@@ -72,7 +73,7 @@ const Red = styled.span`
 `;
 
 Modal.setAppElement('#app');
-const ModalAddQuestion = ({ currentProduct }) => {
+const ModalAddAnswer = ({ currentProduct, questionBody }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -120,8 +121,13 @@ const ModalAddQuestion = ({ currentProduct }) => {
   };
 
   return (
-    <div>
-      <input type="button" onClick={toggleModal} value="Add Question +" />
+    <span>
+      <span
+        aria-hidden="true"
+        onClick={toggleModal}
+      >
+        Add Answer
+      </span>
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -131,21 +137,22 @@ const ModalAddQuestion = ({ currentProduct }) => {
         <FormStyle>
           <form onSubmit={handleSubmit}>
             <h2>
-              Ask Your Question
+              Submit Your Answer
               <div>
-                about the&nbsp;
-                <span className="product">
-                  {product}
-                </span>
+                {product}
+                {`${':'} `}
+                { questionBody }
+                &nbsp;
+                <span className="product" />
               </div>
             </h2>
 
             <label htmlFor="question">
               <span>
-                Your Question
+                Your Answer
                 <Red> *</Red>
               </span>
-              <textarea onChange={handleChange} name="question" rows={10} cols={50} id="question" placeholder="Up to 1000 characters" />
+              <textarea onChange={handleChange} name="question" maxLength={1000} rows={10} cols={50} id="question" placeholder="Up to 1000 characters" />
             </label>
 
             <label htmlFor="nickname">
@@ -153,7 +160,7 @@ const ModalAddQuestion = ({ currentProduct }) => {
                 What is your nickname?
                 <Red> *</Red>
               </span>
-              <input onChange={handleChange} type="text" name="nickname" id="nickname" placeholder="jack543!" />
+              <input onChange={handleChange} type="text" name="nickname" id="nickname" maxLength={60} placeholder="jack543!" />
             </label>
 
             <label htmlFor="email">
@@ -161,7 +168,7 @@ const ModalAddQuestion = ({ currentProduct }) => {
                 Your email
                 <Red> *</Red>
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="email" placeholder="Why did you like the product or not?" />
+              <input onChange={handleChange} type="text" maxLength={60} id="nickname" name="email" placeholder="Why did you like the product or not?" />
               <Red>* Required</Red>
               <div className="notice">
                 For authentication reasons, you will not be emailed
@@ -177,13 +184,11 @@ const ModalAddQuestion = ({ currentProduct }) => {
             </div>
           </form>
         </FormStyle>
+        <ModalAddPhotos />
       </Modal>
-    </div>
+
+    </span>
   );
 };
 
-ModalAddQuestion.propTypes = {
-  currentProduct: PropTypes.number.isRequired,
-};
-
-export default ModalAddQuestion;
+export default ModalAddAnswer;

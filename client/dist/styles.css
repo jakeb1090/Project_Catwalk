@@ -7,7 +7,6 @@
   /* width: 80%; */
   margin: 30px;
   padding: 20px;
-  margin-bottom: 300px;
 }
 
 .button-container {
@@ -23,7 +22,6 @@
   margin-top: 13px;
   margin-left: 20px;
   border: 1px solid gray;
-  border-radius: 14px;
 }
 
 .error-text {

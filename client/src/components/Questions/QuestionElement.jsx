@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { markQuestionHelpful, addQuestion } from '../../utils';
+import ModalAddAnswer from './ModalAddAnswer';
+
 // import PropTypes from 'prop-types';
 
 // { answerer_name, body, date, helpfulness, id, photos }
@@ -90,7 +92,7 @@ const QuestionElement = ({ questionData, currentProduct }) => {
     // eslint-disable-next-line no-console
     console.log('added');
     const data = {
-      body: 'but are the sleeves organic thought?',
+      body: 'but are the sleeves organic though?',
       name: 'Tyler Durden',
       email: 'r123@paper.com',
       product_id: currentProduct,
@@ -123,7 +125,7 @@ const QuestionElement = ({ questionData, currentProduct }) => {
             &nbsp;
             {`(${helpfulCount}) | `}
             &nbsp;
-            <span aria-hidden="true" role="link" onClick={handleAddQuestion}>Add Question</span>
+            <ModalAddAnswer currentProduct={currentProduct} />
           </QuestionInteraction>
         </TwoThirds>
       </QuestionContainer>

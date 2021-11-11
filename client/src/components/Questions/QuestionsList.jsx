@@ -71,7 +71,7 @@ class QuestionsList extends React.Component {
           <Input>
             {
               answersN !== null
-                ? <input type="button" value="LOAD MORE ANSWERS" onClick={() => { loadMoreAnswers(); }} />
+                ? <input type="button" value="Load More Answers" onClick={() => { loadMoreAnswers(); }} />
                 : <span />
             }
           </Input>
@@ -87,6 +87,7 @@ QuestionsList.defaultProps = {
 };
 
 QuestionsList.propTypes = {
+  onFetchQuestions: PropTypes.func.isRequired,
   currentSearch: PropTypes.string.isRequired,
   questionsN: PropTypes.number.isRequired,
   answersN: PropTypes.number,
