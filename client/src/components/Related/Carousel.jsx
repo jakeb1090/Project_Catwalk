@@ -82,13 +82,14 @@ class Carousel extends React.Component {
       onAddOutfitClick,
       data,
       btn,
+      innerWidth,
     } = this.props;
 
     return (
       <Container data-testid="carousel">
         {/* Add Outfit Button Card */}
         {
-        location > 0
+        location > 0 && innerWidth >= 480
           ? <ReverseArrow onClick={this.leftMover} />
           : null
         }
@@ -108,7 +109,7 @@ class Carousel extends React.Component {
           ))}
         </Slider>
         {
-        location < maxMove
+        location < maxMove && innerWidth >= 480
           ? <ForwardArrow onClick={this.rightMover} />
           : null
         }

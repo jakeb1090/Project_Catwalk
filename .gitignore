@@ -14,3 +14,6 @@ client/dist/compiled/config.js
 
 ## Jest Coverage Report ##
 coverage/
+
+## AWS cert
+project-catwalk.cer
