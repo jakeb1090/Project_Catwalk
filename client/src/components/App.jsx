@@ -6,7 +6,7 @@ import Related from './Related/Related';
 import Questions from './Questions/Questions';
 
 const AppStyle = styled.div`
-padding: 15px 50px;
+  padding: 15px 50px;
 `;
 
 const WidgetTitle = styled.h4`
@@ -44,16 +44,15 @@ class App extends Component {
           <h1>Project Catwalk</h1>
           <h3>An Ingenious-ly project</h3>
           {/* <Overview /> */}
-          <Related
+          {/* <Related
             currentProduct={currentProduct}
             innerWidth={innerWidth}
             innerHeight={innerHeight}
-            onCardClick={this.onCardClick}
-          />
+            onCardClick={this.onCardClick} */}
           <Questions
             currentProduct={currentProduct}
           />
-          <ReviewApp id={currentProduct} />
+          {/* <ReviewApp id={currentProduct} /> */}
         </AppStyle>
       </div>
     );

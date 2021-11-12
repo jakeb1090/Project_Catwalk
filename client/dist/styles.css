@@ -2,11 +2,11 @@
 .questions-widget {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: flex-start;
   /* border: 1px solid gray; */
   /* width: 80%; */
-  margin: 30px;
-  padding: 20px;
+  /* margin: 30px; */
+  /* padding: 20px; */
 }
 
 .button-container {
@@ -16,7 +16,7 @@
 }
 
 .img {
-  max-height: 180px;
+  max-height: 200px;
   width: auto;
   margin-bottom: 13px;
   margin-top: 13px;

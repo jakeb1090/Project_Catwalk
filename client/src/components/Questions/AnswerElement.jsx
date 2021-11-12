@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 import {
   markAnswerHelpful,
   reportAnswer,
@@ -12,6 +13,7 @@ const Body = styled.div`
   margin-bottom: 12px;
   margin-left: 10px;
   color: darkslategray;
+  margin: 20px;
 `;
 
 const Interactive = styled.span`
@@ -24,13 +26,14 @@ const Interactive = styled.span`
   }
 `;
 
-const AnswerElement = ({ data, questionId, onFetchAnswers }) => {
+const AnswerElement = ({
+  data, questionId, onFetchAnswers, id,
+}) => {
   const {
     answerer_name: answererName,
     body,
     date,
     helpfulness,
-    id,
     photos,
   } = data;
 
@@ -43,7 +46,7 @@ const AnswerElement = ({ data, questionId, onFetchAnswers }) => {
     setHelpfulCount(helpfulness);
   }, []);
 
-  const formattedDate = date.slice(0, 10);
+  const formattedDate = moment(date).format('ll');
 
   const handleHelpful = () => {
     if (!hasUpVoted) {

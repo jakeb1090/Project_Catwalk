@@ -27,7 +27,7 @@ const Answers = styled.div`
 `;
 
 const AnswerInnerList = (props) => {
-  const [answerArray, setAnswerArray] = useState([]);
+  // const [answerArray, setAnswerArray] = useState([]);
 
   const {
     answers,
@@ -57,6 +57,7 @@ const AnswerInnerList = (props) => {
                 onFetchQuestions={onFetchQuestions}
                 onFetchAnswers={onFetchAnswers}
                 key={`AE${answer.answer_id}`}
+                id={answer.answer_id}
               />
             ))
           }

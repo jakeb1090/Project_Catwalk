@@ -4,6 +4,8 @@ import API_KEY from '../config';
 
 const headers = { headers: { Authorization: API_KEY } };
 
+console.log(headers);
+
 const getPaginatedProducts = (page, count) => axios.get(`/products/?page=${page}&count=${count}`, headers);
 
 const getProduct = (id) => axios.get(`/products/${id}`, headers);
@@ -41,15 +43,15 @@ const markQuestionHelpful = (questionId) => {
 };
 
 const markAnswerHelpful = (answerId) => {
-  return axios.put(`/qa/answers/${answerId}/helpful`, headers);
+  return axios.put(`/qa/answers/${answerId}/helpful`);
 };
 
 const reportQuestion = (questionId) => {
-  return axios.put(`/qa/questions/${questionId}/report`);
+  return axios.put(`/qa/questions/${questionId}/report`, headers);
 };
 
 const reportAnswer = (answerId) => {
-  return axios.put(`/qa/answers/${answerId}/report`);
+  return axios.put(`/qa/answers/${answerId}/report`, headers);
 };
 
 export {

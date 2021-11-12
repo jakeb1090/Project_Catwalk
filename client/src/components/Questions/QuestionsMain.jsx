@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
-// import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import API_KEY from '../../../config';
 import QuestionsList from './QuestionsList';
@@ -95,18 +94,18 @@ class QuestionsMain extends React.Component {
           <div className="button-container">
 
             {
-              questionsN < questionList.length
-                ? (
-                  <input
-                    type="button"
-                    value="More Answered Questions"
-                    onClick={(prevState) =>
-                      // eslint-disable-next-line implicit-arrow-linebreak
-                      this.setState({ ...prevState, questionsN: questionsN + 2 })}
-                  />
-                )
-                : <div />
-            }
+                questionsN < questionList.length
+                  ? (
+                    <input
+                      type="button"
+                      value="More Answered Questions"
+                      onClick={(prevState) =>
+                        // eslint-disable-next-line implicit-arrow-linebreak
+                        this.setState({ ...prevState, questionsN: questionsN + 2 })}
+                    />
+                  )
+                  : <div />
+              }
             <ModalAddQuestion currentProduct={currentProduct} appElement="app" />
           </div>
         </div>

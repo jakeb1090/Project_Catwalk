@@ -80,6 +80,7 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
   const [email, setEmail] = useState('');
   const [product, setProduct] = useState('');
   const [isValid, setIsValid] = useState(true);
+  const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
     getProduct(currentProduct)
@@ -105,6 +106,10 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
       question,
       nickname,
       email,
+    };
+
+    const handleAddPhotos = (photoArray) => {
+      setPhotos(photoArray);
     };
 
     if (!questionObj.email.includes('@')) {
@@ -174,6 +179,11 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
                 For authentication reasons, you will not be emailed
               </div>
             </label>
+            <ul>
+              {
+                photos.map((photo) => <li key={photo.splice(4, 9)}>{photo}</li>)
+              }
+            </ul>
             <div className="footer">
               <button type="submit">Submit</button>
               {
@@ -184,11 +194,20 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
             </div>
           </form>
         </FormStyle>
-        <ModalAddPhotos />
+        <ModalAddPhotos currentProduct={currentProduct} product={product} />
       </Modal>
 
     </span>
   );
+};
+
+ModalAddAnswer.defaultProps = {
+
+};
+
+ModalAddAnswer.propTypes = {
+  questionBody: PropTypes.string.isRequired,
+  currentProduct: PropTypes.number.isRequired,
 };
 
 export default ModalAddAnswer;
