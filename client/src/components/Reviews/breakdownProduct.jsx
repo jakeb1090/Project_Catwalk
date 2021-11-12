@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import RatingBreakdown from './breakdownRating';
 import ScaleBreakdown from './breakdownScale';
@@ -6,7 +8,7 @@ import ScaleBreakdown from './breakdownScale';
 const Breakdown = styled.div`
   flex: 1 1 0;
   align-items: flex-end;
-  padding: 10px;
+  padding: 0px 50px;
 `;
 
 const FlexRow = styled.div`
@@ -20,9 +22,11 @@ const Average = styled.h2`
   margin:0px;
 `;
 
+
+
 const ProductBreakdown = function (props) {
   const {
-    id, scale, ratings, starFilters, filterQty,
+    id, scale, ratings, starFilters, filterQty, scaleSelections
   } = props;
   const clickHandler = function (event) {
     event.preventDefault();
@@ -40,37 +44,40 @@ const ProductBreakdown = function (props) {
       totalReviews={totalReviews}
       toggleStarFilter={props.toggleStarFilter}
       removeStarFilters={props.removeStarFilter}
+      TextButton={props.TextButton}
     />
   ));
-  const starRating = Object.keys(starFilters).map((star) => (
-    <div>
-      {star <= Math.floor(props.avg) ? '★' : '☆'}
-    </div>
-  ))
+  const avgRating = () => {
+    var avgStar = '';
+    for (let i = 1; i <= 5; i++) {
+      if (props.avg > i) {
+        avgStar += '★'
+      } else if (i - props.avg > 1) {
+        avgStar += '☆'
+      } else {
+        avgStar += "1/2"
+      }
+    }
+    return avgStar;
+  };
 
   return (
     <Breakdown data-testid="productbreakdown">
+      {/* <i class="fas fa-question-circle"></i> */}
       <FlexRow>
         <Average>{props.avg}</Average>
-        <FlexRow>{starRating}</FlexRow>
+        <FlexRow>{avgRating()}</FlexRow>
+        <FontAwesomeIcon icon={faCoffee} />
       </FlexRow>
       <div>{stars}</div>
       {filterQty < 5
         ? (
           <div>
-            <br />
-            {`Filter: currently showing ${Object.keys(starFilters).map((star) => {
-              if (starFilters[star]) {
-                return star;
-              }
-            })} star reviews`}
-            <br />
             <button onClick={clickHandler}>Clear Filters</button>
           </div>
         )
-        : null}
-      <h4>Characteristics</h4>
-      <ScaleBreakdown scale={scale} />
+        : <br></br>}
+      <ScaleBreakdown scale={scale} scaleSelections={scaleSelections} />
     </Breakdown>
   );
 };

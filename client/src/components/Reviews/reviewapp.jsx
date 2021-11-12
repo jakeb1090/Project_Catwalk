@@ -5,7 +5,6 @@ import ReviewList from './reviewList';
 import API from './APIcalls';
 
 const ReviewWidget = styled.section`
-  background: pink;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -172,9 +171,47 @@ class ReviewApp extends React.Component {
     const {
       id, starFilters, filterQty, reviews, characteristics, ratings,
     } = this.state;
+    const scaleSelections = {
+      Size: [
+        'A size too small',
+        '½ a size too small',
+        'Perfect',
+        '½ a size too big',
+        'A size too wide'],
+      Width: [
+        'Too narrow',
+        'Slightly narrow',
+        'Perfect',
+        'Slightly wide',
+        'Too wide'],
+      Comfort: [
+        'Uncomfortable',
+        'Slightly uncomfortable',
+        'Ok',
+        'Comfortable',
+        'Perfect'],
+      Quality: [
+        'Poor',
+        'Below average',
+        'What I expected',
+        'Pretty great',
+        'Perfect'],
+      Length: [
+        'Runs Short',
+        'Runs slightly short',
+        'Perfect',
+        'Runs slightly long',
+        'Runs long'],
+      Fit: [
+        'Runs tight',
+        'Runs slightly tight',
+        'Perfect',
+        'Runs slightly long',
+        'Runs long'],
+    };
     return (
       <div data-testid="reviewapp">
-          <title>RATINGS & REVIEWS</title>
+        <title>RATINGS & REVIEWS</title>
         <ReviewWidget>
           <ProductBreakdown
             id={id}
@@ -185,6 +222,8 @@ class ReviewApp extends React.Component {
             toggleStarFilter={this.toggleStarFilter.bind(this)}
             filterQty={filterQty}
             removeStarFilters={this.removeStarFilters.bind(this)}
+            scaleSelections={scaleSelections}
+            TextButton={this.props.TextButton}
           />
           <ReviewList
             id={id}
@@ -194,6 +233,8 @@ class ReviewApp extends React.Component {
             postReview={this.postReview.bind(this)}
             putFeedback={this.putFeedback.bind(this)}
             characteristics={characteristics}
+            scaleSelections={scaleSelections}
+            TextButton={this.props.TextButton}
           />
         </ReviewWidget>
       </div>

@@ -10,9 +10,8 @@ const List = styled.div`
   width: 200px;
 `
 const Tile = styled.section`
-  border-style: solid;
-  border-radius: 15%;
-  background: rebeccapurple;
+  border-bottom: solid;
+  background: #e1bfff;
   padding: 10px;
   margin: 10px 0px;
 `;
@@ -67,7 +66,7 @@ class ReviewList extends React.Component {
 
   render() {
     const {
-      reviews, starFilters, putFeedback, characteristics,
+      reviews, starFilters, putFeedback, characteristics, TextButton
     } = this.props;
     let { qtyToRender, rendered } = this.state;
     if (typeof reviews !== 'object') { return null; }
@@ -79,13 +78,15 @@ class ReviewList extends React.Component {
           rendered++;
         }
         return (
-          <Tile>
-            <ReviewTile
-              key={review.review_id}
-              review={review}
-              putFeedback={putFeedback}
-            />
-          </Tile>
+          // <Tile key={review.review_id}>
+          <ReviewTile
+            key={review.review_id}
+            review={review}
+            putFeedback={putFeedback}
+            Tile={Tile}
+            TextButton={TextButton}
+          />
+          // </Tile>
         );
       }
     });
