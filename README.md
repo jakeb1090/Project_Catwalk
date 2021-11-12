@@ -91,7 +91,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
   ```
 4. In the second terminal run command to start the dev server
   ```sh
-  npm run react-dev
+  npm run server-dev
   ```
 5. In your default browser, navigate to http://localhost:3000
    
