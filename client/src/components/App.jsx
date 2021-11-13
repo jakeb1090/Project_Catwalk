@@ -7,7 +7,7 @@ import Related from './Related/Related';
 import Questions from './Questions/Questions';
 
 const AppStyle = styled.div`
-  margin: ${({ mobile }) => (mobile ? '60px 0' : '60px 15%')}
+  margin: ${({ mobile }) => (mobile ? '60px 0' : '60px 15%')};
   padding: 15px 50px;
   font-family: Georgia, serif;
 `;
@@ -62,7 +62,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61577,
+      currentProduct: 61590,
       currentObject: {},
       innerWidth: 0,
     };
