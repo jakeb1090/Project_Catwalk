@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { markQuestionHelpful, addQuestion } from '../../utils';
+import { markQuestionHelpful, addQuestion, addAnswer } from '../../utils';
 import ModalAddAnswer from './ModalAddAnswer';
 
 // import PropTypes from 'prop-types';
@@ -53,7 +53,7 @@ const QuestionBody = styled.div`
   margin-left: 10px;
 `;
 
-const QuestionElement = ({ questionData, currentProduct }) => {
+const QuestionElement = ({ questionData, currentProduct, BorderedButton }) => {
   const [hasUpVoted, setHasUpVoted] = useState(false);
   const [helpfulCount, setHelpfulCount] = useState(false);
 
@@ -61,9 +61,6 @@ const QuestionElement = ({ questionData, currentProduct }) => {
     question_body: questionBody,
     question_helpfulness: questionHelpfulness,
     question_id: questionId,
-    // asker_name: askerName,
-    // question_date: questionDate,
-    // reported,
   } = questionData;
 
   useEffect(() => {
@@ -107,12 +104,17 @@ const QuestionElement = ({ questionData, currentProduct }) => {
       });
   };
 
+  const handleAddAnswer = (data) => {
+    addAnswer(data);
+  };
+
   // const addhandleAddPhoto = () => {
 
   // };
 
   return (
     <div className="question-element" data-testid="question-element">
+      <hr width="60%" />
       <QuestionContainer>
         <Title>
           <h2>Q:</h2>
@@ -128,7 +130,12 @@ const QuestionElement = ({ questionData, currentProduct }) => {
             &nbsp;
             {`(${helpfulCount}) | `}
             &nbsp;
-            <ModalAddAnswer currentProduct={currentProduct} questionBody={questionBody} />
+            <ModalAddAnswer
+              currentProduct={currentProduct}
+              questionBody={questionBody}
+              BorderedButton={BorderedButton}
+              handleAddAnswer={handleAddAnswer}
+            />
           </QuestionInteraction>
         </TwoThirds>
       </QuestionContainer>

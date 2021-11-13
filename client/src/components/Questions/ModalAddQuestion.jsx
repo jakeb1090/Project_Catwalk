@@ -72,11 +72,9 @@ const Red = styled.span`
 `;
 
 Modal.setAppElement('#app');
-const ModalAddQuestion = ({ currentProduct }) => {
+const ModalAddQuestion = ({ currentProduct, BorderedButton }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [question, setQuestion] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [email, setEmail] = useState('');
+  const [questionData, setQuestionData] = useState('');
   const [product, setProduct] = useState('');
   const [isValid, setIsValid] = useState(true);
 
@@ -92,25 +90,19 @@ const ModalAddQuestion = ({ currentProduct }) => {
   };
 
   const handleChange = (e) => {
-    e.target.name === 'question' ? setQuestion(e.target.value) : null;
-    e.target.name === 'nickname' ? setNickname(e.target.value) : null;
-    e.target.name === 'email' ? setEmail(e.target.value) : null;
+    setQuestionData({
+      ...questionData,
+      [e.target.name]: e.target.value,
+    });
     setIsValid(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const payload = {
-      body: question,
-      name: nickname,
-      email,
-      product_id: currentProduct,
-    };
-
-    if (!payload.email.includes('@')) {
+    if (!questionData.email.includes('@')) {
       setIsValid(false);
     } else {
-      addQuestion(payload)
+      addQuestion(questionData)
         .then((res) => {
           console.log(res);
         })
@@ -122,7 +114,12 @@ const ModalAddQuestion = ({ currentProduct }) => {
 
   return (
     <div>
-      <input type="button" onClick={toggleModal} value="Add Question +" />
+      <BorderedButton
+        onClick={toggleModal}
+        data-testid="addQuestionButton"
+      >
+        Add Question +
+      </BorderedButton>
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -146,7 +143,14 @@ const ModalAddQuestion = ({ currentProduct }) => {
                 Your Question
                 <Red> *</Red>
               </span>
-              <textarea onChange={handleChange} name="question" rows={10} cols={50} id="question" placeholder="Up to 1000 characters" />
+              <textarea
+                onChange={handleChange}
+                name="questionBody"
+                rows={10}
+                cols={50}
+                id="question"
+                placeholder="Up to 1000 characters"
+              />
             </label>
 
             <label htmlFor="nickname">
@@ -154,7 +158,13 @@ const ModalAddQuestion = ({ currentProduct }) => {
                 What is your nickname?
                 <Red> *</Red>
               </span>
-              <input onChange={handleChange} type="text" name="nickname" id="nickname" placeholder="jack543!" />
+              <input
+                onChange={handleChange}
+                type="text"
+                name="nickname"
+                id="nickname"
+                placeholder="jack543!"
+              />
             </label>
 
             <label htmlFor="email">
@@ -162,18 +172,28 @@ const ModalAddQuestion = ({ currentProduct }) => {
                 Your email
                 <Red> *</Red>
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="email" placeholder="Why did you like the product or not?" />
+              <input
+                onChange={handleChange}
+                type="text"
+                id="nickname"
+                name="email"
+                placeholder="Why did you like the product or not?"
+              />
               <Red>* Required</Red>
               <div className="notice">
                 For authentication reasons, you will not be emailed
               </div>
             </label>
+
             <div className="footer">
-              <button type="submit">Submit</button>
               {
                 isValid
                   ? <span />
-                  : <span className="error-text">You must enter the following: valid email</span>
+                  : (
+                    <span className="error-text">
+                      You must enter the following: valid email
+                    </span>
+                  )
               }
             </div>
           </form>
