@@ -51,7 +51,7 @@ const ProductBreakdown = function ({ id, avg, scale, ratings, starFilters, filte
       {/* <i class="fas fa-question-circle"></i> */}
       <FlexRow>
         <Average>{avg}</Average>
-        <FlexRow>{RatingStars({ avg })}</FlexRow>
+        <RatingStars value={avg} />
         {/* <FlexRow>{utils.avgRating(avg)}</FlexRow> */}
       </FlexRow>
       <div>{stars}</div>
