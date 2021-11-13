@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { markQuestionHelpful, addQuestion } from '../../utils';
+import { markQuestionHelpful, addQuestion, addAnswer } from '../../utils';
 import ModalAddAnswer from './ModalAddAnswer';
 
 // import PropTypes from 'prop-types';
@@ -61,9 +61,6 @@ const QuestionElement = ({ questionData, currentProduct, BorderedButton }) => {
     question_body: questionBody,
     question_helpfulness: questionHelpfulness,
     question_id: questionId,
-    // asker_name: askerName,
-    // question_date: questionDate,
-    // reported,
   } = questionData;
 
   useEffect(() => {
@@ -105,6 +102,10 @@ const QuestionElement = ({ questionData, currentProduct, BorderedButton }) => {
         // eslint-disable-next-line no-console
         console.log(error);
       });
+  };
+
+  const handleAddAnswer = () => {
+    
   };
 
   // const addhandleAddPhoto = () => {

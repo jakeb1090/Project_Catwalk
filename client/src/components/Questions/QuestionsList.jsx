@@ -1,17 +1,15 @@
-import React from 'react';
 // eslint-disable-next-line import/no-named-as-default
+/* eslint-disable react/prop-types */
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import QAContainer from './QAContainer';
-
-// props.currentProductId
 
 const QList = styled.div`
 display: flex;
 flex-direction: column;
 max-height: 550px;
 overflow: scroll;
-font-family: "arial", "monospace";
 margin-top: 30px;
 overflow-x: hidden
 `;

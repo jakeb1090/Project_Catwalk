@@ -111,9 +111,9 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Scope
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Specific improvements discussed and anticipated by the business team are contained in the scope, to include Item Detail Pages and Performan optimization. Maintenance of the catalog and internal systems are out of scope for this project. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -128,7 +128,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 <br>
 
-### 2. Related Items / Comparison module
+### 2. Related Items / Comparison Module
 - Renders a carousel of product images related to current selection
 - 'Outfit Feature' allows users to create a custom group of products
 
@@ -146,7 +146,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 <br>
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [commit history](https://github.com/INGENIOUS-LY/Project_Catwalk/commits/main) for a full list of design and component implementations.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -155,7 +155,7 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 
 * Annie Johnston - Project Manager / Ratings & Review
 * Zach Lentz - Overview / Related Products
-* Jake Borromeo - Q&A Widget
+* Jake Borromeo - Q&A Component
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

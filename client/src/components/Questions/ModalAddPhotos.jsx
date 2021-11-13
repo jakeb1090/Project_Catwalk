@@ -183,6 +183,8 @@ const ModalAddPhotos = ({ product, onAddPhotos }) => {
 
             <div className="footer">
               <button type="submit">Submit</button>
+              <button type="submit" onClick={toggleModal}>Cancel</button>
+
             </div>
           </form>
         </FormStyle>
