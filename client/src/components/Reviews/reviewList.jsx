@@ -8,13 +8,6 @@ const List = styled.div`
   margin: 10px 0px;
   flex: 2 1 0;
   width: 200px;
-`
-const Tile = styled.section`
-  border-style: solid;
-  border-radius: 15%;
-  background: rebeccapurple;
-  padding: 10px;
-  margin: 10px 0px;
 `;
 
 class ReviewList extends React.Component {
@@ -67,7 +60,7 @@ class ReviewList extends React.Component {
 
   render() {
     const {
-      reviews, starFilters, putFeedback, characteristics,
+      reviews, starFilters, putFeedback, characteristics, TextButton, scaleSelections, BorderedButton
     } = this.props;
     let { qtyToRender, rendered } = this.state;
     if (typeof reviews !== 'object') { return null; }
@@ -79,28 +72,27 @@ class ReviewList extends React.Component {
           rendered++;
         }
         return (
-          <Tile>
-            <ReviewTile
-              key={review.review_id}
-              review={review}
-              putFeedback={putFeedback}
-            />
-          </Tile>
+          <ReviewTile
+            key={review.review_id}
+            review={review}
+            putFeedback={putFeedback}
+            TextButton={TextButton}
+          />
         );
       }
     });
 
     return (
       <List data-testid="reviewlist">
-        {`Showing ${qtyToRender} of ${reviews.length} reviews, sorted by`}
+        {`${reviews.length} reviews, sorted by`}
         <select data-testid="dropdown" onChange={this.handleSort.bind(this)}>
           <option value="relevance">Relevance</option>
           <option value="helpful">Helpfulness</option>
           <option value="newness">Date</option>
         </select>
         <div>
-          <button data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</button>
-          <button data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</button>
+          <BorderedButton data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</BorderedButton>
+          <BorderedButton data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</BorderedButton>
         </div>
         {tile}
         <ReviewModal
@@ -108,6 +100,8 @@ class ReviewList extends React.Component {
           characteristics={characteristics}
           closeModal={this.closeModal.bind(this)}
           submitModal={this.submitModal.bind(this)}
+          scaleSelections={scaleSelections}
+          ModalButton={this.props.ModalButton}
         />
       </List>
     );

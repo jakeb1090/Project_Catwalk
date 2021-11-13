@@ -1,11 +1,11 @@
 import React from 'react';
+import './graphics/icons';
 import styled from 'styled-components';
 import ProductBreakdown from './breakdownProduct';
 import ReviewList from './reviewList';
 import API from './APIcalls';
 
 const ReviewWidget = styled.section`
-  background: pink;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -15,7 +15,7 @@ class ReviewApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 61599,
+      id: 61590,
       characteristics: {
       },
       sort: 'relevance',
@@ -38,9 +38,19 @@ class ReviewApp extends React.Component {
     this.fetchAPI();
   }
 
+  componentDidUpdate(prevProps) {
+    const { id } = this.props;
+    if (prevProps.id !== id) {
+      this.fetchAPI();
+    }
+  }
+
   fetchAPI() {
+    this.setState({
+      id: this.props.id,
+    });
     const { id, sort } = this.state;
-    API.getReviews(id, sort)
+    API.getReviews(this.props.id, sort)
       .then((res) => {
         this.setState({
           reviews: res.data.results,
@@ -172,9 +182,49 @@ class ReviewApp extends React.Component {
     const {
       id, starFilters, filterQty, reviews, characteristics, ratings,
     } = this.state;
+    const { TextButton, BorderedButton, ModalButton, WidgetTitle } = this.props;
+    const scaleSelections = {
+      Size: [
+        'A size too small',
+        '½ a size too small',
+        'Perfect',
+        '½ a size too big',
+        'A size too wide'],
+      Width: [
+        'Too narrow',
+        'Slightly narrow',
+        'Perfect',
+        'Slightly wide',
+        'Too wide'],
+      Comfort: [
+        'Uncomfortable',
+        'Slightly uncomfortable',
+        'Ok',
+        'Comfortable',
+        'Perfect'],
+      Quality: [
+        'Poor',
+        'Below average',
+        'What I expected',
+        'Pretty great',
+        'Perfect'],
+      Length: [
+        'Runs Short',
+        'Runs slightly short',
+        'Perfect',
+        'Runs slightly long',
+        'Runs long'],
+      Fit: [
+        'Runs tight',
+        'Runs slightly tight',
+        'Perfect',
+        'Runs slightly long',
+        'Runs long'],
+    };
+
     return (
       <div data-testid="reviewapp">
-          <title>RATINGS & REVIEWS</title>
+        <WidgetTitle>RATINGS & REVIEWS</WidgetTitle>
         <ReviewWidget>
           <ProductBreakdown
             id={id}
@@ -185,6 +235,8 @@ class ReviewApp extends React.Component {
             toggleStarFilter={this.toggleStarFilter.bind(this)}
             filterQty={filterQty}
             removeStarFilters={this.removeStarFilters.bind(this)}
+            scaleSelections={scaleSelections}
+            TextButton={TextButton}
           />
           <ReviewList
             id={id}
@@ -194,6 +246,10 @@ class ReviewApp extends React.Component {
             postReview={this.postReview.bind(this)}
             putFeedback={this.putFeedback.bind(this)}
             characteristics={characteristics}
+            scaleSelections={scaleSelections}
+            TextButton={TextButton}
+            BorderedButton={BorderedButton}
+            ModalButton={ModalButton}
           />
         </ReviewWidget>
       </div>
