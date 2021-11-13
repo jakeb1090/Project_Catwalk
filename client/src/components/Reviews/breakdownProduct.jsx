@@ -4,6 +4,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import RatingBreakdown from './breakdownRating';
 import ScaleBreakdown from './breakdownScale';
+import utils from './utils';
 
 const Breakdown = styled.div`
   flex: 1 1 0;
@@ -24,13 +25,11 @@ const Average = styled.h2`
 
 
 
-const ProductBreakdown = function (props) {
-  const {
-    id, scale, ratings, starFilters, filterQty, scaleSelections
-  } = props;
+const ProductBreakdown = function ({ id, avg, scale, ratings, starFilters, filterQty, scaleSelections, toggleStarFilter, removeStarFilters, TextButton }) {
+
   const clickHandler = function (event) {
     event.preventDefault();
-    props.removeStarFilters();
+    removeStarFilters();
   };
   const totalReviews = Object.values(ratings).reduce((a, b) => Number(a) + Number(b))
 
@@ -42,31 +41,18 @@ const ProductBreakdown = function (props) {
       star={rating}
       qty={ratings[rating]}
       totalReviews={totalReviews}
-      toggleStarFilter={props.toggleStarFilter}
-      removeStarFilters={props.removeStarFilter}
-      TextButton={props.TextButton}
+      toggleStarFilter={toggleStarFilter}
+      removeStarFilters={removeStarFilters}
+      TextButton={TextButton}
     />
   ));
-  const avgRating = () => {
-    var avgStar = '';
-    for (let i = 1; i <= 5; i++) {
-      if (props.avg > i) {
-        avgStar += '★'
-      } else if (i - props.avg > 1) {
-        avgStar += '☆'
-      } else {
-        avgStar += "1/2"
-      }
-    }
-    return avgStar;
-  };
 
   return (
     <Breakdown data-testid="productbreakdown">
       {/* <i class="fas fa-question-circle"></i> */}
       <FlexRow>
-        <Average>{props.avg}</Average>
-        <FlexRow>{avgRating()}</FlexRow>
+        <Average>{avg}</Average>
+        <FlexRow>{utils.avgRating(avg)}</FlexRow>
       </FlexRow>
       <div>{stars}</div>
       {filterQty < 5

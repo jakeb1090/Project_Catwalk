@@ -113,7 +113,7 @@ class App extends Component {
             currentObject={currentObject}
           />
           <hr />
-          {/* <Related
+          <Related
             currentProduct={currentProduct}
             innerWidth={mobile ? innerWidth : innerWidth * 0.85}
             onCardClick={this.onCardClick}
@@ -123,7 +123,7 @@ class App extends Component {
           <Questions
             currentProduct={currentProduct}
             WidgetTitle={WidgetTitle}
-          /> */}
+          />
           <hr />
           <ReviewApp
             id={currentProduct}

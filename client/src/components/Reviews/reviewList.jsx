@@ -43,18 +43,21 @@ class ReviewList extends React.Component {
   }
 
   openModal() {
+    document.body.style.overflow = 'hidden';
     this.setState({
       showModal: true,
     });
   }
 
   closeModal() {
+    document.body.style.overflow = 'visible';
     this.setState({
       showModal: false,
     });
   }
 
   submitModal(reviewObject) {
+    document.body.style.overflow = 'visible';
     this.setState({
       showModal: false,
     });
