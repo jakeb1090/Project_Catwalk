@@ -4,23 +4,22 @@ import QuestionsMain from './QuestionsMain';
 
 const Questions = ({
   currentProduct,
-  textButton,
-  borderedButton,
+  BorderedButton,
+  WidgetTitle,
 }) => (
   <div data-testid="questions" className="questions">
+    <WidgetTitle>QUESTIONS & ANSWERS</WidgetTitle>
     <QuestionsMain
       // currentProduct={currentProduct}
       currentProduct={currentProduct}
-      textButton={textButton}
-      borderedButton={borderedButton}
+      BorderedButton={BorderedButton}
+      WidgetTitle={WidgetTitle}
     />
   </div>
 );
 
 Questions.propTypes = {
   currentProduct: PropTypes.number.isRequired,
-  textButton: PropTypes.number.isRequired,
-  borderedButton: PropTypes.number.isRequired,
 };
 
 export default Questions;

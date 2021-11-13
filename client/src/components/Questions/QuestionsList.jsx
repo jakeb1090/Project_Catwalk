@@ -11,6 +11,9 @@ display: flex;
 flex-direction: column;
 max-height: 550px;
 overflow: scroll;
+font-family: "arial", "monospace";
+margin-top: 30px;
+overflow-x: hidden
 `;
 
 const Input = styled.div`
@@ -35,6 +38,8 @@ class QuestionsList extends React.Component {
       questionList,
       currentSearch,
       onFetchQuestions,
+      BorderedButton,
+      TextButton,
     } = this.props;
     let outputList = [];
 
@@ -69,9 +74,16 @@ class QuestionsList extends React.Component {
             ))
           }
           <Input>
+
             {
               answersN !== null
-                ? <input type="button" value="Load More Answers" onClick={() => { loadMoreAnswers(); }} />
+                ? (
+                  <BorderedButton
+                    onClick={() => { loadMoreAnswers(); }}
+                  >
+                    Load More Answers
+                  </BorderedButton>
+                )
                 : <span />
             }
           </Input>

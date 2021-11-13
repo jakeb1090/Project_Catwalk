@@ -72,7 +72,7 @@ const Red = styled.span`
 `;
 
 Modal.setAppElement('#app');
-const ModalAddQuestion = ({ currentProduct }) => {
+const ModalAddQuestion = ({ currentProduct, BorderedButton }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -122,7 +122,12 @@ const ModalAddQuestion = ({ currentProduct }) => {
 
   return (
     <div>
-      <input type="button" onClick={toggleModal} value="Add Question +" />
+      <BorderedButton
+        onClick={toggleModal}
+        data-testid="addQuestionButton"
+      >
+        Add Question +
+      </BorderedButton>
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -169,7 +174,6 @@ const ModalAddQuestion = ({ currentProduct }) => {
               </div>
             </label>
             <div className="footer">
-              <button type="submit">Submit</button>
               {
                 isValid
                   ? <span />

@@ -55,7 +55,7 @@ const Nav = styled.nav`
 `;
 
 const Ingenious = styled.h1`
-  margin 10px;
+  margin: 10px;
 `;
 
 class App extends Component {
@@ -117,6 +117,10 @@ class App extends Component {
           <hr />
           <Questions
             currentProduct={currentProduct}
+            TextButton={TextButton}
+            BorderedButton={BorderedButton}
+            ModalButton={ModalButton}
+            WidgetTitle={WidgetTitle}
           />
           <hr />
           <ReviewApp

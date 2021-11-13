@@ -133,28 +133,52 @@ const ModalAddPhotos = ({ product, onAddPhotos }) => {
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photoOne" placeholder="...photo.jpg" />
+              <input
+                onChange={handleChange}
+                type="text"
+                id="nickname"
+                name="photoOne"
+                placeholder="...photo.jpg"
+              />
             </label>
 
             <label htmlFor="photo-2">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photoTwo" placeholder="...photo-2.jpg" />
+              <input
+                onChange={handleChange}
+                type="text"
+                id="nickname"
+                name="photoTwo"
+                placeholder="...photo-2.jpg"
+              />
             </label>
 
             <label htmlFor="photo-1">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photoThree" placeholder="...photo-3.jpg" />
+              <input
+                onChange={handleChange}
+                type="text"
+                id="nickname"
+                name="photoThree"
+                placeholder="...photo-3.jpg"
+              />
             </label>
 
             <label htmlFor="photo-1">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photoFour" placeholder="...photo-4.jpg" />
+              <input
+                onChange={handleChange}
+                type="text"
+                id="nickname"
+                name="photoFour"
+                placeholder="...photo-4.jpg"
+              />
             </label>
 
             <div className="footer">

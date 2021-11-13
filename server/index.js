@@ -196,7 +196,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
   const url = `${baseURL}/qa/questions/${question_id}/report`;
   const { authorization } = req.headers;
   const headers = { authorization };
-
+  console.log(url);
   axios.put(url, { headers })
     .then((response) => {
       res.status(response.status).send(response);
