@@ -7,6 +7,7 @@ const RatingStars = () => (
 );
 
 export default RatingStars;
+
 // https://bashooka.com/coding/css-star-rating-examples/#:~:text=A%20star%20rating%20comprises%20of,previous%20stars%20should%20be%20filled.
 // .star-ratings-css {
 //   unicode-bidi: bidi-override;

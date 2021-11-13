@@ -40,7 +40,7 @@ const Details = styled.div`
   justify-content: space-around;
   align-items: start;
   height: 25%;
-  margin: 0 10px 0 10px;
+  margin-right: 20px;
   `;
 const Title = styled.span`
   font-weight: 700;
