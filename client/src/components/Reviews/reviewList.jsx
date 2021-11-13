@@ -10,6 +10,24 @@ const List = styled.div`
   width: 200px;
 `;
 
+const Dropdown = styled.select`
+  border: none;
+  margin: 0px 5px;
+  font-size: 16px;
+  font-family: 'Georgia';
+  font-weight: bold;
+  color: #2aa343;
+`;
+
+const Option = styled.option`
+border: none;
+margin: 0px 5px;
+font-size: 16px;
+font-family: 'Georgia';
+font-weight: bold;
+color: blue;
+`;
+
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +78,8 @@ class ReviewList extends React.Component {
 
   render() {
     const {
-      reviews, starFilters, putFeedback, characteristics, TextButton, scaleSelections, BorderedButton
+      reviews, starFilters, putFeedback, characteristics,
+      TextButton, scaleSelections, BorderedButton
     } = this.props;
     let { qtyToRender, rendered } = this.state;
     if (typeof reviews !== 'object') { return null; }
@@ -85,11 +104,11 @@ class ReviewList extends React.Component {
     return (
       <List data-testid="reviewlist">
         {`${reviews.length} reviews, sorted by`}
-        <select data-testid="dropdown" onChange={this.handleSort.bind(this)}>
-          <option value="relevance">Relevance</option>
-          <option value="helpful">Helpfulness</option>
-          <option value="newness">Date</option>
-        </select>
+        <Dropdown data-testid="dropdown" onChange={this.handleSort.bind(this)}>
+          <Option value="relevance">Relevance</Option>
+          <Option value="helpful">Helpfulness</Option>
+          <Option value="newness">Date</Option>
+        </Dropdown>
         <div>
           <BorderedButton data-testid="loadMoreButton" onClick={this.loadMore.bind(this)}>Load More</BorderedButton>
           <BorderedButton data-testid="addReviewButton" onClick={this.openModal.bind(this)}>Add Review</BorderedButton>
