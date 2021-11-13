@@ -73,7 +73,7 @@ const Red = styled.span`
 `;
 
 Modal.setAppElement('#app');
-const ModalAddAnswer = ({ currentProduct, questionBody }) => {
+const ModalAddAnswer = ({ currentProduct, questionBody, handleAddAnswer }) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [question, setQuestion] = useState('');
   // const [nickname, setNickname] = useState('');
@@ -186,7 +186,7 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
               }
             </ul>
             <div className="footer">
-              <button type="submit">Submit</button>
+              <button type="submit" onClick={handleAddAnswer}>Submit</button>
               {
                 isValid
                   ? <span />

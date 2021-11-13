@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unused-state */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -13,19 +13,14 @@ class QuestionsMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentQuestionId: 38,
-      currentProduct: 0,
       questionList: [],
       searchText: '',
       questionsN: 2,
       answersN: 2,
-      questionListLength: 0,
-      isModalOpen: false,
     };
     this.updateSearch = this.updateSearch.bind(this);
     this.updateAnswersN = this.updateAnswersN.bind(this);
     this.fetchQuestions = this.fetchQuestions.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -42,21 +37,15 @@ class QuestionsMain extends React.Component {
 
   fetchQuestions(productId) {
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
-
     const params = {
       product_id: productId,
-      // page: 2,
       count: 10,
     };
-
     const headers = {
       'Content-Type': 'application/json',
       Authorization: API_KEY,
     };
-
-    const config = { params, headers };
-
-    axios.get(url, config)
+    axios.get(url, { params, headers })
       .then((res) => {
         // eslint-disable-next-line react/no-unused-state
         this.setState({ questionList: res.data.results });
@@ -71,12 +60,14 @@ class QuestionsMain extends React.Component {
     this.setState({ answersN: null });
   }
 
-  toggleModal() {
-    this.setState((prevState) => ({ isModalOpen: !prevState }));
-  }
-
   render() {
-    const { currentProduct } = this.props;
+    const {
+      currentProduct,
+      TextButton,
+      BorderedButton,
+      WidgetTitle,
+    } = this.props;
+
     const {
       searchText,
       questionsN,
@@ -87,7 +78,7 @@ class QuestionsMain extends React.Component {
     return (
       <div>
         <div className="test-components" />
-        <div data-testid="questions-widget" className="questions-widget">
+        <div data-testid="questions-widget" className="questions-widget" style={{ zIndex: 1400 }}>
           <SearchQuestions updateSearch={this.updateSearch} />
           <QuestionsList
             currentProductId={currentProduct}
@@ -97,23 +88,32 @@ class QuestionsMain extends React.Component {
             loadMoreAnswers={this.updateAnswersN}
             questionList={questionList}
             onFetchQuestions={this.fetchQuestions}
+            TextButton={TextButton}
+            BorderedButton={BorderedButton}
+            WidgetTitle={WidgetTitle}
           />
           <div className="button-container">
 
             {
                 questionsN < questionList.length
                   ? (
-                    <input
+                    <BorderedButton
                       type="button"
                       value="More Answered Questions"
                       onClick={(prevState) =>
                         // eslint-disable-next-line implicit-arrow-linebreak
                         this.setState({ ...prevState, questionsN: questionsN + 2 })}
-                    />
+                    >
+                      More Answered Questions
+                    </BorderedButton>
                   )
                   : <div />
               }
-            <ModalAddQuestion currentProduct={currentProduct} appElement="app" />
+            <ModalAddQuestion
+              currentProduct={currentProduct}
+              BorderedButton={BorderedButton}
+              appElement="app"
+            />
           </div>
         </div>
       </div>

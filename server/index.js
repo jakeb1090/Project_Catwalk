@@ -196,7 +196,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
   const url = `${baseURL}/qa/questions/${question_id}/report`;
   const { authorization } = req.headers;
   const headers = { authorization };
-
+  console.log(url);
   axios.put(url, { headers })
     .then((response) => {
       res.status(response.status).send(response);
@@ -220,5 +220,27 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
       res.send(error);
     });
 });
+
+//Ratings & Reviews
+// app.get('/reviews', (req, res) => {
+//   axios({
+//     method: 'get',
+//     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews',
+//     params: req.params,
+//     headers: req.headers,
+//   });
+// });
+
+// app.get('/reviews', (req, res) => {
+
+// });
+
+// app.post('/reviews', (req, res) => {
+
+// });
+
+// app.put('/reviews', (req, res) => {
+
+// });
 
 module.exports = app;

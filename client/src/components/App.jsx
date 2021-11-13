@@ -40,7 +40,11 @@ const ModalButton = styled.button`
 `;
 
 const WidgetTitle = styled.h4`
-  color:green;
+  color: #696969;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: lighter;
+  font-size: 20px;
+  margin: 0px;
 `;
 
 const Nav = styled.nav`
@@ -56,14 +60,14 @@ const Nav = styled.nav`
 `;
 
 const Ingenious = styled.h1`
-  margin 10px;
+  margin: 10px;
 `;
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61577,
+      currentProduct: 61593,
       currentObject: {},
       innerWidth: 0,
     };
@@ -127,6 +131,10 @@ class App extends Component {
           <hr />
           <Questions
             currentProduct={currentProduct}
+            WidgetTitle={WidgetTitle}
+            TextButton={TextButton}
+            BorderedButton={BorderedButton}
+            ModalButton={ModalButton}
           />
           <hr ref={this.reviewRef} />
           <ReviewApp
