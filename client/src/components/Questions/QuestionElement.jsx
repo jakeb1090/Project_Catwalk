@@ -18,7 +18,6 @@ const QuestionContainer = styled.div`
   a {
     color: slategray;
   }
-
 `;
 
 const Title = styled.div`
@@ -108,6 +107,10 @@ const QuestionElement = ({ questionData, currentProduct }) => {
       });
   };
 
+  // const addhandleAddPhoto = () => {
+
+  // };
+
   return (
     <div className="question-element" data-testid="question-element">
       <QuestionContainer>
@@ -125,7 +128,7 @@ const QuestionElement = ({ questionData, currentProduct }) => {
             &nbsp;
             {`(${helpfulCount}) | `}
             &nbsp;
-            <ModalAddAnswer currentProduct={currentProduct} />
+            <ModalAddAnswer currentProduct={currentProduct} questionBody={questionBody} />
           </QuestionInteraction>
         </TwoThirds>
       </QuestionContainer>

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getProduct, addQuestion } from '../../utils';
 
 const customStyles = {
   content: {
@@ -27,6 +26,7 @@ const FormStyle = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    width: 250px;
     height: 30px;
     font-size: 15px;
     border-radius: 6px;
@@ -63,26 +63,25 @@ const FormStyle = styled.div`
     flex-direction: row;
     justify-content: space-between;
   }
-
 `;
 
-const Red = styled.span`
-  font-weight: bold;
-  color: red;
+const Image = styled.div`
+  height: 120px;
+  width: auto;
+  margin-bottom: 13px;
+  margin-top: 13px;
+  margin-left: 20px;
+  border: 1px solid gray;
 `;
 
 Modal.setAppElement('#app');
 
-const ModalAddPhotos = () => {
+const ModalAddPhotos = ({ product, onAddPhotos }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [question, setQuestion] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [email, setEmail] = useState('');
-  const [product, setProduct] = useState('');
-  const [isValid, setIsValid] = useState(true);
+  // const [product, setProduct] = useState('');
+  const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    //
   }, []);
 
   const toggleModal = () => {
@@ -90,31 +89,18 @@ const ModalAddPhotos = () => {
   };
 
   const handleChange = (e) => {
-    e.target.name === 'question' ? setQuestion(e.target.value) : null;
-    e.target.name === 'nickname' ? setNickname(e.target.value) : null;
-    e.target.name === 'email' ? setEmail(e.target.value) : null;
-    setIsValid(true);
+    const imgName = e.target.name;
+    setPhotos([
+      ...photos,
+      { [imgName]: e.target.value },
+    ]);
+    console.log(photos);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const questionObj = {
-      question,
-      nickname,
-      email,
-    };
-
-    if (!questionObj.email.includes('@')) {
-      setIsValid(false);
-    } else {
-      addQuestion(questionObj)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    onAddPhotos(photos);
+    toggleModal();
   };
 
   return (
@@ -133,32 +119,57 @@ const ModalAddPhotos = () => {
               <div>
                 about the&nbsp;
                 <span className="product">
-                  {product}
+                  { product }
                 </span>
               </div>
             </h2>
-
-            <label htmlFor="email">
+            {
+              // eslint-disable-next-line react/no-array-index-key
+              photos.length > 0
+                ? <Image><img src={photos[0].photoOne} alt="cool" /></Image>
+                : <span />
+            }
+            <label htmlFor="photo-1">
               <span>
-                Your email
-                <Red> *</Red>
+                Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="email" placeholder="Why did you like the product or not?" />
-
+              <input onChange={handleChange} type="text" id="nickname" name="photoOne" placeholder="...photo.jpg" />
             </label>
+
+            <label htmlFor="photo-2">
+              <span>
+                Image URL
+              </span>
+              <input onChange={handleChange} type="text" id="nickname" name="photoTwo" placeholder="...photo-2.jpg" />
+            </label>
+
+            <label htmlFor="photo-1">
+              <span>
+                Image URL
+              </span>
+              <input onChange={handleChange} type="text" id="nickname" name="photoThree" placeholder="...photo-3.jpg" />
+            </label>
+
+            <label htmlFor="photo-1">
+              <span>
+                Image URL
+              </span>
+              <input onChange={handleChange} type="text" id="nickname" name="photoFour" placeholder="...photo-4.jpg" />
+            </label>
+
             <div className="footer">
               <button type="submit">Submit</button>
-              {
-                isValid
-                  ? <span />
-                  : <span className="error-text">You must enter the following: valid email</span>
-              }
             </div>
           </form>
         </FormStyle>
       </Modal>
     </div>
   );
+};
+
+ModalAddPhotos.propTypes = {
+  product: PropTypes.string.isRequired,
+  onAddPhotos: PropTypes.func.isRequired,
 };
 
 export default ModalAddPhotos;
