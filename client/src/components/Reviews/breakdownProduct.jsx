@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import RatingBreakdown from './breakdownRating';
 import ScaleBreakdown from './breakdownScale';
 import utils from './utils';
+import RatingStars from '../Common/RatingStars';
 
 const Breakdown = styled.div`
   flex: 1 1 0;
@@ -22,8 +23,6 @@ const Average = styled.h2`
   font-size: 100px;
   margin:0px;
 `;
-
-
 
 const ProductBreakdown = function ({ id, avg, scale, ratings, starFilters, filterQty, scaleSelections, toggleStarFilter, removeStarFilters, TextButton }) {
 
@@ -52,7 +51,8 @@ const ProductBreakdown = function ({ id, avg, scale, ratings, starFilters, filte
       {/* <i class="fas fa-question-circle"></i> */}
       <FlexRow>
         <Average>{avg}</Average>
-        <FlexRow>{utils.avgRating(avg)}</FlexRow>
+        <FlexRow>{RatingStars({ avg })}</FlexRow>
+        {/* <FlexRow>{utils.avgRating(avg)}</FlexRow> */}
       </FlexRow>
       <div>{stars}</div>
       {filterQty < 5
