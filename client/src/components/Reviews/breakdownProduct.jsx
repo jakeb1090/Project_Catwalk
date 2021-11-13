@@ -67,7 +67,6 @@ const ProductBreakdown = function (props) {
       <FlexRow>
         <Average>{props.avg}</Average>
         <FlexRow>{avgRating()}</FlexRow>
-        <FontAwesomeIcon icon={faCoffee} />
       </FlexRow>
       <div>{stars}</div>
       {filterQty < 5

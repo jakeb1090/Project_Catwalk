@@ -1,4 +1,5 @@
 import React from 'react';
+import './graphics/icons';
 import styled from 'styled-components';
 import ProductBreakdown from './breakdownProduct';
 import ReviewList from './reviewList';
@@ -14,7 +15,7 @@ class ReviewApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 61599,
+      id: 61590,
       characteristics: {
       },
       sort: 'relevance',
@@ -37,9 +38,19 @@ class ReviewApp extends React.Component {
     this.fetchAPI();
   }
 
+  componentDidUpdate(prevProps) {
+    const { id } = this.props;
+    if (prevProps.id !== id) {
+      this.fetchAPI();
+    }
+  }
+
   fetchAPI() {
+    this.setState({
+      id: this.props.id,
+    });
     const { id, sort } = this.state;
-    API.getReviews(id, sort)
+    API.getReviews(this.props.id, sort)
       .then((res) => {
         this.setState({
           reviews: res.data.results,
@@ -171,6 +182,7 @@ class ReviewApp extends React.Component {
     const {
       id, starFilters, filterQty, reviews, characteristics, ratings,
     } = this.state;
+    const { TextButton, BorderedButton, ModalButton, WidgetTitle } = this.props;
     const scaleSelections = {
       Size: [
         'A size too small',
@@ -209,9 +221,10 @@ class ReviewApp extends React.Component {
         'Runs slightly long',
         'Runs long'],
     };
+
     return (
       <div data-testid="reviewapp">
-        <title>RATINGS & REVIEWS</title>
+        <WidgetTitle>RATINGS & REVIEWS</WidgetTitle>
         <ReviewWidget>
           <ProductBreakdown
             id={id}
@@ -223,7 +236,7 @@ class ReviewApp extends React.Component {
             filterQty={filterQty}
             removeStarFilters={this.removeStarFilters.bind(this)}
             scaleSelections={scaleSelections}
-            TextButton={this.props.TextButton}
+            TextButton={TextButton}
           />
           <ReviewList
             id={id}
@@ -234,7 +247,9 @@ class ReviewApp extends React.Component {
             putFeedback={this.putFeedback.bind(this)}
             characteristics={characteristics}
             scaleSelections={scaleSelections}
-            TextButton={this.props.TextButton}
+            TextButton={TextButton}
+            BorderedButton={BorderedButton}
+            ModalButton={ModalButton}
           />
         </ReviewWidget>
       </div>

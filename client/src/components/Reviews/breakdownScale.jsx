@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Characteristics = styled.div`
-  padding: 20px 0px;
+  // padding: 10px 0px;
   line-height: 300%;
 `;
 
@@ -18,8 +18,9 @@ const Icon = styled.div`
   height: 0.5em;
 }
 &:after {
-  content: '▲';
+  content: '▼';
   justify-content: end;
+  margin-top: -22px;
   align-items: center;
   position:absolute;
   top:0; bottom:0;
@@ -33,7 +34,6 @@ const FlexRow = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1em;
 `;
 
 

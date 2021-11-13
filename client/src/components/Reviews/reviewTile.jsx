@@ -1,16 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// import checkmark from './graphics/checkmark.jpeg'
-// I need to make sure 'jpeg' is an accepted file format
 
-// const TextButton = styled.button`
-// background-color: #e1bfff;
-// border: white;
-// text-align: center;
-// font-size: 16px;
-// text-decoration: underline;
-// `;
+const Tile = styled.section`
+  border-bottom: solid;
+  padding: 10px;
+  margin: 10px 0px;
+`;
 
 const Line = styled.div`
 padding: 2% 0px;
@@ -26,7 +22,7 @@ const BoldLine = styled(Line)`
 `;
 
 const ReviewTile = (props) => {
-  const { review, putFeedback, Tile, TextButton } = props;
+  const { review, putFeedback, TextButton } = props;
 
   // date garbage
   const year = review.date.slice(0, 4);
@@ -59,18 +55,18 @@ const ReviewTile = (props) => {
 
       <BoldLine>{review.summary}</BoldLine>
       <Line>{review.body}</Line>
-      <Line>
+      <div>
         {review.recommend
           ? (
-            <div>
+            <Line>
               ✓ I recommend this product
-            </div>
+            </Line>
           )
           : null}
-      </Line>
-      <Line>
+      </div>
+      <div>
         {review.response ? `Response from seller: ${review.response}` : null}
-      </Line>
+      </div>
       <div>
         Helpful?
         <TextButton data-testid="helpfulButton" name="helpful" onClick={handleClick}>
