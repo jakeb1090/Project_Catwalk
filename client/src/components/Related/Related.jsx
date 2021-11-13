@@ -1,52 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Carousel from './Carousel';
 import Modal from './Modal';
-import {
-  // getPaginatedProducts,
-  getProduct,
-  getProductStyles,
-  getProductRelated,
-  getReviewsMeta,
-} from '../../utils';
-
-const Title = styled.h4`
-
-`;
-
-const objectBuilder = (products) => {
-  const related = Promise.all(products.map(async (product) => {
-    const relation = {
-      id: product,
-      img: '',
-      name: '',
-      original_price: '',
-      sales_price: null,
-      avgRating: null,
-      features: [],
-    };
-    await Promise.all([getProduct(product), getProductStyles(product), getReviewsMeta(product)])
-      .then(([productResponse, styleResponse, reviewsMetaResponse]) => {
-        let { data } = productResponse;
-        relation.name = data.name;
-        relation.features = data.features;
-
-        const result = styleResponse.data.results[0];
-        relation.img = result.photos[0].url;
-        relation.price = result.original_price;
-        relation.salesPrice = result.sale_price;
-
-        data = reviewsMetaResponse.data;
-        const avg = Object.values(data.ratings).reduce((prev, curr) => (
-          Number(prev) + Number(curr)
-        ), 0) / (Object.values(data.ratings).length || 1);
-        relation.avgRating = Math.floor(avg / 0.25) * 0.25;
-      });
-    return relation;
-  }));
-  return related;
-};
+import { getProductRelated } from '../../utils';
+import helpers from '../../helpers';
 
 class Related extends Component {
   constructor(props) {
@@ -155,13 +112,13 @@ class Related extends Component {
     getProductRelated(currentProduct)
       .then((response) => {
         const { data } = response;
-        objectBuilder(data)
+        helpers.objectBuilder(data)
           .then((related) => {
             this.setState({ related });
           });
       })
       .then(() => {
-        objectBuilder([currentProduct])
+        helpers.objectBuilder([currentProduct])
           .then((product) => {
             this.setState({ currentProduct: product[0] });
           });
@@ -184,7 +141,7 @@ class Related extends Component {
     const {
       showModal, compareData, related, outfit, loading,
     } = this.state;
-    const { onCardClick, innerWidth, innerHeight } = this.props;
+    const { onCardClick, innerWidth, innerHeight, WidgetTitle } = this.props;
     return (
       <div data-testid="related">
         {loading
@@ -196,7 +153,7 @@ class Related extends Component {
                 showModal={showModal}
                 data={compareData}
               />
-              <Title>Related Products</Title>
+              <WidgetTitle>RELATED PRODUCTS</WidgetTitle>
               <Carousel
                 onCompareProductClick={this.onCompareProductClick}
                 onCardClick={onCardClick}
@@ -205,7 +162,7 @@ class Related extends Component {
                 innerWidth={innerWidth}
                 innerHeight={innerHeight}
               />
-              <Title>Your Outfit</Title>
+              <WidgetTitle>YOUR OUTFIT</WidgetTitle>
               <Carousel
                 onAddOutfitClick={this.onAddOutfitClick}
                 onDeleteOutfitClick={this.onDeleteOutfitClick}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import helpers from '../helpers';
 import { getProduct } from '../utils';
 import ReviewApp from './Reviews/reviewapp';
 import Overview from './Overview/Overview';
@@ -71,28 +72,34 @@ class App extends Component {
       innerWidth: 0,
     };
     this.onCardClick = this.onCardClick.bind(this);
+    this.onReviewsClick = this.onReviewsClick.bind(this);
+    this.reviewRef = React.createRef();
   }
 
   componentDidMount() {
     const { currentProduct } = this.state;
     const { innerWidth } = window;
-    getProduct(currentProduct)
-      .then((data) => {
+    helpers.objectBuilder([currentProduct])
+      .then((product) => {
         this.setState({
-          currentObject: data.data,
+          currentObject: product[0],
           innerWidth,
         });
       });
   }
 
   onCardClick(id) {
-    getProduct(id)
-      .then((data) => {
+    helpers.objectBuilder([id])
+      .then((product) => {
         this.setState({
-          currentObject: data.data,
+          currentObject: product[0],
         });
       });
     this.setState({ currentProduct: id });
+  }
+
+  onReviewsClick() {
+    this.reviewRef.current.scrollIntoView();
   }
 
   render() {
@@ -111,13 +118,15 @@ class App extends Component {
           <Overview
             mobile={mobile}
             currentObject={currentObject}
+            onReviewsClick={this.onReviewsClick}
           />
           <hr />
           <Related
+            WidgetTitle={WidgetTitle}
             currentProduct={currentProduct}
+            currentObject={currentObject}
             innerWidth={mobile ? innerWidth : innerWidth * 0.85}
             onCardClick={this.onCardClick}
-            WidgetTitle={WidgetTitle}
           />
           <hr />
           <Questions
@@ -127,7 +136,7 @@ class App extends Component {
             BorderedButton={BorderedButton}
             ModalButton={ModalButton}
           />
-          <hr />
+          <hr ref={this.reviewRef} />
           <ReviewApp
             id={currentProduct}
             TextButton={TextButton}
