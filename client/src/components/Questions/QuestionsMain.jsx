@@ -33,6 +33,13 @@ class QuestionsMain extends React.Component {
     this.fetchQuestions(currentProduct);
   }
 
+  componentDidUpdate(prevProps) {
+    const { currentProduct } = this.props;
+    if (prevProps.currentProduct !== currentProduct) {
+      this.fetchQuestions(currentProduct);
+    }
+  }
+
   fetchQuestions(productId) {
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/';
 

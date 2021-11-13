@@ -27,16 +27,13 @@ const ButtonContext = styled.div`
   }
 `;
 
-const ReverseArrow = (props) => {
-  const { onClick } = props;
-  return (
-    <Button type="button" aria-label="reverseArrow" onClick={onClick}>
-      <ButtonContext>
-        <MdArrowForwardIos />
-      </ButtonContext>
-    </Button>
-  );
-};
+const ReverseArrow = ({ onClick }) => (
+  <Button type="button" aria-label="reverseArrow" onClick={onClick}>
+    <ButtonContext>
+      <MdArrowForwardIos />
+    </ButtonContext>
+  </Button>
+);
 
 ReverseArrow.propTypes = {
   onClick: PropTypes.func.isRequired,
