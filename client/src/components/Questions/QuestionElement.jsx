@@ -104,8 +104,8 @@ const QuestionElement = ({ questionData, currentProduct, BorderedButton }) => {
       });
   };
 
-  const handleAddAnswer = () => {
-    
+  const handleAddAnswer = (data) => {
+    addAnswer(data);
   };
 
   // const addhandleAddPhoto = () => {
@@ -134,6 +134,7 @@ const QuestionElement = ({ questionData, currentProduct, BorderedButton }) => {
               currentProduct={currentProduct}
               questionBody={questionBody}
               BorderedButton={BorderedButton}
+              handleAddAnswer={handleAddAnswer}
             />
           </QuestionInteraction>
         </TwoThirds>
