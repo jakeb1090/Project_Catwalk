@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import { MdArrowForwardIos } from 'react-icons/md';
 
 const Button = styled.button`
-  position: absolute;
+position: absolute;
   margin-left: calc(100% - 3em);
   background-color: transparent;
   border: none;
+  z-index: 3;
 `;
 
 const ButtonContext = styled.div`

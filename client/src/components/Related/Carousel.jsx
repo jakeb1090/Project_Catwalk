@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Card from './Card';
-import ForwardArrow from './ForwardArrow';
-import ReverseArrow from './ReverseArrow';
+import ForwardArrow from '../Common/ForwardArrow';
+import ReverseArrow from '../Common/ReverseArrow';
 
 const Container = styled.main`
   display: flex;
@@ -11,11 +11,9 @@ const Container = styled.main`
   align-items: center;
   width: 100%;
   height: 450px;
-  margin: auto;
-  padding: 5px;
   position: relative;
   z-index: 1;
-  `;
+`;
 
 const Slider = styled.section`
   display: flex;
@@ -34,7 +32,7 @@ class Carousel extends React.Component {
     super(props);
     this.state = {
       movePer: 328,
-      maxMove: ((this.props.data.length * 328) + 328) - (this.props.innerWidth * 1.02),
+      maxMove: 0,
       location: 0,
       productLeft: '0',
     };
@@ -44,9 +42,9 @@ class Carousel extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { data, innerWidth, btn } = this.props;
-    const maxOffset = btn === 'compare' ? 320 : 0;
+    const maxOffset = (btn !== 'compare' ? 328 : 0);
     if (prevProps.data !== data) {
-      this.setState({ maxMove: ((data.length * 328) + 328) - (innerWidth * 1.02) - maxOffset });
+      this.setState({ maxMove: ((data.length * 328) + maxOffset) - (innerWidth) });
     }
   }
 
@@ -82,34 +80,35 @@ class Carousel extends React.Component {
       onAddOutfitClick,
       data,
       btn,
-      innerWidth,
     } = this.props;
 
     return (
       <Container data-testid="carousel">
-        {/* Add Outfit Button Card */}
         {
-        location > 0 && innerWidth >= 480
+        location > 0
           ? <ReverseArrow onClick={this.leftMover} />
           : null
         }
         <Slider>
           {btn !== 'compare' && <Card onAddOutfitClick={onAddOutfitClick} productLeft={productLeft} addOutfit />}
-          {data.map((product) => (
-            <Card
-              key={product.id}
-              id={product.id}
-              productLeft={productLeft}
-              onCardClick={onCardClick}
-              onCompareProductClick={onCompareProductClick}
-              onDeleteOutfitClick={onDeleteOutfitClick}
-              product={product}
-              btn={btn}
-            />
-          ))}
+          {data.map((product, i) => {
+            const addend = i;
+            return (
+              <Card
+                key={product.id + addend * 3.33}
+                id={product.id}
+                productLeft={productLeft}
+                onCardClick={onCardClick}
+                onCompareProductClick={onCompareProductClick}
+                onDeleteOutfitClick={onDeleteOutfitClick}
+                product={product}
+                btn={btn}
+              />
+            );
+          })}
         </Slider>
         {
-        location < maxMove && innerWidth >= 480
+        location < maxMove
           ? <ForwardArrow onClick={this.rightMover} />
           : null
         }
@@ -132,7 +131,7 @@ Carousel.propTypes = {
   onAddOutfitClick: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      img: PropTypes.string.isRequired,
+      img: PropTypes.string,
       name: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       salesPrice: PropTypes.string,
@@ -144,6 +143,7 @@ Carousel.propTypes = {
     }).isRequired,
   ).isRequired,
   btn: PropTypes.string.isRequired,
+  innerWidth: PropTypes.number.isRequired,
 };
 
 export default Carousel;
