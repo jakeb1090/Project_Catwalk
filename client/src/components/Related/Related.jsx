@@ -12,6 +12,7 @@ import {
 } from '../../utils';
 
 const Title = styled.h4`
+
 `;
 
 const objectBuilder = (products) => {
@@ -149,7 +150,6 @@ class Related extends Component {
   }
 
   relatedBuilder() {
-    // const { outfitIds } = this.state;
     const { currentProduct } = this.props;
 
     getProductRelated(currentProduct)
@@ -165,10 +165,6 @@ class Related extends Component {
           .then((product) => {
             this.setState({ currentProduct: product[0] });
           });
-        // objectBuilder(outfitIds)
-        //   .then((outfit) => {
-        //     this.setState({ outfit });
-        //   });
       })
       .then(() => {
         this.setState({

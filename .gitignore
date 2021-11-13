@@ -14,3 +14,11 @@ client/dist/compiled/config.js
 
 ## Jest Coverage Report ##
 coverage/
+
+<<<<<<< HEAD
+## AWS cert
+project-catwalk.cer
+=======
+##key
+hide/Tamarillo.pem
+>>>>>>> main

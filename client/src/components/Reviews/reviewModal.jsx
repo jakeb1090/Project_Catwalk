@@ -1,6 +1,92 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import styled from 'styled-components';
 // ReactModal.setAppElement('#reviewmodal')
+
+const FlexCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  `;
+const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const Red = styled.div`
+  font-weight: bold;
+  color: red;
+`;
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: 12,
+  },
+};
+
+const InputBox = styled.input`
+  display: flex;
+  flex-direction: column;
+  // margin-bottom: 20px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 6px;
+  padding-left: 10px;
+  width: 100%;
+  `;
+
+const Radio = styled.input`
+
+`;
+
+const FormStyle = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  ${'' /* border: 1px solid gray; */}
+  margin: 20px;
+
+  textarea {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-size: 15px;
+    border-radius: 6px;
+    width: 100%;
+   }
+
+   h2 {
+     color: dimgray;
+   }
+
+   h5 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3px;
+  }
+
+  // label {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+
+  .product {
+    color: darkslategray;
+  }
+
+  .notice {
+    margin-bottom: 10px;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+`;
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -66,91 +152,117 @@ class ReviewModal extends React.Component {
   }
 
   addPhoto(event) {
-      this.setState(prevState => ({
-        photos: [...prevState.photos, document.getElementById('photo').value]
-      }))
+    this.setState(prevState => ({
+      photos: [...prevState.photos, document.getElementById('photo').value]
+    }))
   }
 
   render() {
-    const { isOpen, closeModal, submitModal, characteristics } = this.props
+    const { isOpen, closeModal, submitModal, characteristics, scaleSelections, ModalButton } = this.props
     const charAndId = Object.keys(characteristics).map((char, index) => {
       return (
-        <div  key={characteristics[char].id}>
-          <h5>*{char}</h5>
-          <input name={char} id={characteristics[char].id} value={1} type="radio" onChange={this.changeChar.bind(this)} />
-          <label>Poor</label>
-
-          <input name={char} id={characteristics[char].id} value={2} type="radio" onChange={this.changeChar.bind(this)} />
-          <label>Below Average</label>
-
-          <input name={char} id={characteristics[char].id} value={3} type="radio" onChange={this.changeChar.bind(this)} />
-          <label>What I Expected</label>
-
-          <input name={char} id={characteristics[char].id} value={4} type="radio" onChange={this.changeChar.bind(this)} />
-          <label>Pretty Great</label>
-
-          <input name={char} id={characteristics[char].id} value={5} type="radio" onChange={this.changeChar.bind(this)} />
-          <label>Perfect</label>
-        </div>
+        <FlexCol key={characteristics[char].id}>
+          <h5><Red>*</Red>{char}</h5>
+          <FlexRow>
+            <Radio name={char} id={characteristics[char].id} value={1} type="radio" onChange={this.changeChar.bind(this)} />
+            <label>{scaleSelections[char][0]}</label>
+          </FlexRow>
+          <FlexRow>
+            <Radio name={char} id={characteristics[char].id} value={2} type="radio" onChange={this.changeChar.bind(this)} />
+            <label>{scaleSelections[char][1]}</label>
+          </FlexRow>
+          <FlexRow>
+            <Radio name={char} id={characteristics[char].id} value={3} type="radio" onChange={this.changeChar.bind(this)} />
+            <label>{scaleSelections[char][2]}</label>
+          </FlexRow>
+          <FlexRow>
+            <Radio name={char} id={characteristics[char].id} value={4} type="radio" onChange={this.changeChar.bind(this)} />
+            <label>{scaleSelections[char][3]}</label>
+          </FlexRow>
+          <FlexRow>
+            <Radio name={char} id={characteristics[char].id} value={5} type="radio" onChange={this.changeChar.bind(this)} />
+            <label>{scaleSelections[char][4]}</label>
+          </FlexRow>
+        </FlexCol>
       )
     })
     return (
-      <ReactModal  isOpen={isOpen} >
-        <div data-testid="reviewModal">
-          <h3>Write Your Review</h3>
-          <h4>{`For [product name]`} </h4>
-          <div>* = mandatory field
-            <h5>*Overall Rating:</h5>
-            <input data-testid="ratingRadio1" name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
-            <label >One Star - "Poor"</label>
+      <ReactModal
+        isOpen={isOpen}
+        style={customStyles}
+      >
+        <FormStyle data-testid="reviewModal">
+          <h2>{`Write Your Review`} </h2>
+          <FlexRow>
+            <FlexCol>
+              <h5><Red>*</Red>Overall Rating:</h5>
+              <FlexRow>
+                <Radio data-testid="ratingRadio1" name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
+                <label >One Star - "Poor"</label>
+              </FlexRow>
+              <FlexRow>
+                <Radio name="rating" value="2" type="radio" onChange={this.changeRating.bind(this)} />
+                <label >Two Stars - "Fair"</label>
+              </FlexRow>
+              <FlexRow>
+                <Radio name="rating" value="3" type="radio" onChange={this.changeRating.bind(this)} />
+                <label >Three Stars - "Average"</label>
+              </FlexRow>
+              <FlexRow>
+                <Radio name="rating" value="4" type="radio" onChange={this.changeRating.bind(this)} />
+                <label >Four Stars - "Good"</label>
+              </FlexRow>
+              <FlexRow>
+                <Radio name="rating" value="5" type="radio" onChange={this.changeRating.bind(this)} />
+                <label >Five Stars - "Great"</label>
+              </FlexRow>
+            </FlexCol>
+            <FlexCol>
+              <h5><Red>*</Red>Do you recommend this product?</h5>
+              <FlexRow>
+                <Radio name="recommend" value="true" type="radio" onChange={this.changeRecommend.bind(this)} />
+                <label>Yes</label>
+              </FlexRow>
+              <FlexRow>
+                <Radio name="recommend" value="false" type="radio" onChange={this.changeRecommend.bind(this)} />
+                <label>No</label>
+              </FlexRow>
+            </FlexCol>
+          </FlexRow>
 
-            <input name="rating" value="2" type="radio" onChange={this.changeRating.bind(this)} />
-            <label >Two Stars - "Fair"</label>
+          <FlexRow>{charAndId}</FlexRow>
 
-            <input name="rating" value="3" type="radio" onChange={this.changeRating.bind(this)} />
-            <label >Three Stars - "Average"</label>
+          <div>
+            <h5>Your Review Headline:</h5>
+            <InputBox id="summary" data-testid="summary" placeholder="Example: Best purchase ever!" />
+          </div>
+          <h5>
+            <Red>*</Red>Enter your review here:
+          </h5>
+          <textarea id="body" data-testid="body" placeholder="Why did you like the product or not?" />
+          {/* <div>{`Character count: ${this.state.bodyChar} of 1000`}</div> */}
 
-            <input name="rating" value="4" type="radio" onChange={this.changeRating.bind(this)} />
-            <label >Four Stars - "Good"</label>
 
-            <input name="rating" value="5" type="radio" onChange={this.changeRating.bind(this)} />
-            <label >Five Stars - "Great"</label>
+          <div>
+            <h5>Add photo URL:</h5>
+            <InputBox id="photo" />
+            <ModalButton name="addPhoto" onClick={this.addPhoto.bind(this)}> Attach Photo</ModalButton>
           </div>
 
-          <div>{charAndId}</div>
-          <br></br>
-          <div>Your Review Headline:
-            <input id="summary" data-testid="summary" placeholder="Example: Best purchase ever!" />
-          </div>
-          <div>*Enter your review here:
-            <input id="body" data-testid="body" placeholder="Why did you like the product or not?" />
-            <div>{`Character count: ${this.state.bodyChar} of 1000`}</div>
-          </div>
 
-          <div>*Do you recommend this product?
-            <input name="recommend" value="true" type="radio" onChange={this.changeRecommend.bind(this)} />
-            <label>Yes</label>
-
-            <input name="recommend" value="false" type="radio" onChange={this.changeRecommend.bind(this)} />
-            <label>No</label>
-          </div>
-
-          <div>Add photo URL:
-            <input id="photo" />
-            <button name="addPhoto" onClick={this.addPhoto.bind(this)}> Attach Photo</button>
-          </div>
-
-
-          <div>*Your username:
-            <input id="name" data-testid="username" placeholder="jackson11!" />
-            <p>For privacy reasons, do not use your full name or email address as your display name.</p>
-          </div>
-          <div>*Your email address:
-            <input id="email" data-testid="email" placeholder="jackson11@email.com" />
-          </div>
-        </div>
-        <button onClick={this.handleSubmit.bind(this)}>Submit Review</button>
-        <button onClick={closeModal}> Cancel </button>
+          <h5>
+            <Red>*</Red>Your username:
+          </h5>
+          <InputBox id="name" data-testid="username" placeholder="jackson11!" />
+          <p>For privacy reasons, do not use your full name or email address as your display name.</p>
+          <h5>
+            <Red>*</Red>Your email address:
+          </h5>
+          <InputBox id="email" data-testid="email" placeholder="jackson11@email.com" />
+          <ModalButton onClick={this.handleSubmit.bind(this)}>Submit Review</ModalButton>
+          <ModalButton onClick={closeModal}> Cancel </ModalButton>
+          <Red>* = Required</Red>
+        </FormStyle>
       </ReactModal>
     )
   }

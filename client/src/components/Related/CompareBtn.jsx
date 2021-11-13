@@ -30,8 +30,8 @@ const ButtonContext = styled.div`
 const CompareBtn = (props) => {
   const { onCompareProductClick, id } = props;
   return (
-    <Button type="button" aria-label="compareBtn" onClick={(event) => onCompareProductClick(event, id)}>
-      <ButtonContext>
+    <Button type="button" aria-label="compareBtn">
+      <ButtonContext onClick={(event) => onCompareProductClick(event, id)}>
         <MdStarOutline />
       </ButtonContext>
     </Button>

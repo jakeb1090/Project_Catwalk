@@ -6,39 +6,47 @@ import styled from 'styled-components';
 // `;
 
 const BarGraph = styled.div`
-margin-top: 15px;
+margin: 10px 0px;
 display:flex;
 flex-direction: row;
-align-items: stretch;
 height: 1em;
-
-`;
-//I broke my filter button!
-const FilterButton = styled(BarGraph)`
-background-color: white;
-border: white;
-text-align: center;
-// display: inline-block;
-font-size: 16px;
-text-decoration: underline;
-`;
-const FilledBar = styled(BarGraph)`
-  background-color: green;
-  justify-content: center;
-  //first flex number = ratings qty
-  flex: ${props => props.qty} 1 0;
-
-`;
-const EmptyBar = styled(BarGraph)`
-background-color: #c4c4c4;
-//first flex number = reviews.length - ratings qty
-flex: ${props => props.empty} 1 0;
-
 `;
 
-const RatingBreakdown = function (props) {
+const FilledBar = styled.div`
+  & {
+    width: 100%;
+    // padding: 0.5em;
+    background-color: #d6d6d6; //gray
+    position: relative;
+    // height: 50%;
+    align-items: end; //this isn't working
+  }
+  &:after {
+    content: ' ';
+    color: #0abf00; //green
+    position:absolute;
+    background: #0abf00; //green
+    top:0; bottom:0;
+    left:0;
+    width:${props => props.percent}%;
+  }
+`;
+
+const FilterButton = styled.button`
+  background-color: white;
+  text-align: left;
+  font-size: 16px;
+  text-decoration: underline;
+  width: 30%;
+  border: none;
+  font-family: Georgia, serif;
+  align-items: start;
+
+`
+
+const RatingBreakdown = (props) => {
   const {
-    qty, totalReviews, star, toggleStarFilter, removeStarFilters,
+    qty, totalReviews, star, toggleStarFilter, removeStarFilters
   } = props;
 
   const clickHandler = function (event) {
@@ -49,18 +57,15 @@ const RatingBreakdown = function (props) {
   if (!qty) { return null; }
 
   return (
-    <div data-testid="ratingBreakdown">
-      <BarGraph>
-        <FilterButton value={star}
-          // style={(filter is on ? styles.greenButton : style.greyButton)}
-          onClick={clickHandler}
-        >
-          {`${star} stars`}
-        </FilterButton>
-        <FilledBar qty={qty} />
-        <EmptyBar empty={totalReviews - qty} />
-      </BarGraph>
-    </div>
+    <BarGraph data-testid="ratingBreakdown">
+      <FilterButton value={star}
+        // style={(filter is on ? styles.greenButton : style.greyButton)}
+        onClick={clickHandler}
+      >
+        {`${star} stars`}
+      </FilterButton>
+      <FilledBar percent={qty / totalReviews * 100} />
+    </BarGraph>
   );
 };
 export default RatingBreakdown;

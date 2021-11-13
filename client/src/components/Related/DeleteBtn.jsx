@@ -30,8 +30,8 @@ padding-bottom: -5px;
 const DeleteBtn = (props) => {
   const { onDeleteOutfitClick, id } = props;
   return (
-    <Button type="button" aria-label="deleteBtn" onClick={() => onDeleteOutfitClick(id)}>
-      <ButtonContext>
+    <Button type="button" aria-label="deleteBtn">
+      <ButtonContext onClick={() => onDeleteOutfitClick(id)}>
         <MdClose />
       </ButtonContext>
     </Button>
