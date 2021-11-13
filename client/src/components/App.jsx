@@ -39,7 +39,11 @@ const ModalButton = styled.button`
 `;
 
 const WidgetTitle = styled.h4`
-  color:green;
+  color: #696969;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: lighter;
+  font-size: 20px;
+  margin: 0px;
 `;
 
 const Nav = styled.nav`
@@ -62,7 +66,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentProduct: 61590,
+      currentProduct: 61593,
       currentObject: {},
       innerWidth: 0,
     };
@@ -113,10 +117,12 @@ class App extends Component {
             currentProduct={currentProduct}
             innerWidth={mobile ? innerWidth : innerWidth * 0.85}
             onCardClick={this.onCardClick}
+            WidgetTitle={WidgetTitle}
           />
           <hr />
           <Questions
             currentProduct={currentProduct}
+            WidgetTitle={WidgetTitle}
           />
           <hr />
           <ReviewApp

@@ -221,4 +221,26 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     });
 });
 
+//Ratings & Reviews
+// app.get('/reviews', (req, res) => {
+//   axios({
+//     method: 'get',
+//     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews',
+//     params: req.params,
+//     headers: req.headers,
+//   });
+// });
+
+// app.get('/reviews', (req, res) => {
+
+// });
+
+// app.post('/reviews', (req, res) => {
+
+// });
+
+// app.put('/reviews', (req, res) => {
+
+// });
+
 module.exports = app;
