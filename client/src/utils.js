@@ -4,8 +4,6 @@ import API_KEY from '../config';
 
 const headers = { headers: { Authorization: API_KEY } };
 
-console.log(headers);
-
 const getPaginatedProducts = (page, count) => axios.get(`/products/?page=${page}&count=${count}`, headers);
 
 const getProduct = (id) => axios.get(`/products/${id}`, headers);

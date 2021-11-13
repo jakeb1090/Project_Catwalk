@@ -18,7 +18,6 @@ const QuestionContainer = styled.div`
   a {
     color: slategray;
   }
-
 `;
 
 const Title = styled.div`

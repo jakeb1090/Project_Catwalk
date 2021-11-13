@@ -123,14 +123,18 @@ app.get('/qa/:question_id/answers', (req, res) => {
     });
 });
 
-// add question
 app.post('/qa/questions', (req, res) => {
-  const { data } = req.body;
-  const { authorization } = req.headers;
+  const { payload } = req.body;
+  const { Authorization } = req.headers;
   const url = `${baseURL}/qa/questions`;
-  const headers = { authorization };
+  const headers = { headers: { Authorization } };
 
-  axios.post(url, data, { headers })
+  axios({
+    method: 'post',
+    url,
+    data: payload,
+    headers,
+  })
     .then((response) => {
       res.status(response.status).send(response);
     })
@@ -139,7 +143,6 @@ app.post('/qa/questions', (req, res) => {
     });
 });
 
-// add answer
 app.post('/qa/:question_id/answers', (req, res) => {
   const data = req.body;
   // eslint-disable-next-line camelcase
@@ -158,7 +161,6 @@ app.post('/qa/:question_id/answers', (req, res) => {
     });
 });
 
-// helpful question
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
   const { question_id } = req.params;
   const url = `${baseURL}/qa/questions/${question_id}/helpful`;
@@ -174,7 +176,6 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     });
 });
 
-// helpful answer
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   const { answer_id } = req.params;
   const url = `${baseURL}/qa/answers/${answer_id}/helpful`;
@@ -190,7 +191,6 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
     });
 });
 
-// report question
 app.put('/qa/questions/:question_id/report', (req, res) => {
   const { question_id } = req.params;
   const url = `${baseURL}/qa/questions/${question_id}/report`;
@@ -206,7 +206,6 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
     });
 });
 
-// report answer
 app.put('/qa/answers/:answer_id/report', (req, res) => {
   const { answer_id } = req.params;
   const url = `${baseURL}/qa/answers/${answer_id}/report`;

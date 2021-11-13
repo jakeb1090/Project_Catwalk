@@ -100,16 +100,17 @@ const ModalAddQuestion = ({ currentProduct }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const questionObj = {
-      question,
-      nickname,
+    const payload = {
+      body: question,
+      name: nickname,
       email,
+      product_id: currentProduct,
     };
 
-    if (!questionObj.email.includes('@')) {
+    if (!payload.email.includes('@')) {
       setIsValid(false);
     } else {
-      addQuestion(questionObj)
+      addQuestion(payload)
         .then((res) => {
           console.log(res);
         })

@@ -98,7 +98,12 @@ const AnswerElement = ({
           <span>
             <Interactive>
               by&nbsp;
-              {answererName}
+              {
+                answererName === 'Seller'
+                  ? <b>{answererName}</b>
+                  : <span>{answererName}</span>
+              }
+
               ,&nbsp;
               {formattedDate}
               &nbsp;

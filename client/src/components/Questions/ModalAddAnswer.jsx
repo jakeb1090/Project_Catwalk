@@ -75,9 +75,10 @@ const Red = styled.span`
 Modal.setAppElement('#app');
 const ModalAddAnswer = ({ currentProduct, questionBody }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [question, setQuestion] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [email, setEmail] = useState('');
+  // const [question, setQuestion] = useState('');
+  // const [nickname, setNickname] = useState('');
+  // const [email, setEmail] = useState('');
+  const [questionData, setQuestionData] = useState('');
   const [product, setProduct] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [photos, setPhotos] = useState([]);
@@ -94,28 +95,22 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
   };
 
   const handleChange = (e) => {
-    e.target.name === 'question' ? setQuestion(e.target.value) : null;
-    e.target.name === 'nickname' ? setNickname(e.target.value) : null;
-    e.target.name === 'email' ? setEmail(e.target.value) : null;
+    const questionItem = e.target.name;
+    setQuestionData([
+      ...questionData,
+      { [questionItem]: e.target.value },
+    ]);
+    console.log(photos);
     setIsValid(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const questionObj = {
-      question,
-      nickname,
-      email,
-    };
 
-    const handleAddPhotos = (photoArray) => {
-      setPhotos(photoArray);
-    };
-
-    if (!questionObj.email.includes('@')) {
+    if (!questionData.email.includes('@')) {
       setIsValid(false);
     } else {
-      addQuestion(questionObj)
+      addQuestion(questionData)
         .then((res) => {
           console.log(res);
         })
@@ -123,6 +118,10 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
           console.log(err);
         });
     }
+  };
+
+  const handleAddPhotos = (photosObj) => {
+    setPhotos(photosObj);
   };
 
   return (
@@ -181,7 +180,9 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
             </label>
             <ul>
               {
-                photos.map((photo) => <li key={photo.splice(4, 9)}>{photo}</li>)
+                photos.length !== 0
+                  ? photos.map((photo) => <li key={photo.splice(5, 9)}>{photo}</li>)
+                  : null
               }
             </ul>
             <div className="footer">
@@ -194,15 +195,15 @@ const ModalAddAnswer = ({ currentProduct, questionBody }) => {
             </div>
           </form>
         </FormStyle>
-        <ModalAddPhotos currentProduct={currentProduct} product={product} />
+        <ModalAddPhotos
+          currentProduct={currentProduct}
+          product={product}
+          onAddPhotos={handleAddPhotos}
+        />
       </Modal>
 
     </span>
   );
-};
-
-ModalAddAnswer.defaultProps = {
-
 };
 
 ModalAddAnswer.propTypes = {

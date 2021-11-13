@@ -9,12 +9,12 @@ import QAContainer from './QAContainer';
 const QList = styled.div`
 display: flex;
 flex-direction: column;
-height: 550px;
+max-height: 550px;
 overflow: scroll;
 `;
 
 const Input = styled.div`
-  width: 200px;
+  min-width: 50%;
 `;
 
 class QuestionsList extends React.Component {

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getProduct, addQuestion } from '../../utils';
 
 const customStyles = {
   content: {
@@ -67,7 +66,7 @@ const FormStyle = styled.div`
 `;
 
 const Image = styled.div`
-  max-height: 100px;
+  height: 120px;
   width: auto;
   margin-bottom: 13px;
   margin-top: 13px;
@@ -75,17 +74,11 @@ const Image = styled.div`
   border: 1px solid gray;
 `;
 
-const Red = styled.span`
-  font-weight: bold;
-  color: red;
-`;
-
 Modal.setAppElement('#app');
 
-const ModalAddPhotos = ({ product, currentProduct }) => {
+const ModalAddPhotos = ({ product, onAddPhotos }) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [product, setProduct] = useState('');
-  const [isValid, setIsValid] = useState(true);
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
@@ -96,21 +89,18 @@ const ModalAddPhotos = ({ product, currentProduct }) => {
   };
 
   const handleChange = (e) => {
-    e.target.name === 'photo-1' ? setPhotos([...photos, e.target.value]) : null;
-    e.target.name === 'photo-2' ? setPhotoTwo(e.target.value) : null;
-    e.target.name === 'photo-3' ? setPhotoThree(e.target.value) : null;
-    e.target.name === 'photo-4' ? setPhotoFour(e.target.value) : null;
-    setIsValid(true);
+    const imgName = e.target.name;
+    setPhotos([
+      ...photos,
+      { [imgName]: e.target.value },
+    ]);
+    console.log(photos);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onAddPhotos(photos);
     toggleModal();
-
-    setPhotoOne('');
-    setPhotoTwo('');
-    setPhotoThree('');
-    setPhotoFour('');
   };
 
   return (
@@ -128,52 +118,47 @@ const ModalAddPhotos = ({ product, currentProduct }) => {
               Add Photos
               <div>
                 about the&nbsp;
-                  <span className="product">
+                <span className="product">
                   { product }
                 </span>
               </div>
             </h2>
             {
-              photos
-                ? photos.map((photo) => <Image><img src={photo} alt="cool" /></Image>)
+              // eslint-disable-next-line react/no-array-index-key
+              photos.length > 0
+                ? <Image><img src={photos[0].photoOne} alt="cool" /></Image>
                 : <span />
             }
-
             <label htmlFor="photo-1">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photo-1" placeholder="...photo.jpg" />
+              <input onChange={handleChange} type="text" id="nickname" name="photoOne" placeholder="...photo.jpg" />
             </label>
 
             <label htmlFor="photo-2">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photo-2" placeholder="...photo-2.jpg" />
+              <input onChange={handleChange} type="text" id="nickname" name="photoTwo" placeholder="...photo-2.jpg" />
             </label>
 
             <label htmlFor="photo-1">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photo-3" placeholder="...photo-3.jpg" />
+              <input onChange={handleChange} type="text" id="nickname" name="photoThree" placeholder="...photo-3.jpg" />
             </label>
 
             <label htmlFor="photo-1">
               <span>
                 Image URL
               </span>
-              <input onChange={handleChange} type="text" id="nickname" name="photo-4" placeholder="...photo-4.jpg" />
+              <input onChange={handleChange} type="text" id="nickname" name="photoFour" placeholder="...photo-4.jpg" />
             </label>
 
             <div className="footer">
               <button type="submit">Submit</button>
-              {
-                isValid
-                  ? <span />
-                  : <span className="error-text">You must enter the following: valid email</span>
-              }
             </div>
           </form>
         </FormStyle>
@@ -183,7 +168,8 @@ const ModalAddPhotos = ({ product, currentProduct }) => {
 };
 
 ModalAddPhotos.propTypes = {
-  currentProduct: PropTypes.number.isRequired,
+  product: PropTypes.string.isRequired,
+  onAddPhotos: PropTypes.func.isRequired,
 };
 
 export default ModalAddPhotos;
