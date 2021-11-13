@@ -1,11 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// import checkmark from './graphics/checkmark.jpeg'
-// I need to make sure 'jpeg' is an accepted file format
+
+const Tile = styled.section`
+  border-bottom: solid;
+  padding: 10px;
+  margin: 10px 0px;
+`;
+
+const Line = styled.div`
+padding: 2% 0px;
+line-height: 125%;
+`;
+const TopLine = styled(Line)`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`;
+const BoldLine = styled(Line)`
+  font-weight: bold;
+`;
 
 const ReviewTile = (props) => {
-  const { review, putFeedback } = props;
+  const { review, putFeedback, TextButton } = props;
 
   // date garbage
   const year = review.date.slice(0, 4);
@@ -14,31 +31,36 @@ const ReviewTile = (props) => {
   let formattedDate = new Date(Date.UTC(year, month, day));
   formattedDate = formattedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 
+  const stars = (n) => {
+    var stars = '';
+    for (let i = 0; i < 5; i += 1) {
+      if (i < n) {
+        stars += '★';
+      } else {
+        stars += '☆';
+      }
+    }
+    return stars;
+  };
+
   const handleClick = function (event) {
     putFeedback(event.target.name, review.review_id);
   };
   return (
-    <div data-testid="ReviewTile" key={review.review_id}>
-      <br />
-      <div>
-        {`Number of stars: ${review.rating}`}
-      </div>
-      <div>
-        {`Reviewer Name: ${review.reviewer_name}, ${formattedDate}`}
-      </div>
-      <div>
-        {review.summary}
-      </div>
-      <div>
-        {review.body}
-      </div>
+    <Tile data-testid="ReviewTile" key={review.review_id}>
+      <TopLine>
+        <div>{stars(review.rating)}</div>
+        <div>{`${review.reviewer_name}, ${formattedDate}`}</div>
+      </TopLine>
+
+      <BoldLine>{review.summary}</BoldLine>
+      <Line>{review.body}</Line>
       <div>
         {review.recommend
           ? (
-            <div>
-              {/* <img src={checkmark} alt="checkmark image" /> */}
-              I recommend this product
-            </div>
+            <Line>
+              ✓ I recommend this product
+            </Line>
           )
           : null}
       </div>
@@ -46,16 +68,14 @@ const ReviewTile = (props) => {
         {review.response ? `Response from seller: ${review.response}` : null}
       </div>
       <div>
-        Was this review helpful?
-        <button data-testid="helpfulButton" name="helpful" onClick={handleClick}>
-          {' '}
+        Helpful?
+        <TextButton data-testid="helpfulButton" name="helpful" onClick={handleClick}>
           {`Yes (${review.helpfulness})`}
-          {' '}
-        </button>
+        </TextButton> |
+        <TextButton data-testid="reportButton" name="report" onClick={handleClick}>Report</TextButton>
       </div>
-      <button data-testid="reportButton" name="report" onClick={handleClick}>Report</button>
       <br />
-    </div>
+    </Tile>
   );
 };
 

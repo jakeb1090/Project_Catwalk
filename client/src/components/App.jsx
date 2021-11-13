@@ -8,6 +8,34 @@ import Questions from './Questions/Questions';
 
 const AppStyle = styled.div`
   margin: ${({ mobile }) => (mobile ? '60px 0' : '60px 15%')}
+  padding: 15px 50px;
+  font-family: Georgia, serif;
+`;
+
+const TextButton = styled.button` //for helpful/report buttons
+  text-align: center;
+  background: rgba(0, 0, 0,0); //transparent
+  font-size: 16px;
+  text-decoration: underline;
+  border: none;
+  font-family: Georgia, serif;
+  `;
+
+const BorderedButton = styled.button` //for Annie & Jake's "Load More" "Add" etc.
+  background-color: rgba(0, 0, 0,0); //transparent
+  margin: 10px;
+  padding: 10px;
+  font-weight: bold;
+  font-family: Georgia, serif;
+`;
+
+const ModalButton = styled.button`
+  background: rgba(235, 235, 235,0.5); //transparent
+  border: solid black 1px;
+  border-radius: 2px;
+  margin: 10px;
+  padding: 2px 5px;
+  font-family: Georgia, serif;
 `;
 
 const WidgetTitle = styled.h4`
@@ -91,7 +119,13 @@ class App extends Component {
             currentProduct={currentProduct}
           />
           <hr />
-          <ReviewApp id={currentProduct} />
+          <ReviewApp
+            id={currentProduct}
+            TextButton={TextButton}
+            BorderedButton={BorderedButton}
+            ModalButton={ModalButton}
+            WidgetTitle={WidgetTitle}
+          />
         </AppStyle>
       </div>
     );
