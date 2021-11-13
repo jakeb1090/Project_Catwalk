@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-// ReactModal.setAppElement('#reviewmodal')
+import ModalAddPhotos from './reviewModalPhotos';
 
 const FlexCol = styled.div`
   display: flex;
@@ -24,6 +24,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: 12,
+    height: '75%',
   },
 };
 
@@ -35,7 +36,7 @@ const InputBox = styled.input`
   font-size: 15px;
   border-radius: 6px;
   padding-left: 10px;
-  width: 100%;
+  width: 90%;
   `;
 
 const Radio = styled.input`
@@ -43,9 +44,7 @@ const Radio = styled.input`
 `;
 
 const FormStyle = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  ${'' /* border: 1px solid gray; */}
+
   margin: 20px;
 
   textarea {
@@ -54,7 +53,7 @@ const FormStyle = styled.div`
     margin-bottom: 20px;
     font-size: 15px;
     border-radius: 6px;
-    width: 100%;
+    width: 90%;
    }
 
    h2 {
@@ -88,6 +87,12 @@ const FormStyle = styled.div`
 
 `;
 
+const Scroll = styled.div`
+  top: 150px;
+  bottom: auto;
+  overflow-y: auto;
+`;
+
 class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
@@ -96,6 +101,7 @@ class ReviewModal extends React.Component {
       rating: undefined,
       bodyChar: 0,
       photos: [],
+      showPhotoModal: false,
     }
   }
 
@@ -112,7 +118,6 @@ class ReviewModal extends React.Component {
       photos: this.state.photos,
       characteristics: this.state.characteristics,
     }
-    console.log(reviewObject)
     if (!reviewObject.rating) {
       alert("Please select a rating")
     } else if (reviewObject.summary.length > 60) {
@@ -151,10 +156,21 @@ class ReviewModal extends React.Component {
     }))
   }
 
-  addPhoto(event) {
-    this.setState(prevState => ({
-      photos: [...prevState.photos, document.getElementById('photo').value]
-    }))
+  openPhotoModal() {
+      this.setState({
+        showPhotoModal: true,
+      })
+  }
+  closePhotoModal() {
+    this.setState({
+      showPhotoModal: false,
+    })
+  }
+
+  addPhotos(photoArray) {
+    this.setState({
+      photos: photoArray,
+    })
   }
 
   render() {
@@ -193,75 +209,82 @@ class ReviewModal extends React.Component {
       >
         <FormStyle data-testid="reviewModal">
           <h2>{`Write Your Review`} </h2>
-          <FlexRow>
-            <FlexCol>
-              <h5><Red>*</Red>Overall Rating:</h5>
-              <FlexRow>
-                <Radio data-testid="ratingRadio1" name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
-                <label >One Star - "Poor"</label>
-              </FlexRow>
-              <FlexRow>
-                <Radio name="rating" value="2" type="radio" onChange={this.changeRating.bind(this)} />
-                <label >Two Stars - "Fair"</label>
-              </FlexRow>
-              <FlexRow>
-                <Radio name="rating" value="3" type="radio" onChange={this.changeRating.bind(this)} />
-                <label >Three Stars - "Average"</label>
-              </FlexRow>
-              <FlexRow>
-                <Radio name="rating" value="4" type="radio" onChange={this.changeRating.bind(this)} />
-                <label >Four Stars - "Good"</label>
-              </FlexRow>
-              <FlexRow>
-                <Radio name="rating" value="5" type="radio" onChange={this.changeRating.bind(this)} />
-                <label >Five Stars - "Great"</label>
-              </FlexRow>
-            </FlexCol>
-            <FlexCol>
-              <h5><Red>*</Red>Do you recommend this product?</h5>
-              <FlexRow>
-                <Radio name="recommend" value="true" type="radio" onChange={this.changeRecommend.bind(this)} />
-                <label>Yes</label>
-              </FlexRow>
-              <FlexRow>
-                <Radio name="recommend" value="false" type="radio" onChange={this.changeRecommend.bind(this)} />
-                <label>No</label>
-              </FlexRow>
-            </FlexCol>
-          </FlexRow>
+          <Scroll>
+            <FlexRow>
+              <FlexCol>
+                <h5><Red>*</Red>Overall Rating:</h5>
+                <FlexRow>
+                  <Radio data-testid="ratingRadio1" name="rating" value="1" type="radio" onChange={this.changeRating.bind(this)} />
+                  <label >One Star - "Poor"</label>
+                </FlexRow>
+                <FlexRow>
+                  <Radio name="rating" value="2" type="radio" onChange={this.changeRating.bind(this)} />
+                  <label >Two Stars - "Fair"</label>
+                </FlexRow>
+                <FlexRow>
+                  <Radio name="rating" value="3" type="radio" onChange={this.changeRating.bind(this)} />
+                  <label >Three Stars - "Average"</label>
+                </FlexRow>
+                <FlexRow>
+                  <Radio name="rating" value="4" type="radio" onChange={this.changeRating.bind(this)} />
+                  <label >Four Stars - "Good"</label>
+                </FlexRow>
+                <FlexRow>
+                  <Radio name="rating" value="5" type="radio" onChange={this.changeRating.bind(this)} />
+                  <label >Five Stars - "Great"</label>
+                </FlexRow>
+              </FlexCol>
+              <FlexCol>
+                <h5><Red>*</Red>Do you recommend this product?</h5>
+                <FlexRow>
+                  <Radio name="recommend" value="true" type="radio" onChange={this.changeRecommend.bind(this)} />
+                  <label>Yes</label>
+                </FlexRow>
+                <FlexRow>
+                  <Radio name="recommend" value="false" type="radio" onChange={this.changeRecommend.bind(this)} />
+                  <label>No</label>
+                </FlexRow>
+              </FlexCol>
+            </FlexRow>
 
-          <FlexRow>{charAndId}</FlexRow>
+            <FlexRow>{charAndId}</FlexRow>
 
-          <div>
-            <h5>Your Review Headline:</h5>
-            <InputBox id="summary" data-testid="summary" placeholder="Example: Best purchase ever!" />
-          </div>
-          <h5>
-            <Red>*</Red>Enter your review here:
-          </h5>
-          <textarea id="body" data-testid="body" placeholder="Why did you like the product or not?" />
-          {/* <div>{`Character count: ${this.state.bodyChar} of 1000`}</div> */}
-
-
-          <div>
-            <h5>Add photo URL:</h5>
-            <InputBox id="photo" />
-            <ModalButton name="addPhoto" onClick={this.addPhoto.bind(this)}> Attach Photo</ModalButton>
-          </div>
+            <div>
+              <h5>Your Review Headline:</h5>
+              <InputBox id="summary" data-testid="summary" placeholder="Example: Best purchase ever!" />
+            </div>
+            <h5>
+              <Red>*</Red>Enter your review here:
+            </h5>
+            <textarea id="body" data-testid="body" placeholder="Why did you like the product or not?" />
+            {/* <div>{`Character count: ${this.state.bodyChar} of 1000`}</div> */}
 
 
-          <h5>
-            <Red>*</Red>Your username:
-          </h5>
-          <InputBox id="name" data-testid="username" placeholder="jackson11!" />
-          <p>For privacy reasons, do not use your full name or email address as your display name.</p>
-          <h5>
-            <Red>*</Red>Your email address:
-          </h5>
-          <InputBox id="email" data-testid="email" placeholder="jackson11@email.com" />
+            <h5>
+              <Red>*</Red>Your username:
+            </h5>
+            <InputBox id="name" data-testid="username" placeholder="jackson11!" />
+            <p>For privacy reasons, do not use your full name or email address as your display name.</p>
+            <h5>
+              <Red>*</Red>Your email address:
+            </h5>
+            <InputBox id="email" data-testid="email" placeholder="jackson11@email.com" />
+          </Scroll>
+
+          <ModalButton onClick={this.openPhotoModal.bind(this)}> Add Photos </ModalButton>
+
+
+          <br />
           <ModalButton onClick={this.handleSubmit.bind(this)}>Submit Review</ModalButton>
           <ModalButton onClick={closeModal}> Cancel </ModalButton>
           <Red>* = Required</Red>
+
+          <ModalAddPhotos
+            isOpen={this.state.showPhotoModal}
+            addPhotos={this.addPhotos.bind(this)}
+            closePhotoModal={this.closePhotoModal.bind(this)}
+            ModalButton={this.props.ModalButton}
+          />
         </FormStyle>
       </ReactModal>
     )

@@ -85,8 +85,6 @@ class ReviewApp extends React.Component {
 
   postReview(review) {
     review.product_id = this.state.id;
-    console.log('post request for:', review);
-    console.log('post request for:', JSON.stringify(review));
 
     API.post(review)
       .then((result) => {

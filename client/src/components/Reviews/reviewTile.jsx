@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import utils from './utils';
 
 const Tile = styled.section`
   border-bottom: solid;
@@ -21,27 +22,8 @@ const BoldLine = styled(Line)`
   font-weight: bold;
 `;
 
-const ReviewTile = (props) => {
-  const { review, putFeedback, TextButton } = props;
-
-  // date garbage
-  const year = review.date.slice(0, 4);
-  const month = review.date.slice(5, 7);
-  const day = review.date.slice(8, 10);
-  let formattedDate = new Date(Date.UTC(year, month, day));
-  formattedDate = formattedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-
-  const stars = (n) => {
-    var stars = '';
-    for (let i = 0; i < 5; i += 1) {
-      if (i < n) {
-        stars += '★';
-      } else {
-        stars += '☆';
-      }
-    }
-    return stars;
-  };
+const ReviewTile = ({ review, putFeedback, TextButton }) => {
+  const formattedDate = utils.date(review.date);
 
   const handleClick = function (event) {
     putFeedback(event.target.name, review.review_id);
@@ -49,7 +31,7 @@ const ReviewTile = (props) => {
   return (
     <Tile data-testid="ReviewTile" key={review.review_id}>
       <TopLine>
-        <div>{stars(review.rating)}</div>
+        <div>{utils.stars(review.rating)}</div>
         <div>{`${review.reviewer_name}, ${formattedDate}`}</div>
       </TopLine>
 
