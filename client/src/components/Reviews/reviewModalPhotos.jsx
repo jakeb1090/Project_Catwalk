@@ -21,6 +21,8 @@ const FormStyle = styled.div`
   flex-direction: column;
   ${'' /* border: 1px solid gray; */}
   margin: 20px;
+  // z-index: 100;
+  // position: absolute;
 
   input {
     display: flex;

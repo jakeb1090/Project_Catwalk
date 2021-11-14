@@ -15,7 +15,7 @@ const Stars = styled.div`
     color: black;
     content: '★★★★★';
     position: absolute;
-    z-index: 1;
+    // z-index: 1;
     display: block;
     left: 0;
     top:0;
