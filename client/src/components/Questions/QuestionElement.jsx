@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import { markQuestionHelpful, addQuestion, addAnswer } from '../../utils';
 import ModalAddAnswer from './ModalAddAnswer';
 
-// import PropTypes from 'prop-types';
-
-// { answerer_name, body, date, helpfulness, id, photos }
-
 const QuestionContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -121,7 +117,7 @@ const QuestionElement = ({ questionData, currentProduct, BorderedButton }) => {
         </Title>
         <TwoThirds>
           <QuestionBody>
-            <h2>{`${questionBody} `}</h2>
+            <h3>{`${questionBody} `}</h3>
           </QuestionBody>
           <QuestionInteraction>
             Helpful?
