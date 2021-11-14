@@ -22,16 +22,13 @@ const ButtonContext = styled.div`
   }
 `;
 
-const AddOutfitBtn = (props) => {
-  const { onAddOutfitClick } = props;
-  return (
-    <Button type="button" aria-label="addOutfitBtn" onClick={onAddOutfitClick}>
-      <ButtonContext>
-        <MdAdd />
-      </ButtonContext>
-    </Button>
-  );
-};
+const AddOutfitBtn = ({ onAddOutfitClick }) => (
+  <Button type="button" aria-label="addOutfitBtn" onClick={onAddOutfitClick}>
+    <ButtonContext>
+      <MdAdd />
+    </ButtonContext>
+  </Button>
+);
 
 AddOutfitBtn.propTypes = {
   onAddOutfitClick: PropTypes.func.isRequired,
