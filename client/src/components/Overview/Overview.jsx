@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { getProductStyles } from '../../utils';
 import MainPicture from './mainPicture';
+import RatingStars from '../Common/RatingStars';
 
 // flex-direction: ${({ mobile }) => (mobile ? 'column' : 'row')};
 const Container = styled.div`
@@ -16,7 +17,11 @@ const Text = styled.div`
 `;
 
 const Title = styled.h2`
-
+`;
+const StarsContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
 `;
 
 class Overview extends React.Component {
@@ -67,9 +72,10 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { currentObject, mobile } = this.props;
-    const { name, slogan, description } = currentObject;
+    const { currentObject, mobile, onReviewsClick } = this.props;
+    const { name, slogan, description, avgRating } = currentObject;
     const { currentPhoto } = this.state;
+    console.log(avgRating);
     return (
       <Container mobile={mobile}>
         <MainPicture
@@ -83,6 +89,11 @@ class Overview extends React.Component {
           <Title>{name}</Title>
           <p><strong>{slogan}</strong></p>
           <p>{description}</p>
+          {avgRating && (
+            <StarsContainer onClick={onReviewsClick}>
+              <RatingStars value={avgRating} />
+            </StarsContainer>
+          )}
         </Text>
       </Container>
     );

@@ -84,11 +84,7 @@ class Carousel extends React.Component {
 
     return (
       <Container data-testid="carousel">
-        {
-        location > 0
-          ? <ReverseArrow onClick={this.leftMover} />
-          : null
-        }
+        { location > 0 && <ReverseArrow onClick={this.leftMover} /> }
         <Slider>
           {btn !== 'compare' && <Card onAddOutfitClick={onAddOutfitClick} productLeft={productLeft} addOutfit />}
           {data.map((product, i) => {
@@ -107,11 +103,7 @@ class Carousel extends React.Component {
             );
           })}
         </Slider>
-        {
-        location < maxMove
-          ? <ForwardArrow onClick={this.rightMover} />
-          : null
-        }
+        { location < maxMove && <ForwardArrow onClick={this.rightMover} /> }
       </Container>
     );
   }

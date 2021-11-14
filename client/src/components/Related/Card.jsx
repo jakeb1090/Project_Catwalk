@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CompareBtn from './CompareBtn';
 import DeleteBtn from './DeleteBtn';
 import CardImg from './CardImg';
-import RatingStars from './RatingStars';
+import RatingStars from '../Common/RatingStars';
 import AddOutfitBtn from './AddOutfitBtn';
 
 // max-width: ${({ innerWidth }) => {
@@ -41,7 +41,7 @@ const Details = styled.div`
   align-items: start;
   height: 25%;
   margin-right: 20px;
-  `;
+`;
 const Title = styled.span`
   font-weight: 700;
 `;
@@ -116,7 +116,7 @@ const Card = (props) => {
                       {price}
                     </Price>
                   )}
-                <RatingStars avgRating={avgRating} />
+                <RatingStars value={avgRating} />
               </Details>
             </>
           )

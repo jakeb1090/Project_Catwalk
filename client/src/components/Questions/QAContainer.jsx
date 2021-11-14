@@ -40,6 +40,7 @@ class QAContainer extends React.Component {
       currentProduct,
       onFetchQuestions,
     } = this.props;
+
     const { answers } = this.state;
 
     return (

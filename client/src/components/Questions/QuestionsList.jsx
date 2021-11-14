@@ -1,16 +1,17 @@
-import React from 'react';
 // eslint-disable-next-line import/no-named-as-default
+/* eslint-disable react/prop-types */
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import QAContainer from './QAContainer';
-
-// props.currentProductId
 
 const QList = styled.div`
 display: flex;
 flex-direction: column;
 max-height: 550px;
 overflow: scroll;
+margin-top: 30px;
+overflow-x: hidden
 `;
 
 const Input = styled.div`
@@ -35,6 +36,8 @@ class QuestionsList extends React.Component {
       questionList,
       currentSearch,
       onFetchQuestions,
+      BorderedButton,
+      TextButton,
     } = this.props;
     let outputList = [];
 
@@ -69,9 +72,16 @@ class QuestionsList extends React.Component {
             ))
           }
           <Input>
+
             {
               answersN !== null
-                ? <input type="button" value="Load More Answers" onClick={() => { loadMoreAnswers(); }} />
+                ? (
+                  <BorderedButton
+                    onClick={() => { loadMoreAnswers(); }}
+                  >
+                    Load More Answers
+                  </BorderedButton>
+                )
                 : <span />
             }
           </Input>
