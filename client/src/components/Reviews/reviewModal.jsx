@@ -44,8 +44,10 @@ const Radio = styled.input`
 `;
 
 const FormStyle = styled.div`
-
+// z-index: 100;
+// position: relative;
   margin: 20px;
+
 
   textarea {
     display: flex;
